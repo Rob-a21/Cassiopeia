@@ -1,2 +1,2 @@
 # Cassiopeia
-A repository for Cassiopeia Betting web project 
+A repository for Cassiopeia School Management web project 
