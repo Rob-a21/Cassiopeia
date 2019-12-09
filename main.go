@@ -1,22 +1,18 @@
 package main
 
 import "net/http"
-import "text/template"
+
+import "html/template"
 
 var templ = template.Must(template.ParseGlob("delivery/web/templates/*"))
 
-func indexHandler(w http.ResponseWriter, r *http.Request) {
+func homeHandler(w http.ResponseWriter, r *http.Request) {
 	templ.ExecuteTemplate(w, "main.layout", "welcome")
 }
-
 func main() {
 	mux := http.NewServeMux()
-
-	//File server for bootstrap and css
 	fs := http.FileServer(http.Dir("delivery/web/assets"))
-	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
-
-	mux.HandleFunc("/", indexHandler)
+	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
+	mux.HandleFunc("/", homeHandler)
 	http.ListenAndServe(":2121", mux)
-
 }
