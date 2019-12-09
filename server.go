@@ -1,7 +1,6 @@
 package main
 
 import "net/http"
-
 import "text/template"
 
 var templ = template.Must(template.ParseGlob("delivery/web/templates/*"))
