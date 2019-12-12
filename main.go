@@ -6,6 +6,7 @@ import "html/template"
 
 var templ = template.Must(template.ParseGlob("delivery/web/templates/*"))
 
+//home handler
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	templ.ExecuteTemplate(w, "main.layout", "welcome")
 }
