@@ -1,8 +1,0 @@
-{{define "main.layout"}}
-{{template "navbar"}}
-{{template "body.content"}}
-{{template "footer"}}
-{{end}}
-
-
-

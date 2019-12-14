@@ -3,10 +3,10 @@ package entity
 //Student struct for data caching
 type Student struct {
 	UserName  string
-	Password  string
+	Password  int
 	FirstName string
 	LastName  string
-	StudentID int
+	ID        int
 	Email     string
-	Grade     int
+	Image    string
 }

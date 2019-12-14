@@ -1,19 +1,56 @@
 package main
 
-import "net/http"
+import (
+	"database/sql"
+	"html/template"
+	"net/http"
 
-import "html/template"
+	_ "github.com/lib/pq"
 
-var templ = template.Must(template.ParseGlob("delivery/web/templates/*"))
+	"github.com/solomonkindie/Project/delivery/handler"
+	"github.com/solomonkindie/Project/registration/repository"
+	"github.com/solomonkindie/Project/registration/service"
+	"github.com/solomonkindie/Project/profile/pRepository"
+	"github.com/solomonkindie/Project/profile/pService"
 
-//home handler
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	templ.ExecuteTemplate(w, "main.layout", "welcome")
-}
+
+
+)
+
 func main() {
-	mux := http.NewServeMux()
+
+	dbconn, err := sql.Open("postgres", "postgres://postgres:aait@127.0.0.1/school?sslmode=disable")
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer dbconn.Close()
+
+	if err := dbconn.Ping(); err != nil {
+		panic(err)
+	}
+
+	tmpl := template.Must(template.ParseGlob("delivery/web/templates/*.html"))
+
+	registrationRepository := repository.NewPsqlRegistrationRepositoryImpl(dbconn)
+	registrationService := service.NewRegistrationServiceImpl(registrationRepository)
+   
+	studentRegHandler := handler.NewStudentRegistrationHandler(tmpl, registrationService)
+
+	
+	 profileRepository := pRepository.NewPsqlProfileRepositoryImpl(dbconn)
+	 profileService := pService.NewProfileServiceImpl(profileRepository)
+
+	 profileHandler := handler.NewProfileHandler(tmpl, profileService)
+
 	fs := http.FileServer(http.Dir("delivery/web/assets"))
-	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
-	mux.HandleFunc("/", homeHandler)
-	http.ListenAndServe(":2121", mux)
+	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
+	
+
+	http.HandleFunc("/student", studentRegHandler.StudentRegistrationNew)
+
+	http.HandleFunc("/profile", profileHandler.StudentsProfile)
+
+	http.ListenAndServe(":80", nil)
 }
