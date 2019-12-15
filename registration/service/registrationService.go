@@ -3,8 +3,8 @@ package service
 
 import (
 
-	"github.com/solomonkindie/Project/entity"
-	"github.com/solomonkindie/Project/registration"
+	"github.com/robi_a21/Cassiopeia/entity"
+	"github.com/robi_a21/Cassiopeia/registration"
 
 )
 

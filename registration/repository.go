@@ -3,7 +3,7 @@ package registration
 
 import(
 
-	"github.com/solomonkindie/Project/entity"
+	"github.com/robi_a21/Cassiopeia/entity"
 )
 
 

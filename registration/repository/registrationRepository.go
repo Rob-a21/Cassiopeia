@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/solomonkindie/Project/entity"
+	"github.com/robi_a21/Cassiopeia/entity"
 )
 
 

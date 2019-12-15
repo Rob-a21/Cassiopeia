@@ -6,9 +6,7 @@ package handler
 import(
     "html/template"
 	"net/http"
-	//"strconv"
-	//"github.com/solomonkindie/Project/entity"
-	"github.com/solomonkindie/Project/profile"
+	"github.com/robi_a21/Cassiopeia/profile"
 
 )
 

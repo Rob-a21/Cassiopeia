@@ -3,13 +3,9 @@ package handler
 import(
     "html/template"
 	"net/http"
-	//"path/filepath"
-	//"mime/multipart"
-   // "os"
-	//"io"
 	"strconv"
-	"github.com/solomonkindie/Project/entity"
-	"github.com/solomonkindie/Project/registration"
+	"github.com/robi_a21/Cassiopeia/entity"
+	"github.com/robi_a21/Cassiopeia/registration"
 
 )
 
@@ -31,7 +27,7 @@ func (srh *StudentRegistrationHandler) StudentRegistrationNew(w http.ResponseWri
 
 		student := entity.Student{}
 		student.UserName = r.FormValue("username")
-		student.Password,_ = strconv.Atoi(r.FormValue("password"))
+		student.Password = r.FormValue("password")
 		student.FirstName = r.FormValue("fname")
 		student.LastName = r.FormValue("lname")
 		student.ID,_ = strconv.Atoi(r.FormValue("id"))
