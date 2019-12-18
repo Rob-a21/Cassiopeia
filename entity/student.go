@@ -6,7 +6,7 @@ type Student struct {
 	Password  string
 	FirstName string
 	LastName  string
-	StudentID int
+	ID        int
 	Email     string
-	Grade     int
+	Image     string
 }
