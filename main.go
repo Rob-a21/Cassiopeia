@@ -9,6 +9,7 @@ var templ = template.Must(template.ParseGlob("delivery/web/templates/*"))
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	templ.ExecuteTemplate(w, "main.layout", "welcome")
 }
+
 func main() {
 	mux := http.NewServeMux()
 	fs := http.FileServer(http.Dir("delivery/web/assets"))
@@ -16,3 +17,4 @@ func main() {
 	mux.HandleFunc("/", homeHandler)
 	http.ListenAndServe(":2121", mux)
 }
+

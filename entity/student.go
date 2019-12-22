@@ -1,12 +1,12 @@
 package entity
 
-//Student struct for data caching
-type Student struct {
-	UserName  string
-	Password  string
+//Student struct
+type Student struct{
+	UserName string
+	Password string
 	FirstName string
-	LastName  string
-	StudentID int
-	Email     string
-	Grade     int
+	LastName string
+	ID string
+	Email string
+	Grade string
 }
