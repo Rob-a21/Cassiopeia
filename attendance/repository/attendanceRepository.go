@@ -22,8 +22,8 @@ func (s StudentsAttendance) ShowAttendance(id int) (*entity.Student, error) {
 
 //FillAttendance filling function for student
 func (s StudentsAttendance) FillAttendance(student *entity.Student) error {
-	if _, ok := s[student.StudentID]; !ok {
-		s[student.StudentID] = student
+	if _, ok := s[student.ID]; !ok {
+		s[student.ID] = student
 		return nil
 	}
 	return errors.New("Student Filled The Attendance")
