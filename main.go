@@ -16,5 +16,6 @@ func main() {
 	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
 	mux.HandleFunc("/", homeHandler)
 	http.ListenAndServe(":2121", mux)
+
 }
 

@@ -1,6 +1,6 @@
-package service
+package Attendancerepository
 
-import "github.com/robi_a21/Cassiopeia/entity"
+import "github.com/Rob_a21/Cassiopeia/entity"
 
 import "errors"
 

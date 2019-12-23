@@ -2,8 +2,8 @@ package entity
 
 //Assessment struct
 type Assessment struct {
-	SubjectID string
 	Value     int
+	SubjectID string
 	StudentID string
 	Grade     string
 }

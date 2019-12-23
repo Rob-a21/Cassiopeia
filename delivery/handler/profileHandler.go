@@ -3,7 +3,7 @@ package handler
 import(
     "html/template"
 	"net/http"
-	"github.com/robi_a21/Cassiopeia/profile"
+	"github.com/Rob_a21/Cassiopeia/profile"
 
 )
 
