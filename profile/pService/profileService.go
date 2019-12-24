@@ -1,8 +1,8 @@
 package pService
 
 import (
-	"github.com/robi_a21/Cassiopeia/entity"
-	"github.com/robi_a21/Cassiopeia/profile"
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/profile"
 )
 
 type ProfileServiceImpl struct {

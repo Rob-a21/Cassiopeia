@@ -1,6 +1,6 @@
 package Attendancerepository
 
-import "github.com/Rob_a21/Cassiopeia/entity"
+import "github.com/Rob-a21/Cassiopeia/entity"
 
 import "errors"
 

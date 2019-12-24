@@ -1,21 +1,21 @@
 package service
 
 import (
-	"github.com/Rob_a21/Cassiopeia/entity"
-	"github.com/Rob_a21/Cassiopeia/grade"
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/assessment"
 )
 
-// GradeServiceImpl implements grade.GradeService interface
+// GradeServiceImpl implements assessment.GradeService interface
 type GradeServiceImpl struct {
-	GradeRepo grade.GradeRepository
+	GradeRepo assessment.GradeRepository
 }
 
 // NewGradeServiceImpl will create new GradeService object
-func NewGradeServiceImpl(grRepo grade.GradeRepository) *GradeServiceImpl {
+func NewGradeServiceImpl(grRepo assessment.GradeRepository) *GradeServiceImpl {
 	return &GradeServiceImpl{GradeRepo: grRepo}
 }
 
-// StoreGrade holds new grade information
+// StoreGrade holds new assessment information
 func (cs *GradeServiceImpl) StoreGrade(grade entity.Assessment) error {
 
 	err := cs.GradeRepo.StoreGrade(grade)

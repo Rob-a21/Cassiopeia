@@ -2,24 +2,20 @@ package main
 
 import (
 	"database/sql"
+	"html/template"
 	"net/http"
 
 	_ "github.com/lib/pq"
 
-	"github.com/robi_a21/Cassiopeia/delivery/handler"
-	"github.com/robi_a21/Cassiopeia/profile/pRepository"
-	"github.com/robi_a21/Cassiopeia/profile/pService"
-	"github.com/robi_a21/Cassiopeia/registration/repository"
-	"github.com/robi_a21/Cassiopeia/registration/service"
+	"github.com/Rob-a21/Cassiopeia/delivery/handler"
+	"github.com/Rob-a21/Cassiopeia/profile/pRepository"
+	"github.com/Rob-a21/Cassiopeia/profile/pService"
+	"github.com/Rob-a21/Cassiopeia/registration/repository"
+	"github.com/Rob-a21/Cassiopeia/registration/service"
 )
 
-<<<<<<< HEAD
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	templ.ExecuteTemplate(w, "main.layout", "welcome")
-}
+var templ = template.Must(template.ParseGlob("delivery/web/templates/*"))
 
-=======
->>>>>>> ef863e83e75485d3bbb1e4923fc31937ecb7d8ae
 func main() {
 
 	dbconn, err := sql.Open("postgres", "postgres://postgres:strafael@127.0.0.1/logindb?sslmode=disable")
@@ -37,12 +33,12 @@ func main() {
 	registrationRepository := repository.NewPsqlRegistrationRepositoryImpl(dbconn)
 	registrationService := service.NewRegistrationServiceImpl(registrationRepository)
 
-	studentRegHandler := handler.NewStudentRegistrationHandler(tmpl, registrationService)
+	studentRegHandler := handler.NewStudentRegistrationHandler(templ, registrationService)
 
 	profileRepository := pRepository.NewPsqlProfileRepositoryImpl(dbconn)
 	profileService := pService.NewProfileServiceImpl(profileRepository)
 
-	profileHandler := handler.NewProfileHandler(tmpl, profileService)
+	profileHandler := handler.NewProfileHandler(templ, profileService)
 
 	fs := http.FileServer(http.Dir("delivery/web/assets/"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
@@ -51,10 +47,9 @@ func main() {
 
 	mux.HandleFunc("/student", studentRegHandler.StudentRegistrationNew)
 	mux.HandleFunc("/", homeHandler)
-<<<<<<< HEAD
+
 	http.ListenAndServe(":2121", mux)
 
-=======
 	mux.HandleFunc("/profile", profileHandler.StudentsProfile)
 
 	http.ListenAndServe(":8080", mux)
@@ -62,6 +57,5 @@ func main() {
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	templ.ExecuteTemplate(w, "mainpage.html", "Welcome")
->>>>>>> ef863e83e75485d3bbb1e4923fc31937ecb7d8ae
 }
 

@@ -4,30 +4,18 @@ import(
     "html/template"
 	"net/http"
 	"strconv"
-<<<<<<< HEAD
-	"github.com/Rob_a21/Cassiopeia/entity"
-	"github.com/Rob_a21/Cassiopeia/registration"
-=======
-	"github.com/robi_a21/Cassiopeia/entity"
-	"github.com/robi_a21/Cassiopeia/registration"
->>>>>>> ef863e83e75485d3bbb1e4923fc31937ecb7d8ae
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/registration"
 
 )
 
 
 type StudentRegistrationHandler struct {
 	tmpl        *template.Template
-<<<<<<< HEAD
 	regService registration.RegistrationServ
 }
 
-func NewStudentRegistrationHandler(T *template.Template, RS registration.RegistrationServ) *StudentRegistrationHandler {
-=======
-	regService registration.RegistrationService
-}
-
 func NewStudentRegistrationHandler(T *template.Template, RS registration.RegistrationService) *StudentRegistrationHandler {
->>>>>>> ef863e83e75485d3bbb1e4923fc31937ecb7d8ae
 	return &StudentRegistrationHandler{tmpl: T, regService: RS}
 }
 

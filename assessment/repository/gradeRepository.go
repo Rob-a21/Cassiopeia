@@ -3,10 +3,10 @@ package repository
 import (
 	"database/sql"
 	"errors"
-	"github.com/Rob_a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
-// GradeRepositoryImpl implements the grade.gradeRepository interface
+// GradeRepositoryImpl implements the assessment.gradeRepository interface
 type GradeRepositoryImpl struct {
 	conn *sql.DB
 }
@@ -16,10 +16,10 @@ func NewGradeRepositoryImpl(Conn *sql.DB) *GradeRepositoryImpl {
 	return &GradeRepositoryImpl{conn: Conn}
 }
 
-// StoreGrade stores new grade information to database
+// StoreGrade stores new assessment information to database
 func (cri *GradeRepositoryImpl) StoreGrade(c entity.Assessment) error {
 
-	_, err := cri.conn.Exec("INSERT INTO assessment (studentid,subjectid,value,grade) values($1, $2, $3, $4)", c.StudentID, c.SubjectID, c.Value,c.Grade)
+	_, err := cri.conn.Exec("INSERT INTO assessment (studentid,subjectid,value,assessment) values($1, $2, $3, $4)", c.StudentID, c.SubjectID, c.Value,c.Grade)
 	if err != nil {
 		return errors.New("Insertion has failed")
 	}
@@ -30,7 +30,7 @@ func (cri *GradeRepositoryImpl) StoreGrade(c entity.Assessment) error {
 // UpdateGrade updates a given object with a new data
 func (cri *GradeRepositoryImpl) UpdateGrade(c entity.Assessment) error {
 
-	_, err := cri.conn.Exec("UPDATE assessment SET subjectid=$1, value=$2, grade=$3 WHERE studentid=$4", c.SubjectID, c.Value, c.Grade, c.StudentID)
+	_, err := cri.conn.Exec("UPDATE assessment SET subjectid=$1, value=$2, assessment=$3 WHERE studentid=$4", c.SubjectID, c.Value, c.Grade, c.StudentID)
 	if err != nil {
 		return errors.New("Update has failed")
 	}
