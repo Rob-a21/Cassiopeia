@@ -38,7 +38,7 @@ func (st *StudentGormRepo) Students() ([]entity.Student, []error) {
 // Student retrieves a student by its id from the database
 func (st *StudentGormRepo) Student(id int) (*entity.Student, []error) {
 	student := entity.Student{}
-	errs := StudentGormRepo.conn.First(&student, id).GetErrors()
+	errs := st.conn.First(&student, id).GetErrors()
 	if len(errs) > 0 {
 		return nil, errs
 	}
@@ -55,11 +55,11 @@ func (st *StudentGormRepo) UpdateStudent(student *entity.Student) (*entity.Stude
 }
 
 func (st *StudentGormRepo) DeleteStudent(id int) (*entity.Student, []error) {
-	s, errs := StudentGormRepo.Student(*st,id)
+	s, errs := st.Student(id)
 	if len(errs) > 0 {
 		return nil, errs
 	}
-	errs = StudentGormRepo.conn.Delete(s, id).GetErrors()
+	errs = st.conn.Delete(s, id).GetErrors()
 	if len(errs) > 0 {
 		return nil, errs
 	}

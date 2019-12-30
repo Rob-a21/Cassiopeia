@@ -8,6 +8,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
+	_"github.com/lib/pq"
 )
 
 func main() {
@@ -33,10 +34,10 @@ router := httprouter.New()
 
 router.GET("/v1/main/students", adminStudentHandler.GetStudents)
 
-router.GET("/v1/admin/student/:id", adminStudentHandler.GetSingleStudent)
-router.PUT("/v1/admin/students/:id", adminStudentHandler.UpdateStudent)
-router.POST("/v1/admin/student", adminStudentHandler.RegisterStudent)
-router.DELETE("/v1/admin/students/:id", adminStudentHandler.DeleteStudent)
+router.GET("/v1/student/:id", adminStudentHandler.GetSingleStudent)
+router.PUT("/v1/students/:id", adminStudentHandler.UpdateStudent)
+router.POST("/v1/student", adminStudentHandler.RegisterStudent)
+router.DELETE("/v1/students/:id", adminStudentHandler.DeleteStudent)
 
 	_ = http.ListenAndServe(":8181", router)
 }

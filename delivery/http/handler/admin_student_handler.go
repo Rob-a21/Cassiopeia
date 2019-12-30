@@ -75,7 +75,7 @@ func (arh *AdminStudentHandler) GetSingleStudent(w http.ResponseWriter,
 func (arh *AdminStudentHandler) UpdateStudent(w http.ResponseWriter,
 	r *http.Request, ps httprouter.Params) {
 
-	students, errs := arh.studentService.UpdateStudent()
+	students, errs := arh.studentService.UpdateStudent(&entity.Student{"Rob","strafael","Robel","Azmera",751,"myImage","Male","12","0909","rob@gmail.com"})
 
 	if len(errs) > 0 {
 		w.Header().Set("Content-Type", "application/json")
@@ -101,7 +101,7 @@ func (arh *AdminStudentHandler) RegisterStudent(w http.ResponseWriter,
 	r *http.Request, _ httprouter.Params) {
 
 
-	students, errs := arh.studentService.RegisterStudent()
+	students, errs := arh.studentService.RegisterStudent(&entity.Student{"Rob","strafael","Robel","Azmera",751,"myImage","Male","12","0909","rob@gmail.com"})
 
 	if len(errs) > 0 {
 		w.Header().Set("Content-Type", "application/json")

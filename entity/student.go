@@ -2,16 +2,36 @@ package entity
 
 //Student struct
 type Student struct{
-	UserName  string
-	Password  string
-	FirstName string
-	LastName  string
-	ID        int
-	image     string
-	Gender    string
-	Grade     string
-	Phone     string
-	email     string
-	Email     string
-	Image     string
+	UserName  string	`json:"username" gorm:"type:varchar(255);not null; unique"`
+	Password  string	`json:"password" gorm:"type:varchar(255);not null; unique"`
+	FirstName string	`json:"firstname" gorm:"type:varchar(255)"`
+	LastName  string	`json:"lastname" gorm:"type:varchar(255)"`
+	ID        int		`json:"id" gorm:"type:integer;not null; unique"`
+	Image     string	`json:"image" gorm:"type:varchar(255)"`
+	Gender    string	`json:"gender" gorm:"type:varchar(255)"`
+	Grade     string	`json:"grade" gorm:"type:varchar(255)"`
+	Phone     string	`json:"phone" gorm:"type:varchar(255)"`
+	Email     string	`json:"email" gorm:"type:varchar(255)"`
 }
+
+//
+//type User struct {
+//	ID       uint
+//	UserName string `gorm:"type:varchar(255);not null"`
+//	FullName string `gorm:"type:varchar(255);not null"`
+//	Email    string `gorm:"type:varchar(255);not null; unique"`
+//	Phone    string `gorm:"type:varchar(100);not null; unique"`
+//	Password string `gorm:"type:varchar(255)"`
+//	Roles    []Role `gorm:"many2many:user_roles"`
+//	Orders   []Order
+//}
+//
+//// Comment represents comments forwarded by application users
+//type Comment struct {
+//	ID       uint      `json:"id"`
+//	FullName string    `json:"fullname" gorm:"type:varchar(255)"`
+//	Message  string    `json:"message"`
+//	Phone    string    `json:"phone" gorm:"type:varchar(100);not null; unique"`
+//	Email    string    `json:"email" gorm:"type:varchar(255);not null; unique"`
+//	PlacedAt time.Time `json:"placedat"`
+//}
