@@ -1,17 +1,17 @@
 package main
 
 import (
-	"database/sql"
-	"html/template"
-	"net/http"
+"database/sql"
+"html/template"
+"net/http"
 
-	_ "github.com/lib/pq"
+_ "github.com/lib/pq"
 
-	"github.com/Rob-a21/Cassiopeia/delivery/handler"
-	"github.com/Rob-a21/Cassiopeia/profile/pRepository"
-	"github.com/Rob-a21/Cassiopeia/profile/pService"
-	"github.com/Rob-a21/Cassiopeia/registration/repository"
-	"github.com/Rob-a21/Cassiopeia/registration/service"
+"github.com/Rob-a21/Cassiopeia/delivery/http/handler"
+"github.com/Rob-a21/Cassiopeia/profile/pRepository"
+"github.com/Rob-a21/Cassiopeia/profile/pService"
+"github.com/Rob-a21/Cassiopeia/registration/repository"
+"github.com/Rob-a21/Cassiopeia/registration/service"
 )
 
 var templ = template.Must(template.ParseGlob("delivery/web/templates/*"))
@@ -48,14 +48,14 @@ func main() {
 	mux.HandleFunc("/student", studentRegHandler.StudentRegistrationNew)
 	mux.HandleFunc("/", homeHandler)
 
-	http.ListenAndServe(":2121", mux)
+	_ = http.ListenAndServe(":2121", mux)
 
-	mux.HandleFunc("/profile", profileHandler.StudentsProfile)
+	mux.HandleFunc("/Studentprofile", profileHandler.StudentsProfile)
 
-	http.ListenAndServe(":8080", mux)
+	_ = http.ListenAndServe(":8080", mux)
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	templ.ExecuteTemplate(w, "mainpage.html", "Welcome")
+	_ = templ.ExecuteTemplate(w, "mainpage.html", "Welcome")
 }
 
