@@ -28,16 +28,16 @@ func (cs *GradeServiceImpl) StoreGrade(grade entity.Assessment) error {
 }
 
 // Assessment returns list of assessments
-//func (cs *GradeServiceImpl) Assessment(subjectId string) ([]entity.Assessment, error) {
-//
-//	grades, err := cs.GradeRepo.Assessment(subjectId)
-//
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	return grades, nil
-//}
+func (cs *GradeServiceImpl) Assessment(studentId int, subjectId string) ([]entity.Assessment, error) {
+
+	grades, err := cs.GradeRepo.Assessment(studentId,subjectId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return grades, nil
+}
 
 // singleStudentAssessments returns list of categories
 func (cs *GradeServiceImpl) singleStudentAssessments(id string) ([]entity.Assessment, error) {

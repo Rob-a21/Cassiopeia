@@ -2,42 +2,70 @@ package service
 
 
 import (
-
-<<<<<<< HEAD
-	"github.com/Rob_a21/Cassiopeia/entity"
-	"github.com/Rob_a21/Cassiopeia/registration"
-=======
-	"github.com/robi_a21/Cassiopeia/entity"
-	"github.com/robi_a21/Cassiopeia/registration"
->>>>>>> ef863e83e75485d3bbb1e4923fc31937ecb7d8ae
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/registration"
 
 )
 
-
-
 type RegistrationServiceImpl struct {
-<<<<<<< HEAD
-	registrationRepo registration.RegistrationRepo
+	registrationRepo registration.StudentRepository
 }
 
-func NewRegistrationServiceImpl(regRepo registration.RegistrationRepo) *RegistrationServiceImpl {
-=======
-	registrationRepo registration.RegistrationRepository
-}
-
-func NewRegistrationServiceImpl(regRepo registration.RegistrationRepository) *RegistrationServiceImpl {
->>>>>>> ef863e83e75485d3bbb1e4923fc31937ecb7d8ae
-	
+func NewRegistrationServiceImpl(regRepo registration.StudentRepository) *RegistrationServiceImpl {
 	return &RegistrationServiceImpl{registrationRepo: regRepo}
 }
 
-func (ss *RegistrationServiceImpl) RegisterStudent(student entity.Student) error {
+func (ss *RegistrationServiceImpl) RegisterStudent(student *entity.Student) (*entity.Student, []error) {
 
-	err := ss.registrationRepo.RegisterStudent(student)
+	s1, err := ss.registrationRepo.RegisterStudent(student)
 
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return s1, err
+}
+
+func (ss *RegistrationServiceImpl) Students() ([]entity.Student, []error) {
+
+	students ,err := ss.registrationRepo.Students()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return students, nil
+}
+
+func (ss *RegistrationServiceImpl) Student(id int) (*entity.Student, []error) {
+
+	student ,err := ss.registrationRepo.Student(id)
+
+	if err != nil {
+		return student, err
+	}
+
+	return student, nil
+}
+
+
+func (ss *RegistrationServiceImpl) UpdateStudent(student *entity.Student) (*entity.Student, []error) {
+
+	s1, err := ss.registrationRepo.UpdateStudent(student)
+
+	if err != nil {
+		return nil,err
+	}
+
+	return s1, nil
+}
+func (ss *RegistrationServiceImpl) DeleteStudent(id int) (*entity.Student, []error) {
+
+	s1, err := ss.registrationRepo.DeleteStudent(id)
+
+	if err != nil {
+		return nil,err
+	}
+
+	return s1, nil
 }

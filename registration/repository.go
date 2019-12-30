@@ -2,23 +2,15 @@ package registration
 
 
 import(
-
-<<<<<<< HEAD
-	"github.com/Rob_a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
+type StudentRepository interface{
 
-type RegistrationRepo interface{
+	RegisterStudent(student *entity.Student) (*entity.Student, []error)
+	Students() ([]entity.Student, []error)
+	Student(id int) (*entity.Student, []error)
+	UpdateStudent(student *entity.Student) (*entity.Student, []error)
+	DeleteStudent(id int) (*entity.Student, []error)
 
-	RegisterStudent(student entity.Student) error
 }
-=======
-	"github.com/robi_a21/Cassiopeia/entity"
-)
-
-
-type RegistrationRepository interface{
-
-	RegisterStudent(student entity.Student) error
-}
->>>>>>> ef863e83e75485d3bbb1e4923fc31937ecb7d8ae

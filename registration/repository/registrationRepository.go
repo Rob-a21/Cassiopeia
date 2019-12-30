@@ -3,12 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
-
-<<<<<<< HEAD
-	"github.com/Rob_a21/Cassiopeia/entity"
-=======
-	"github.com/robi_a21/Cassiopeia/entity"
->>>>>>> ef863e83e75485d3bbb1e4923fc31937ecb7d8ae
+	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
 
@@ -32,7 +27,7 @@ func (pr *PsqlRegistrationRepositoryImpl) Students() ([]entity.Student, error) {
 
 	for rows.Next() {
 		student := entity.Student{}
-		err = rows.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Email, &student.Image)
+		err = rows.Scan(student.UserName,student.Password,student.FirstName,student.LastName,student.ID,student.Image,student.Gender,student.Grade,student.Phone,student.Email)
 		if err != nil {
 			return nil, err
 		}
@@ -48,7 +43,8 @@ func (pr *PsqlRegistrationRepositoryImpl) Student(id int) (entity.Student, error
 
 	student := entity.Student{}
 
-	err := row.Scan(&student.ID, &student.FirstName, &student.LastName,&student.Email, &student.Image)
+	err := row.Scan(student.UserName,student.Password,student.FirstName,student.LastName,student.ID,student.Image,student.Gender,student.Grade,student.Phone,student.Email)
+
 	if err != nil {
 		return student, err
 	}
@@ -56,9 +52,9 @@ func (pr *PsqlRegistrationRepositoryImpl) Student(id int) (entity.Student, error
 	return student, nil
 }
 
-func (pr *PsqlRegistrationRepositoryImpl) UpdateCategory(student entity.Student) error {
+func (pr *PsqlRegistrationRepositoryImpl) UpdateStudent(student entity.Student) error {
 
-	_, err := pr.conn.Exec("UPDATE student SET fname=$1,lname=$2, image=$3 WHERE id=$4", student.FirstName, student.LastName, student.Image, student.ID)
+	_, err := pr.conn.Exec("UPDATE student SET username=$1,password=$2, firstname=$3, lastname=$4,studentid=$5, image=$6,gender=$7,grade=$8,phone=$9, email=$10 WHERE id=$4", student.UserName,student.Password,student.FirstName,student.LastName,student.ID,student.Image,student.Gender,student.Grade,student.Phone,student.Email)
 	if err != nil {
 		return errors.New("Update has failed")
 	}
@@ -78,7 +74,7 @@ func (pr *PsqlRegistrationRepositoryImpl) DeleteStudent(id int) error {
 
 func (pr *PsqlRegistrationRepositoryImpl) RegisterStudent(student entity.Student) error {
 
-	_, err := pr.conn.Exec("insert into student (username,password,fname,lname,id,email) values($1, $2, $3,$4, $5, $6)", student.UserName, student.Password, student.FirstName, student.LastName, student.ID, student.Email)
+	_, err := pr.conn.Exec("insert into student (username,password,firstname,lastname,studentid,image,gender,grade,phone,email) values($1, $2, $3,$4, $5, $6, $7, $8,$9, $10)", student.UserName,student.Password,student.FirstName,student.LastName,student.ID,student.Image,student.Gender,student.Grade,student.Phone,student.Email)
 	if err != nil {
 		return errors.New("Insertion has failed")
 	}
