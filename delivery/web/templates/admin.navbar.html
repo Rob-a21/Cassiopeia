@@ -1,0 +1,74 @@
+{{ define "admin.navbar" }}
+    <!doctype html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- css -->
+        <link  rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/student.css">
+
+    </head>
+
+    <body>
+    <nav class="navbar navbar-light fixed-top flex-md-nowrap p-0" style="background-color: #e3f2fd;">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">School Managment</a>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/student">
+                                <span data-feather="home"></span>
+                                School <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/student/notification">
+                                <span data-feather="notification"></span>
+                                notification
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/student/assessment">
+                                <span data-feather="assessment"></span>
+                                assessment
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/student/myprofile">
+                                <span data-feather="myprofile"></span>
+                                myprofile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/student/course">
+                                <span data-feather="course"></span>
+                                course
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/student/attendance">
+                                <span data-feather="attendance"></span>
+                                attendance
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/student/logout">
+                                <span data-feather="logout"></span>
+                                logout
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+    </div>
+{{ end }}

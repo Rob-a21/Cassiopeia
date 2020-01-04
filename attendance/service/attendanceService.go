@@ -1,6 +1,6 @@
 package service
 
-import "github.com/Rob-a21/Cassiopeia/entity"
+import "github.com/robi_a21/Cassiopeia/entity"
 
 import "errors"
 
@@ -22,8 +22,8 @@ func (s StudentsAttendance) ShowAttendance(id int) (*entity.Student, error) {
 
 //FillAttendance filling function for student
 func (s StudentsAttendance) FillAttendance(student *entity.Student) error {
-	if _, ok := s[student.ID]; !ok {
-		s[student.ID] = student
+	if _, ok := s[student.StudentID]; !ok {
+		s[student.StudentID] = student
 		return nil
 	}
 	return errors.New("Student Filled The Attendance")

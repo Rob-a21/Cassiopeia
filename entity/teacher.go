@@ -9,4 +9,5 @@ type Teacher struct {
 	LastName  string
 	FirstName string
 	TeacherID string
+	Image     string
 }

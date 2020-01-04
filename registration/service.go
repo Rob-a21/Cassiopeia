@@ -1,17 +1,12 @@
 package registration
 
-import "github.com/Rob-a21/Cassiopeia/entity"
+import "github.com/robi_a21/Cassiopeia/entity"
 
-// CategoryService specifies food menu category services
-type StudentService interface {
+type RegistrationService interface{
 
-	RegisterStudent(student entity.Student) (*entity.Student, []error)
-	Students() ([]entity.Student, []error)
-	Student(id int) (*entity.Student, []error)
-	UpdateStudent(student *entity.Student) (*entity.Student, []error)
-	DeleteStudent(id int) (*entity.Student, []error)
+	RegisterStudent(student entity.Student) error
+	RegisterFamily(family entity.Family) error
+	RegisterTeacher(teacher entity.Teacher) error
+	RegisterAdmin(admin entity.Admin) error
+
 }
-
-
-
-

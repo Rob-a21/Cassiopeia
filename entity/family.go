@@ -3,8 +3,10 @@ package entity
 //Family struct for data caching
 type Family struct {
 	FirstName string
+	LastName  string
+	Username string
 	Password  string
 	Phone     string
 	Email     string
-	LastName  string
+	Image    string
 }

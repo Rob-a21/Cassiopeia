@@ -1,8 +1,8 @@
 package pService
 
 import (
-	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/profile"
+	"github.com/robi_a21/Cassiopeia/entity"
+	"github.com/robi_a21/Cassiopeia/profile"
 )
 
 type ProfileServiceImpl struct {
@@ -34,6 +34,44 @@ func (ss *ProfileServiceImpl) Student(id int) (entity.Student, error) {
 	}
 
 	return student, nil
+}
+
+func (fs *ProfileServiceImpl) Families() ([]entity.Family,error) {
+
+	family, err := fs.profileRepository.Families()
+
+	if err != nil{
+
+		return  nil,err
+	}
+
+	return family,nil
+
+}
+
+func (ts *ProfileServiceImpl) Teachers() ([]entity.Teacher,error) {
+
+	teacher, err := ts.profileRepository.Teachers()
+
+	if err != nil{
+
+		return  nil,err
+	}
+
+	return teacher,nil
+
+}
+
+func (as *ProfileServiceImpl) Admins() ([]entity.Admin,error){
+
+	admin,err := as.profileRepository.Admins()
+
+	if err != nil{
+
+		return  nil,err
+	}
+
+	return  admin,nil
 }
 
 
