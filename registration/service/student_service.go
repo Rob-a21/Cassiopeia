@@ -10,7 +10,7 @@ type StudentService struct {
 	studentRepo registration.StudentRepository
 }
 
-func (st *StudentService) RegisterStudent(student *entity.Student) (*entity.Student, []error) {
+func (st *StudentService) RegisterStudent(student entity.Student) (*entity.Student, []error) {
 	rl, errs := st.studentRepo.RegisterStudent(student)
 	if len(errs) > 0 {
 		return nil, errs

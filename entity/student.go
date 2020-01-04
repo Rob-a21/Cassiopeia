@@ -13,25 +13,3 @@ type Student struct{
 	Phone     string	`json:"phone" gorm:"type:varchar(255)"`
 	Email     string	`json:"email" gorm:"type:varchar(255)"`
 }
-
-//
-//type User struct {
-//	ID       uint
-//	UserName string `gorm:"type:varchar(255);not null"`
-//	FullName string `gorm:"type:varchar(255);not null"`
-//	Email    string `gorm:"type:varchar(255);not null; unique"`
-//	Phone    string `gorm:"type:varchar(100);not null; unique"`
-//	Password string `gorm:"type:varchar(255)"`
-//	Roles    []Role `gorm:"many2many:user_roles"`
-//	Orders   []Order
-//}
-//
-//// Comment represents comments forwarded by application users
-//type Comment struct {
-//	ID       uint      `json:"id"`
-//	FullName string    `json:"fullname" gorm:"type:varchar(255)"`
-//	Message  string    `json:"message"`
-//	Phone    string    `json:"phone" gorm:"type:varchar(100);not null; unique"`
-//	Email    string    `json:"email" gorm:"type:varchar(255);not null; unique"`
-//	PlacedAt time.Time `json:"placedat"`
-//}

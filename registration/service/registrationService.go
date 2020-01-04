@@ -15,7 +15,7 @@ func NewRegistrationServiceImpl(regRepo registration.StudentRepository) *Registr
 	return &RegistrationServiceImpl{registrationRepo: regRepo}
 }
 
-func (ss *RegistrationServiceImpl) RegisterStudent(student *entity.Student) (*entity.Student, []error) {
+func (ss *RegistrationServiceImpl) RegisterStudent(student entity.Student) (*entity.Student, []error) {
 
 	s1, err := ss.registrationRepo.RegisterStudent(student)
 
