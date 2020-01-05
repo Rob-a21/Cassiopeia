@@ -17,7 +17,7 @@ func NewPsqlCourseRepositoryImpl(Conn *sql.DB) *PsqlCourseRepositoryImpl {
 
 func (pr *PsqlCourseRepositoryImpl) AddCourse(course entity.Course) error {
 
-	_, err := pr.conn.Exec("insert into course (coursename,courseid,grade) values($1, $2,$3)", course.CourseName, course.CourseID, Course.Grade)
+	_, err := pr.conn.Exec("insert into course (coursename,courseid,grade) values($1, $2,$3)", course.CourseName, course.CourseID,course.Grade)
 	if err != nil {
 		return errors.New("Insertion has failed")
 	}
@@ -37,7 +37,7 @@ func (pr *PsqlCourseRepositoryImpl) GetCourse() ([]entity.Course, error) {
 
 	for rows.Next() {
 		course := entity.Course{}
-		err = rows.Scan(&course.CourseName, &course.CourseID, &course.Grade)
+		err = rows.Scan(&course.CourseName, &course.CourseID,&course.Grade)
 		if err != nil {
 			return nil, err
 		}
@@ -53,7 +53,7 @@ func (pr *PsqlCourseRepositoryImpl) Course(id int) (entity.Course, error) {
 
 	c := entity.Course{}
 
-	err := row.Scan(&c.CourseName, &c.CourseID, &c.Grade)
+	err := row.Scan(&c.CourseName, &c.CourseID)
 	if err != nil {
 		return c, err
 	}
@@ -63,7 +63,7 @@ func (pr *PsqlCourseRepositoryImpl) Course(id int) (entity.Course, error) {
 
 func (pr *PsqlCourseRepositoryImpl) UpdateCourse(c entity.Course) error {
 
-	_, err := pr.conn.Exec("UPDATE course SET coursename=$1,courseid=$2, grade=$3 WHERE id=$4", c.CourseName, c.CourseID, c.Grade)
+	_, err := pr.conn.Exec("UPDATE course SET coursename=$1,courseid=$2, grade=$3 WHERE id=$4", c.CourseName, c.CourseID,c.Grade)
 	if err != nil {
 		return errors.New("Update has failed")
 	}

@@ -61,20 +61,22 @@ func main() {
 	//mux.HandleFunc("/", homeHandler.Home)
 
 	mux.HandleFunc("/student/login", loginHandler.Login)
-	mux.HandleFunc("/student/course", courseHandler.GetCourse)
+	mux.HandleFunc("/student/course", courseHandler.StudentGetCourse)
 	mux.HandleFunc("/student/notification", notificationHandler.GetNotification)
 	mux.HandleFunc("/student/register", registrationHandler.StudentRegistration)
 	mux.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
 	mux.HandleFunc("/student/profile", profileHandler.StudentProfile)
 
 	mux.HandleFunc("/family/register", registrationHandler.FamilyRegistration)
+	mux.HandleFunc("/family/course", courseHandler.FamilyGetCourse)
+
 
 	mux.HandleFunc("/teacher/register", registrationHandler.TeacherRegistration)
 	mux.HandleFunc("/teacher/notification", notificationHandler.AddNotification)
 
 	mux.HandleFunc("/admin/register", registrationHandler.AdminRegistration)
-	mux.HandleFunc("/admin/course", courseHandler.GetCourse)
-	mux.HandleFunc("/admin/course/new", courseHandler.CourseAdd)
+	mux.HandleFunc("/admin/course", courseHandler.AdminGetCourse)
+	mux.HandleFunc("/admin/course/new", courseHandler.AdminCourseAdd)
 	mux.HandleFunc("/admin/course/update", courseHandler.UpdateCourse)
 	mux.HandleFunc("/admin/course/delete", courseHandler.DeleteCourse)
 

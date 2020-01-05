@@ -38,18 +38,18 @@ func (crs *CourseServiceImpl) GetCourse() ([]entity.Course, error) {
 
 func (cs *CourseServiceImpl) Course(id int) (entity.Course, error) {
 
-	c, err := cs.courseRepository.Course(id)
+	course, err := cs.courseRepository.Course(id)
 
 	if err != nil {
-		return c, err
+		panic(err)
 	}
 
-	return c, nil
+	return course, nil
 }
 
 func (crs *CourseServiceImpl) UpdateCourse(course entity.Course) error {
 
-	err := crs.cService.UpdateCourse(course)
+	err := crs.courseRepository.UpdateCourse(course)
 
 	if err != nil {
 		return err
@@ -60,7 +60,7 @@ func (crs *CourseServiceImpl) UpdateCourse(course entity.Course) error {
 
 func (crs *CourseServiceImpl) DeleteCourse(id int) error {
 
-	err := crs.categoryRepo.DeleteCourse(id)
+	err := crs.courseRepository.DeleteCourse(id)
 	if err != nil {
 		return err
 	}
