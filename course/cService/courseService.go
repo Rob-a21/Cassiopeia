@@ -9,9 +9,9 @@ type CourseServiceImpl struct {
 	courseRepository course.CourseRepository
 }
 
-func NewCourseServiceImpl(regRepo course.CourseRepository) *CourseServiceImpl {
+func NewCourseServiceImpl(crRepo course.CourseRepository) *CourseServiceImpl {
 
-	return &CourseServiceImpl{courseRepository: regRepo}
+	return &CourseServiceImpl{courseRepository: crRepo}
 }
 
 func (ss *CourseServiceImpl) AddCourse(course entity.Course) error {
@@ -34,4 +34,35 @@ func (crs *CourseServiceImpl) GetCourse() ([]entity.Course, error) {
 	}
 
 	return course, nil
+}
+
+func (cs *CourseServiceImpl) Course(id int) (entity.Course, error) {
+
+	c, err := cs.courseRepository.Course(id)
+
+	if err != nil {
+		return c, err
+	}
+
+	return c, nil
+}
+
+func (crs *CourseServiceImpl) UpdateCourse(course entity.Course) error {
+
+	err := crs.cService.UpdateCourse(course)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (crs *CourseServiceImpl) DeleteCourse(id int) error {
+
+	err := crs.categoryRepo.DeleteCourse(id)
+	if err != nil {
+		return err
+	}
+	return nil
 }

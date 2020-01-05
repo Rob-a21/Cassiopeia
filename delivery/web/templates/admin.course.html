@@ -1,4 +1,3 @@
-
 {{ define "admin.course.layout" }}
 {{ template "admin.navbar" . }}
 {{ template "admin.course.content" . }}
@@ -11,28 +10,33 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h2>Courses</h2>
     </div>
-    <form method="POST" action="/admin/course" enctype="multipart/form-data">
 
-    </div><label for="fname" class="col-sm-2 col-form-label">Course Name</label>
-    <div class="col-sm-10">
-        <input type="text" class="form-control" name="coursename" id="coursename" placeholder="course name">
-    </div>
-    </div><label for="courseid" class="col-sm-2 col-form-label">Course ID</label>
-    <div class="col-sm-10">
-        <input type="text" class="form-control" name="courseid" id="courseid" placeholder="course id">
+    <div class="pt-3 pb-2 mb-3">
+        <a class="btn btn-primary btn-lg" href="/admin/course/new" role="button">New Course</a>
     </div>
 
-<label for="grade" class="col-sm-2 col-form-label">Grade</label>
-<div class="col-sm-10">
-    <input type="text" class="form-control" name="grade" id="grade" placeholder="course id">
-</div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">CourseName</th>
+            <th scope="col">CourseID</th>
+            <th scope="col">Grade</th>
 
-    
-    <div class="form-group row">
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary float-right">submit</button>
-        </div>
-    </div>
-    </form>
+
+
+          </tr>
+        </thead>
+        <tbody>
+            {{ range . }}
+          <tr>
+            <td> {{ .CourseName }} </td>
+            <td> {{ .CourseID }} </td>
+            <td> <a href="/admin/course/update?id={{ .CourseID }}">Edit</a> </td>
+            <td> <a href="/admin/course/delete?id={{ .CourseID }}">Delete</a> </td>
+
+          </tr>
+          {{ end }}
+          </tbody>
+          </table>
 </main>
 {{ end }}

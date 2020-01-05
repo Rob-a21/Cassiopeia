@@ -7,4 +7,7 @@ import (
 type CourseService interface {
 	AddCourse(course entity.Course) error
 	GetCourse() ([]entity.Course, error)
+	Course(id int) (entity.Course, error)
+	UpdateCourse(course entity.Course) error
+	DeleteCourse(id int) error
 }

@@ -73,7 +73,10 @@ func main() {
 	mux.HandleFunc("/teacher/notification", notificationHandler.AddNotification)
 
 	mux.HandleFunc("/admin/register", registrationHandler.AdminRegistration)
-	mux.HandleFunc("/admin/course", courseHandler.CourseAdd)
+	mux.HandleFunc("/admin/course", courseHandler.GetCourse)
+	mux.HandleFunc("/admin/course/new", courseHandler.CourseAdd)
+	mux.HandleFunc("/admin/course/update", courseHandler.UpdateCourse)
+	mux.HandleFunc("/admin/course/delete", courseHandler.DeleteCourse)
 
 	http.ListenAndServe(":8181", mux)
 }
