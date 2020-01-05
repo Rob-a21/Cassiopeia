@@ -1,13 +1,11 @@
 package cRepository
 
-
 import (
 	"database/sql"
 	"errors"
 
-	"github.com/robi_a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/entity"
 )
-
 
 type PsqlCourseRepositoryImpl struct {
 	conn *sql.DB
@@ -17,10 +15,9 @@ func NewPsqlCourseRepositoryImpl(Conn *sql.DB) *PsqlCourseRepositoryImpl {
 	return &PsqlCourseRepositoryImpl{conn: Conn}
 }
 
-
 func (pr *PsqlCourseRepositoryImpl) AddCourse(course entity.Course) error {
 
-	_, err := pr.conn.Exec("insert into course (coursename,courseid) values($1, $2)", course.CourseName, course.CourseID)
+	_, err := pr.conn.Exec("insert into course (coursename,courseid,grade) values($1, $2,$3)", course.CourseName, course.CourseID, Course.Grade)
 	if err != nil {
 		return errors.New("Insertion has failed")
 	}
@@ -40,12 +37,12 @@ func (pr *PsqlCourseRepositoryImpl) GetCourse() ([]entity.Course, error) {
 
 	for rows.Next() {
 		course := entity.Course{}
-		err = rows.Scan(&course.CourseName,&course.CourseID)
+		err = rows.Scan(&course.CourseName, &course.CourseID, &course.Grade)
 		if err != nil {
 			return nil, err
 		}
 		courses = append(courses, course)
 	}
 
-	return courses,err
+	return courses, err
 }

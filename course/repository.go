@@ -1,15 +1,10 @@
 package course
 
-
-
-import(
-
-	"github.com/robi_a21/Cassiopeia/entity"
+import (
+	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
-
-type CourseRepository interface{
-
+type CourseRepository interface {
 	AddCourse(course entity.Course) error
-	GetCourse() ([]entity.Course,error)
+	GetCourse() ([]entity.Course, error)
 }

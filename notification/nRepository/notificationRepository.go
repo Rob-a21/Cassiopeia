@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/robi_a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
 type PsqlNotificationRepositoryImpl struct {

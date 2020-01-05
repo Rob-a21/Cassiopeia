@@ -1,20 +1,16 @@
 package cService
 
-
-
 import (
-	"github.com/robi_a21/Cassiopeia/course"
-	"github.com/robi_a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/course"
+	"github.com/Rob-a21/Cassiopeia/entity"
 )
-
-
 
 type CourseServiceImpl struct {
 	courseRepository course.CourseRepository
 }
 
 func NewCourseServiceImpl(regRepo course.CourseRepository) *CourseServiceImpl {
-	
+
 	return &CourseServiceImpl{courseRepository: regRepo}
 }
 
@@ -39,4 +35,3 @@ func (crs *CourseServiceImpl) GetCourse() ([]entity.Course, error) {
 
 	return course, nil
 }
-

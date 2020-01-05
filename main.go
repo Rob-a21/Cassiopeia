@@ -7,15 +7,15 @@ import (
 
 	_ "github.com/lib/pq"
 
-	"github.com/robi_a21/Cassiopeia/course/cRepository"
-	"github.com/robi_a21/Cassiopeia/course/cService"
-	"github.com/robi_a21/Cassiopeia/delivery/http/handler"
-	"github.com/robi_a21/Cassiopeia/notification/nRepository"
-	"github.com/robi_a21/Cassiopeia/notification/nService"
-	"github.com/robi_a21/Cassiopeia/profile/pRepository"
-	"github.com/robi_a21/Cassiopeia/profile/pService"
-	"github.com/robi_a21/Cassiopeia/registration/repository"
-	"github.com/robi_a21/Cassiopeia/registration/service"
+	"github.com/Rob-a21/Cassiopeia/course/cRepository"
+	"github.com/Rob-a21/Cassiopeia/course/cService"
+	"github.com/Rob-a21/Cassiopeia/delivery/http/handler"
+	"github.com/Rob-a21/Cassiopeia/notification/nRepository"
+	"github.com/Rob-a21/Cassiopeia/notification/nService"
+	"github.com/Rob-a21/Cassiopeia/profile/pRepository"
+	"github.com/Rob-a21/Cassiopeia/profile/pService"
+	"github.com/Rob-a21/Cassiopeia/registration/repository"
+	"github.com/Rob-a21/Cassiopeia/registration/service"
 )
 
 var tmpl = template.Must(template.ParseGlob("delivery/web/templates/*"))
@@ -64,8 +64,8 @@ func main() {
 	mux.HandleFunc("/student/course", courseHandler.GetCourse)
 	mux.HandleFunc("/student/notification", notificationHandler.GetNotification)
 	mux.HandleFunc("/student/register", registrationHandler.StudentRegistration)
-	mux.HandleFunc("student/profiles", profileHandler.StudentsProfile)
-	mux.HandleFunc("student/profile", profileHandler.StudentProfile)
+	mux.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
+	mux.HandleFunc("/student/profile", profileHandler.StudentProfile)
 
 	mux.HandleFunc("/family/register", registrationHandler.FamilyRegistration)
 

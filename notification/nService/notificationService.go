@@ -1,8 +1,8 @@
 package nService
 
 import (
-	"github.com/robi_a21/Cassiopeia/entity"
-	"github.com/robi_a21/Cassiopeia/notification"
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/notification"
 )
 
 type NotificationServiceImpl struct {
@@ -24,7 +24,6 @@ func (ntf *NotificationServiceImpl) AddNotification(notf entity.Notification) er
 	return nil
 }
 
-
 func (ss *NotificationServiceImpl) GetNotification() ([]entity.Notification, error) {
 
 	notn, err := ss.notificationRepository.GetNotification()
@@ -35,8 +34,3 @@ func (ss *NotificationServiceImpl) GetNotification() ([]entity.Notification, err
 
 	return notn, nil
 }
-
-
-
-
-

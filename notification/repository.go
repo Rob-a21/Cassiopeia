@@ -1,13 +1,10 @@
 package notification
 
-
-import(
-	
-	"github.com/robi_a21/Cassiopeia/entity"
+import (
+	"github.com/Rob-a21/Cassiopeia/entity"
 )
-type NotificationRepository interface{
 
-	 GetNotification() ([]entity.Notification ,error)
-     AddNotification( entity.Notification)error
-
+type NotificationRepository interface {
+	GetNotification() ([]entity.Notification, error)
+	AddNotification(entity.Notification) error
 }

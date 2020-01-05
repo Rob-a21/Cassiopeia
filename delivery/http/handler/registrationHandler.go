@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/robi_a21/Cassiopeia/entity"
-	"github.com/robi_a21/Cassiopeia/registration"
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/registration"
 )
 
 type RegistrationHandler struct {

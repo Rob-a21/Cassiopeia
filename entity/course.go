@@ -1,8 +1,7 @@
 package entity
 
-type Course struct{
-
+type Course struct {
 	CourseName string
-
-	CourseID int
+	CourseID   int
+	Grade      int
 }

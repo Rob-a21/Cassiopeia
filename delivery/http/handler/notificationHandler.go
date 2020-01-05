@@ -4,8 +4,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/robi_a21/Cassiopeia/entity"
-	"github.com/robi_a21/Cassiopeia/notification"
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/notification"
 )
 
 type NotificationHandler struct {

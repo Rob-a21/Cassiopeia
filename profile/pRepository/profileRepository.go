@@ -1,11 +1,10 @@
-
 package pRepository
 
 import (
 	"database/sql"
 	"errors"
 
-	"github.com/robi_a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
 type PsqlProfileRepositoryImpl struct {
@@ -18,7 +17,7 @@ func NewPsqlProfileRepositoryImpl(Conn *sql.DB) *PsqlProfileRepositoryImpl {
 
 func (pr *PsqlProfileRepositoryImpl) Students() ([]entity.Student, error) {
 
-	rows, err := pr.conn.Query("SELECT * FROM student;")
+	rows, err := pr.conn.Query("select * from student;")
 	if err != nil {
 		return nil, errors.New("Could not query the database")
 	}
@@ -28,14 +27,14 @@ func (pr *PsqlProfileRepositoryImpl) Students() ([]entity.Student, error) {
 
 	for rows.Next() {
 		student := entity.Student{}
-		err = rows.Scan(&student.UserName,&student.Password,&student.FirstName, &student.LastName,&student.ID, &student.Email,&student.Image)
+		err = rows.Scan(&student.UserName, &student.Password, &student.FirstName, &student.LastName, &student.ID, &student.Email, &student.Image)
 		if err != nil {
 			return nil, err
 		}
 		students = append(students, student)
 	}
 
-	return students,err
+	return students, err
 }
 
 func (pr *PsqlProfileRepositoryImpl) Student(id int) (entity.Student, error) {
@@ -44,15 +43,13 @@ func (pr *PsqlProfileRepositoryImpl) Student(id int) (entity.Student, error) {
 
 	student := entity.Student{}
 
-	err := row.Scan(&student.ID, &student.FirstName, &student.LastName,&student.Email,&student.Image)
+	err := row.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Email, &student.Image)
 	if err != nil {
 		return student, err
 	}
 
 	return student, nil
 }
-
-
 
 func (pr *PsqlProfileRepositoryImpl) Families() ([]entity.Family, error) {
 
@@ -65,14 +62,14 @@ func (pr *PsqlProfileRepositoryImpl) Families() ([]entity.Family, error) {
 	var families = []entity.Family{}
 	for rows.Next() {
 		family := entity.Family{}
-		err = rows.Scan(&family.FirstName,&family.LastName,&family.Password,&family.Phone,&family.Phone,&family.Image)
+		err = rows.Scan(&family.FirstName, &family.LastName, &family.Password, &family.Phone, &family.Phone, &family.Image)
 		if err != nil {
 			return nil, err
 		}
 		families = append(families, family)
 	}
 
-	return families,err
+	return families, err
 }
 
 func (pr *PsqlProfileRepositoryImpl) Teachers() ([]entity.Teacher, error) {
@@ -87,14 +84,14 @@ func (pr *PsqlProfileRepositoryImpl) Teachers() ([]entity.Teacher, error) {
 
 	for rows.Next() {
 		teacher := entity.Teacher{}
-		err = rows.Scan(&teacher.UserName,&teacher.Password,&teacher.Phone,&teacher.FirstName,&teacher.LastName,&teacher.TeacherID,&teacher.Image)
+		err = rows.Scan(&teacher.UserName, &teacher.Password, &teacher.Phone, &teacher.FirstName, &teacher.LastName, &teacher.TeacherID, &teacher.Image)
 		if err != nil {
 			return nil, err
 		}
 		teachers = append(teachers, teacher)
 	}
 
-	return teachers,err
+	return teachers, err
 }
 func (pr *PsqlProfileRepositoryImpl) Admins() ([]entity.Admin, error) {
 
@@ -108,13 +105,12 @@ func (pr *PsqlProfileRepositoryImpl) Admins() ([]entity.Admin, error) {
 
 	for rows.Next() {
 		admin := entity.Admin{}
-		err = rows.Scan(&admin.UserName,&admin.Password,&admin.FirstName,&admin.LastName,&admin.Email,&admin.Image)
+		err = rows.Scan(&admin.UserName, &admin.Password, &admin.FirstName, &admin.LastName, &admin.Email, &admin.Image)
 		if err != nil {
 			return nil, err
 		}
 		admins = append(admins, admin)
 	}
 
-	return admins,err
+	return admins, err
 }
-

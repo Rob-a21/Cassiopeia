@@ -1,21 +1,16 @@
 package service
 
-
 import (
-
-	"github.com/robi_a21/Cassiopeia/entity"
-	"github.com/robi_a21/Cassiopeia/registration"
-
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/registration"
 )
-
-
 
 type RegistrationServiceImpl struct {
 	registrationRepo registration.RegistrationRepository
 }
 
 func NewRegistrationServiceImpl(regRepo registration.RegistrationRepository) *RegistrationServiceImpl {
-	
+
 	return &RegistrationServiceImpl{registrationRepo: regRepo}
 }
 
@@ -29,7 +24,6 @@ func (ss *RegistrationServiceImpl) RegisterStudent(student entity.Student) error
 
 	return nil
 }
-
 
 func (ss *RegistrationServiceImpl) RegisterFamily(family entity.Family) error {
 
@@ -63,5 +57,3 @@ func (ss *RegistrationServiceImpl) RegisterAdmin(admin entity.Admin) error {
 
 	return nil
 }
-
-

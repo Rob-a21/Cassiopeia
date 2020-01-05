@@ -1,8 +1,8 @@
 package pService
 
 import (
-	"github.com/robi_a21/Cassiopeia/entity"
-	"github.com/robi_a21/Cassiopeia/profile"
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/profile"
 )
 
 type ProfileServiceImpl struct {
@@ -24,7 +24,6 @@ func (ss *ProfileServiceImpl) Students() ([]entity.Student, error) {
 	return students, nil
 }
 
-
 func (ss *ProfileServiceImpl) Student(id int) (entity.Student, error) {
 
 	student, err := ss.profileRepository.Student(id)
@@ -36,42 +35,40 @@ func (ss *ProfileServiceImpl) Student(id int) (entity.Student, error) {
 	return student, nil
 }
 
-func (fs *ProfileServiceImpl) Families() ([]entity.Family,error) {
+func (fs *ProfileServiceImpl) Families() ([]entity.Family, error) {
 
 	family, err := fs.profileRepository.Families()
 
-	if err != nil{
+	if err != nil {
 
-		return  nil,err
+		return nil, err
 	}
 
-	return family,nil
+	return family, nil
 
 }
 
-func (ts *ProfileServiceImpl) Teachers() ([]entity.Teacher,error) {
+func (ts *ProfileServiceImpl) Teachers() ([]entity.Teacher, error) {
 
 	teacher, err := ts.profileRepository.Teachers()
 
-	if err != nil{
+	if err != nil {
 
-		return  nil,err
+		return nil, err
 	}
 
-	return teacher,nil
+	return teacher, nil
 
 }
 
-func (as *ProfileServiceImpl) Admins() ([]entity.Admin,error){
+func (as *ProfileServiceImpl) Admins() ([]entity.Admin, error) {
 
-	admin,err := as.profileRepository.Admins()
+	admin, err := as.profileRepository.Admins()
 
-	if err != nil{
+	if err != nil {
 
-		return  nil,err
+		return nil, err
 	}
 
-	return  admin,nil
+	return admin, nil
 }
-
-

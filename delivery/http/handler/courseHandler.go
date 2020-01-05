@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/robi_a21/Cassiopeia/course"
-	"github.com/robi_a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/course"
+	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
 type CourseHandler struct {
@@ -25,6 +25,7 @@ func (crs *CourseHandler) CourseAdd(w http.ResponseWriter, r *http.Request) {
 		course := entity.Course{}
 		course.CourseName = r.FormValue("coursename")
 		course.CourseID, _ = strconv.Atoi(r.FormValue("courseid"))
+		course.Grade, _ = strconv.Atoi(r.FormValue("grade"))
 
 		crs.crsService.AddCourse(course)
 

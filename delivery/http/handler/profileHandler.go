@@ -1,71 +1,53 @@
-
-
-
 package handler
 
-import(
-    "html/template"
+import (
+	"html/template"
 	"net/http"
 	"strconv"
-	"github.com/robi_a21/Cassiopeia/entity"
-	"github.com/robi_a21/Cassiopeia/profile"
 
-
+	"github.com/Rob-a21/Cassiopeia/profile"
 )
 
-
 type ProfileHandler struct {
-	tmpl        *template.Template
+	tmpl           *template.Template
 	profileService profile.ProfileService
 }
 
-func NewProfileHandler(T *template.Template, PS profile.ProfileService) *ProfileHandler{
+func NewProfileHandler(T *template.Template, PS profile.ProfileService) *ProfileHandler {
 	return &ProfileHandler{tmpl: T, profileService: PS}
 }
 
-
 func (prf *ProfileHandler) StudentsProfile(w http.ResponseWriter, r *http.Request) {
-	
+
 	students, err := prf.profileService.Students()
 	if err != nil {
 		panic(err)
 	}
 	prf.tmpl.ExecuteTemplate(w, "student.index.layout", students)
 
-	
 }
 
-
-
-
-
 func (prf *ProfileHandler) StudentProfile(w http.ResponseWriter, r *http.Request) {
-	
+
 	if r.Method == http.MethodGet {
 
-		//idRaw := r.URL.Query().Get("id")
-		//id, err := strconv.Atoi(idRaw)
+		idRaw := r.URL.Query().Get("id")
 
-		// if err != nil {
-		// 	panic(err)
-		// }
+		id, err := strconv.Atoi(idRaw)
 
-		st:=entity.Student{}
+		if err != nil {
 
-		st.ID,_ = strconv.Atoi(r.FormValue("id"))
+			panic(err)
+		}
 
-		student, err := prf.profileService.Student(st.ID)
+		student, err := prf.profileService.Student(id)
 
 		if err != nil {
 			panic(err)
 		}
 
-	  //http.Redirect(w,r,"/profile",http.StatusSeeOther)
-	  
-	  prf.tmpl.ExecuteTemplate(w, "studentProfile.html", student)
+		prf.tmpl.ExecuteTemplate(w, "student.index.html", student)
 
 	}
-
-	prf.tmpl.ExecuteTemplate(w, "studentByID.html", nil)
 
 }
