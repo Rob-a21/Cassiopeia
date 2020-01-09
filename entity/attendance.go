@@ -1,6 +1,6 @@
 package entity
 
-type Attendance struct{
-
-	
+type Attendance struct {
+	Date      string
+	StudentId string
 }
