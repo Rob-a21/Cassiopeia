@@ -86,7 +86,7 @@ func (srh *RegistrationHandler) FamilyRegistration(w http.ResponseWriter, r *htt
 			panic(err)
 		}
 
-		http.Redirect(w, r, "family/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/family/register", http.StatusSeeOther)
 
 	} else {
 

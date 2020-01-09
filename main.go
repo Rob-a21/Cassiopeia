@@ -60,10 +60,10 @@ func main() {
 
 	//mux.HandleFunc("/", homeHandler.Home)
 
+	mux.HandleFunc("/student/register", registrationHandler.StudentRegistration)
 	mux.HandleFunc("/student/login", loginHandler.Login)
 	mux.HandleFunc("/student/course", courseHandler.StudentGetCourse)
 	mux.HandleFunc("/student/notification", notificationHandler.GetNotification)
-	mux.HandleFunc("/student/register", registrationHandler.StudentRegistration)
 	mux.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
 	mux.HandleFunc("/student/profile", profileHandler.StudentProfile)
 
@@ -75,10 +75,17 @@ func main() {
 	mux.HandleFunc("/teacher/notification", notificationHandler.AddNotification)
 
 	mux.HandleFunc("/admin/register", registrationHandler.AdminRegistration)
+	mux.HandleFunc("/admin/student", profileHandler.AdminGetStudent)
+	mux.HandleFunc("/admin/student/delete", profileHandler.AdminDeleteStudent)
+	mux.HandleFunc("/admin/teacher", profileHandler.AdminGetTeacher)
+	mux.HandleFunc("/admin/teacher/delete", profileHandler.AdminDeleteTeacher)
 	mux.HandleFunc("/admin/course", courseHandler.AdminGetCourse)
-	mux.HandleFunc("/admin/course/new", courseHandler.AdminCourseAdd)
-	mux.HandleFunc("/admin/course/update", courseHandler.UpdateCourse)
-	mux.HandleFunc("/admin/course/delete", courseHandler.DeleteCourse)
+	mux.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse)
+	mux.HandleFunc("/admin/course/update", courseHandler.AdminUpdateCourse)
+	mux.HandleFunc("/admin/course/delete", courseHandler.AdminDeleteCourse)
+
+	mux.HandleFunc("/api/admin/course", courseHandler.AdminPostCourse)
+
 
 	http.ListenAndServe(":8181", mux)
 }

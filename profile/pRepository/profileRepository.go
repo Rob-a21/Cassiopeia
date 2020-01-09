@@ -84,7 +84,7 @@ func (pr *PsqlProfileRepositoryImpl) Teachers() ([]entity.Teacher, error) {
 
 	for rows.Next() {
 		teacher := entity.Teacher{}
-		err = rows.Scan(&teacher.UserName, &teacher.Password, &teacher.Phone, &teacher.FirstName, &teacher.LastName, &teacher.TeacherID, &teacher.Image)
+		err = rows.Scan(&teacher.UserName, &teacher.Password, &teacher.Phone, &teacher.Email, &teacher.FirstName, &teacher.LastName, &teacher.TeacherID, &teacher.Image)
 		if err != nil {
 			return nil, err
 		}
@@ -92,6 +92,20 @@ func (pr *PsqlProfileRepositoryImpl) Teachers() ([]entity.Teacher, error) {
 	}
 
 	return teachers, err
+}
+
+func (pr *PsqlProfileRepositoryImpl) Teacher(id string) (entity.Teacher, error) {
+
+	row := pr.conn.QueryRow("SELECT * FROM teacher WHERE id = $1", id)
+
+	teacher := entity.Teacher{}
+
+	err := row.Scan(&teacher.UserName, &teacher.Password, &teacher.Phone,&teacher.Email, &teacher.FirstName, &teacher.LastName, &teacher.TeacherID, &teacher.Image)
+	if err != nil {
+		return teacher, err
+	}
+
+	return teacher, nil
 }
 func (pr *PsqlProfileRepositoryImpl) Admins() ([]entity.Admin, error) {
 
@@ -113,4 +127,24 @@ func (pr *PsqlProfileRepositoryImpl) Admins() ([]entity.Admin, error) {
 	}
 
 	return admins, err
+}
+
+func (pr *PsqlProfileRepositoryImpl) DeleteStudent(id int) error {
+
+	_, err := pr.conn.Exec("DELETE FROM student WHERE id=$1", id)
+	if err != nil {
+		return errors.New("Delete has failed")
+	}
+
+	return nil
+}
+
+func (pr *PsqlProfileRepositoryImpl) DeleteTeacher(id string) error {
+
+	_, err := pr.conn.Exec("DELETE FROM teacher WHERE id=$1", id)
+	if err != nil {
+		return errors.New("Delete has failed")
+	}
+
+	return nil
 }
