@@ -1,19 +1,19 @@
 package handler
 
 import (
-	"html/template"
-	"net/http"
 
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/profile"
+	"github.com/Rob-a21/Cassiopeia/user"
+	"html/template"
+	"net/http"
 )
 
 type LoginHandler struct {
 	tmpl         *template.Template
-	loginService profile.ProfileService
+	loginService user.ProfileService
 }
 
-func NewLoginHandler(T *template.Template, PS profile.ProfileService) *LoginHandler {
+func NewLoginHandler(T *template.Template, PS user.ProfileService) *LoginHandler {
 	return &LoginHandler{tmpl: T, loginService: PS}
 }
 

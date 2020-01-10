@@ -7,16 +7,16 @@ import (
 	"path"
 	"strconv"
 
-	"github.com/Rob-a21/Cassiopeia/course"
+	"github.com/Rob-a21/Cassiopeia/user"
 	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
 type CourseHandler struct {
 	tmpl       *template.Template
-	crsService course.CourseService
+	crsService user.CourseService
 }
 
-func NewCourseHandler(T *template.Template, CS course.CourseService) *CourseHandler {
+func NewCourseHandler(T *template.Template, CS user.CourseService) *CourseHandler {
 	return &CourseHandler{tmpl: T, crsService: CS}
 }
 

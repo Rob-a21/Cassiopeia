@@ -34,7 +34,6 @@ func Valid(signedToken string, signingKey []byte) (bool, error) {
 	return true, nil
 }
 
-// Claims returns claims used for generating jwt tokens
 func Claims(email string, tokenExpires int64) jwt.Claims {
 	return CustomClaims{
 		email,
