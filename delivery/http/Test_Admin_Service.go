@@ -1,9 +1,11 @@
-package http
+package main
 
 
 
 import (
 	"bytes"
+	"github.com/Rob-a21/Cassiopeia/user/repository"
+	"github.com/Rob-a21/Cassiopeia/user/service"
 	"html/template"
 	"io/ioutil"
 	"net/http"
@@ -11,8 +13,6 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/Rob-a21/Cassiopeia/course/cRepository"
-	"github.com/Rob-a21/Cassiopeia/course/cService"
 	"github.com/Rob-a21/Cassiopeia/delivery/http/handler"
 	"github.com/Rob-a21/Cassiopeia/entity"
 )
@@ -20,10 +20,10 @@ import (
 
 func TestAdminCourse(t *testing.T) {
 
-	tmpl := template.Must(template.ParseGlob("../templates/*"))
+	tmpl := template.Must(template.ParseGlob("../web/templates/*"))
 
-	courseRepo := cRepository.NewPsqlCourseRepositoryImpl(nil)
-	courseServ := cService.NewCourseServiceImpl(courseRepo)
+	courseRepo := repository.NewPsqlCourseRepositoryImpl(nil)
+	courseServ := service.NewCourseServiceImpl(courseRepo)
 
 	adminCourseHandler := handler.NewCourseHandler(tmpl,courseServ)
 
@@ -60,10 +60,10 @@ func TestAdminCourse(t *testing.T) {
 
 func TestAdminAddCourse(t *testing.T) {
 
-	tmpl := template.Must(template.ParseGlob("../templates/*"))
+	tmpl := template.Must(template.ParseGlob("../web/templates/*"))
 
-	courseRepo := cRepository.NewPsqlCourseRepositoryImpl(nil)
-	courseServ := cService.NewCourseServiceImpl(courseRepo)
+	courseRepo := repository.NewPsqlCourseRepositoryImpl(nil)
+	courseServ := service.NewCourseServiceImpl(courseRepo)
 
 	adminCourseHandler := handler.NewCourseHandler(tmpl,courseServ)
 

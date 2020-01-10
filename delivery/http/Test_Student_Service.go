@@ -1,11 +1,11 @@
-package http
+package main
 
 
 
 import (
 	"bytes"
-	"github.com/Rob-a21/Cassiopeia/course/cRepository"
-	"github.com/Rob-a21/Cassiopeia/course/cService"
+	"github.com/Rob-a21/Cassiopeia/user/repository"
+	"github.com/Rob-a21/Cassiopeia/user/service"
 	"html/template"
 	"io/ioutil"
 	"net/http"
@@ -13,8 +13,6 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/Rob-a21/Cassiopeia/attendance/aRepository"
-	"github.com/Rob-a21/Cassiopeia/attendance/aService"
 	"github.com/Rob-a21/Cassiopeia/delivery/http/handler"
 	"github.com/Rob-a21/Cassiopeia/entity"
 )
@@ -24,13 +22,13 @@ func TestStudentCourse(t *testing.T) {
 
 	tmpl := template.Must(template.ParseGlob("../templates/*"))
 
-	courseRepo := cRepository.NewPsqlCourseRepositoryImpl(nil)
-	courseServ := cService.NewCourseServiceImpl(courseRepo)
+	courseRepo := repository.NewPsqlCourseRepositoryImpl(nil)
+	courseServ := service.NewCourseServiceImpl(courseRepo)
 
 	adminCourseHandler := handler.NewCourseHandler(tmpl,courseServ)
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/student/course", adminCourseHandler.AdminGetCourse)
+	mux.HandleFunc("/student/course", adminCourseHandler.ApiAdminGetCourses)
 	ts := httptest.NewTLSServer(mux)
 	defer ts.Close()
 
@@ -64,8 +62,8 @@ func TestStudentPostAttendance(t *testing.T) {
 
 	tmpl := template.Must(template.ParseGlob("../templates/*"))
 
-	attendanceRepo := aRepository.NewStudentAttendanceRepositoryImpl(nil)
-	attendanceServ := aService.NewStudentAttendanceServiceImpl(attendanceRepo)
+	attendanceRepo := repository.NewStudentAttendanceRepositoryImpl(nil)
+	attendanceServ := service.NewStudentAttendanceServiceImpl(attendanceRepo)
 
 	studentAttendanceHandler := handler.NewAttendanceHandler(tmpl,attendanceServ)
 
