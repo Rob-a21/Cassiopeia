@@ -19,7 +19,7 @@ func NewHomeHandler(T *template.Template) *HomeHandler {
 func (srh *LoginHandler) Home(w http.ResponseWriter, r *http.Request) {
 
 
-		srh.tmpl.ExecuteTemplate(w, "mainPage.html", nil)
+		//srh.tmpl.ExecuteTemplate(w, "mainPage.html", nil)
 
 	}
 

@@ -2,8 +2,8 @@ package handler
 
 import (
 	"encoding/json"
-	"github.com/Rob-a21/Cassiopeia/attendance"
 	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/user"
 	"html/template"
 	"net/http"
 	"path"
@@ -14,10 +14,10 @@ import (
 
 type AttendanceHandler struct {
 	tmpl                *template.Template
-	attendanceService attendance.StudentAttendanceService
+	attendanceService user.StudentAttendanceService
 }
 
-func NewAttendanceHandler(T *template.Template, NS attendance.StudentAttendanceService) *AttendanceHandler {
+func NewAttendanceHandler(T *template.Template, NS user.StudentAttendanceService) *AttendanceHandler {
 	return &AttendanceHandler{tmpl: T, attendanceService: NS}
 }
 
