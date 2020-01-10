@@ -1,7 +1,5 @@
 package http
 
-
-
 import (
 	"bytes"
 	"html/template"
@@ -20,7 +18,7 @@ import (
 
 func TestAdminCourse(t *testing.T) {
 
-	tmpl := template.Must(template.ParseGlob("../templates/*"))
+	tmpl := template.Must(template.ParseGlob("../web/templates/*"))
 
 	courseRepo := cRepository.NewPsqlCourseRepositoryImpl(nil)
 	courseServ := cService.NewCourseServiceImpl(courseRepo)
