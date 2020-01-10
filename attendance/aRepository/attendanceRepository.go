@@ -1,4 +1,4 @@
-package repository
+package aRepository
 
 import (
 	"database/sql"
@@ -39,7 +39,7 @@ func (att *StudentAttendanceRepositoryImpl) ShowAttendance() ([]entity.Attendanc
 
 func (att *StudentAttendanceRepositoryImpl) CheckAttendance(id int) (entity.Attendance, error) {
 
-	row := att.conn.QueryRow("SELECT * FROM categories WHERE id = $1", id)
+	row := att.conn.QueryRow("SELECT * FROM attendance WHERE id = $1", id)
 
 	c := entity.Attendance{}
 
@@ -51,9 +51,9 @@ func (att *StudentAttendanceRepositoryImpl) CheckAttendance(id int) (entity.Atte
 	return c, nil
 }
 
-func (att *StudentAttendanceRepositoryImpl) FillAttendance(student entity.Student) error {
+func (att *StudentAttendanceRepositoryImpl) FillAttendance(attendance entity.Attendance) error {
 
-	_, err := att.conn.Exec("INSERT INTO attendance (date,id) values($1, $2)", time.Now(),student.ID)
+	_, err := att.conn.Exec("INSERT INTO attendance (date,id) values($1, $2)", time.Now(),attendance.StudentId)
 	if err != nil {
 		return errors.New("Insertion has failed")
 	}

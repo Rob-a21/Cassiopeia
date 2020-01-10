@@ -4,9 +4,9 @@ import "time"
 
 type Notification struct{
 
-	Message string
+	Message string             `json:"message""`
 
-	NotifyName string
+	NotifyName string           `json:"name""`
 
-	NotificationDate time.Time
+	NotificationDate time.Time   `json:"date""`
 }
