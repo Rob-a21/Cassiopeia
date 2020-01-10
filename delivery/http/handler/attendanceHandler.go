@@ -25,18 +25,16 @@ func (at *AttendanceHandler) StudentFillAttendance(w http.ResponseWriter, r *htt
 
 	if r.Method == http.MethodPost {
 
-		attendance := entity.Attendance{}
-		attendance.Date = time.Now()
-		attendance.StudentId,_ = strconv.Atoi(r.FormValue("studentid"))
+		attendance2 := entity.Attendance{}
+		attendance2.Date = time.Now()
+		attendance2.StudentId,_ = strconv.Atoi(r.FormValue("studentid"))
 
-		at.attendanceService.FillAttendance(attendance)
+		_ = at.attendanceService.FillAttendance(attendance2)
 
 
 	}
 
-	at.tmpl.ExecuteTemplate(w, "admin.course.new.layout", nil)
-
-
+	_ = at.tmpl.ExecuteTemplate(w, "admin.course.new.layout", nil)
 
 }
 
@@ -78,11 +76,11 @@ func (ntf *AttendanceHandler)ApiStudentCheckAttendance(w http.ResponseWriter,r *
 	}
 
 
-	attendance:= entity.Attendance{}
+	attendance2 := entity.Attendance{}
 
-	ntf.attendanceService.CheckAttendance(id)
+	_, _ = ntf.attendanceService.CheckAttendance(id)
 
-	output,err := json.MarshalIndent(&attendance,"","\t\t")
+	output,err := json.MarshalIndent(&attendance2,"","\t\t")
 
 	if err != nil{
 
