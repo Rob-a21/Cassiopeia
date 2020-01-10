@@ -1,11 +1,12 @@
 package handler
 
 import (
-	"html/template"
-	"net/http"
-
+	"encoding/json"
 	"github.com/Rob-a21/Cassiopeia/entity"
 	"github.com/Rob-a21/Cassiopeia/notification"
+	"html/template"
+	"net/http"
+	"time"
 )
 
 type NotificationHandler struct {
@@ -17,7 +18,7 @@ func NewNotificationHandler(T *template.Template, NS notification.NotificationSe
 	return &NotificationHandler{tmpl: T, notificationService: NS}
 }
 
-func (ntf *NotificationHandler) GetNotification(w http.ResponseWriter, r *http.Request) {
+func (ntf *NotificationHandler) StudentGetNotification(w http.ResponseWriter, r *http.Request) {
 
 	notf, err := ntf.notificationService.GetNotification()
 	if err != nil {
@@ -27,7 +28,7 @@ func (ntf *NotificationHandler) GetNotification(w http.ResponseWriter, r *http.R
 
 }
 
-func (ntf *NotificationHandler) AddNotification(w http.ResponseWriter, r *http.Request) {
+func (ntf *NotificationHandler) TeacherAddNotification(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodPost {
 
@@ -35,6 +36,7 @@ func (ntf *NotificationHandler) AddNotification(w http.ResponseWriter, r *http.R
 
 		notf.NotifyName = r.FormValue("name")
 		notf.Message = r.FormValue("message")
+		notf.NotificationDate = time.Now()
 
 		ntf.notificationService.AddNotification(notf)
 
@@ -44,4 +46,56 @@ func (ntf *NotificationHandler) AddNotification(w http.ResponseWriter, r *http.R
 
 	ntf.tmpl.ExecuteTemplate(w, "teacher.notification.layout", nil)
 
+}
+
+
+
+func (ntf *NotificationHandler)TeacherPostNotification(w http.ResponseWriter,r *http.Request){
+
+	len := r.ContentLength
+
+	body:= make([]byte,len)
+
+	r.Body.Read(body)
+
+	notification:= entity.Notification{}
+
+	json.Unmarshal(body,&notification)
+
+
+	ntf.notificationService.AddNotification(notification)
+
+	w.WriteHeader(200)
+
+	return
+}
+
+
+func (ntf *NotificationHandler)ApiStudentGetNotification(w http.ResponseWriter,r *http.Request) {
+
+	//id, err := strconv.Atoi(path.Base(r.URL.Path))
+	//
+	//if err != nil{
+	//
+	//	return
+	//}
+
+	//id := path.Base(r.URL.Path)
+
+	notification:= entity.Notification{}
+
+	ntf.notificationService.GetNotification()
+
+	output,err := json.MarshalIndent(&notification,"","\t\t")
+
+   if err != nil{
+
+	   return
+   }
+
+    w.Header().Set("Content-Type","application/json")
+
+	w.Write(output)
+
+	return
 }

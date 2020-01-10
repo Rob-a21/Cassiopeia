@@ -60,20 +60,25 @@ func main() {
 	mux := http.NewServeMux()
 
 	//mux.HandleFunc("/", homeHandler.Home)
-
+      // student handler
 	mux.HandleFunc("/student/register", registrationHandler.StudentRegistration)
 	mux.HandleFunc("/student/login", loginHandler.Login)
-	mux.HandleFunc("/student/course", courseHandler.StudentGetCourse)
-	mux.HandleFunc("/student/notification", notificationHandler.GetNotification)
+	mux.HandleFunc("/student/course", courseHandler.StudentCourse)
+	mux.HandleFunc("/student/notification", notificationHandler.StudentGetNotification)
 	mux.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
 	mux.HandleFunc("/student/profile", profileHandler.StudentProfile)
 
-	mux.HandleFunc("/family/register", registrationHandler.FamilyRegistration)
-	mux.HandleFunc("/family/course", courseHandler.FamilyGetCourse)
+	// family handler
 
+	mux.HandleFunc("/family/register", registrationHandler.FamilyRegistration)
+	//mux.HandleFunc("/family/course", courseHandler.FamilyGetCourse)
+
+	// teacher handler
 
 	mux.HandleFunc("/teacher/register", registrationHandler.TeacherRegistration)
-	mux.HandleFunc("/teacher/notification", notificationHandler.AddNotification)
+	mux.HandleFunc("/teacher/notification", notificationHandler.TeacherAddNotification)
+
+	// admin handler
 
 	mux.HandleFunc("/admin/register", registrationHandler.AdminRegistration)
 	mux.HandleFunc("/admin/student", profileHandler.AdminGetStudent)
@@ -82,10 +87,19 @@ func main() {
 	mux.HandleFunc("/admin/teacher/delete", profileHandler.AdminDeleteTeacher)
 	mux.HandleFunc("/admin/course", courseHandler.AdminGetCourse)
 	mux.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse)
-	mux.HandleFunc("/admin/course/update", courseHandler.AdminUpdateCourse)
-	mux.HandleFunc("/admin/course/delete", courseHandler.AdminDeleteCourse)
 
-	mux.HandleFunc("/api/admin/course", courseHandler.AdminPostCourse)
+
+
+	// api hadlers
+
+	mux.HandleFunc("/api/student/course", courseHandler.ApiStudentGetCourse)
+	mux.HandleFunc("/api/student/courses", courseHandler.ApiStudentGetCourses)
+	mux.HandleFunc("/api/student/notification", notificationHandler.ApiStudentGetNotification)
+	mux.HandleFunc("/api/teacher/notification", notificationHandler.TeacherPostNotification)
+	mux.HandleFunc("/api/admin/course/add", courseHandler.ApiAdminPostCourse)
+	mux.HandleFunc("/api/admin/courses", courseHandler.ApiAdminGetCourses)
+	mux.HandleFunc("/api/admin/course/delete", courseHandler.ApiAdminDeleteCourse)
+
 
 	_ = http.ListenAndServe(":2121", mux)
 }

@@ -6,5 +6,6 @@ import (
 
 type NotificationRepository interface {
 	GetNotification() ([]entity.Notification, error)
+	Notification(id string) (entity.Notification, error)
 	AddNotification(entity.Notification) error
 }

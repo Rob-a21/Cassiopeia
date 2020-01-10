@@ -46,3 +46,17 @@ func (ntf *PsqlNotificationRepositoryImpl) GetNotification() ([]entity.Notificat
 
 	return notifications, err
 }
+
+func (ntf *PsqlNotificationRepositoryImpl) Notification(id string) (entity.Notification, error) {
+
+	row := ntf.conn.QueryRow("SELECT * FROM notification WHERE notifyname = $1", id)
+
+	notification := entity.Notification{}
+
+	err := row.Scan(&notification.Message, &notification.NotificationDate)
+	if err != nil {
+		return notification,err
+	}
+
+	return notification, nil
+}

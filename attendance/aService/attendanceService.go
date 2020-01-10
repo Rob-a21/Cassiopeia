@@ -1,6 +1,6 @@
 //Attendanceservice
 
-package service
+package aService
 
 import (
 	"github.com/Rob-a21/Cassiopeia/attendance"
@@ -38,7 +38,7 @@ func (at *StudentAttendanceServiceImpl) CheckAttendance(id int) (entity.Attendan
 	return student, nil
 }
 
-func (at *StudentAttendanceServiceImpl) FillAttendance(student entity.Student) error {
+func (at *StudentAttendanceServiceImpl) FillAttendance(student entity.Attendance) error {
 
 	err := at.attendanceRepo.FillAttendance(student)
 

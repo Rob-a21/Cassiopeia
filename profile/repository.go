@@ -14,3 +14,9 @@ type ProfileRepository interface {
 	DeleteTeacher(id string) error
 	Admins() ([]entity.Admin, error)
 }
+
+type SessionRepository interface {
+	Session(sessionID string) (*entity.Session, error)
+	StoreSession(session *entity.Session) (*entity.Session, error)
+	DeleteSession(sessionID string) (*entity.Session, error)
+}
