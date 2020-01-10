@@ -9,3 +9,4 @@ type Admin struct {
 	Image     string
 
 }
+

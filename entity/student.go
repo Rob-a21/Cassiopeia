@@ -8,5 +8,8 @@ type Student struct {
 	LastName  string
 	ID        int
 	Email     string
+	Gender    string
+	Phone     string
+	LastResult int
 	Image     string
 }

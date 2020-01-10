@@ -1,6 +1,8 @@
 package entity
 
+import "time"
+
 type Attendance struct {
-	Date      string
+	Date      time.Time
 	StudentId string
 }

@@ -22,7 +22,8 @@ var tmpl = template.Must(template.ParseGlob("delivery/web/templates/*"))
 
 func main() {
 
-	dbconn, err := sql.Open("postgres", "postgres://postgres:aait@127.0.0.1/school?sslmode=disable")
+	dbconn, err := sql.Open("postgres",
+		"postgres://postgres:strafael@localhost/cassiopeia?sslmode=disable")
 
 	if err != nil {
 		panic(err)
@@ -86,6 +87,5 @@ func main() {
 
 	mux.HandleFunc("/api/admin/course", courseHandler.AdminPostCourse)
 
-
-	http.ListenAndServe(":8181", mux)
+	_ = http.ListenAndServe(":2121", mux)
 }

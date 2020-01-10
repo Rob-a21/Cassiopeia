@@ -47,10 +47,10 @@ func (srh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 
-		for s := range student {
+		for index := range student {
 
-			uname := student[s]
-			pass := student[s]
+			uname := student[index]
+			pass := student[index]
 
 			if uname.UserName == studentUser.UserName && pass.Password == studentUser.Password {
 
@@ -96,7 +96,7 @@ func (srh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		srh.tmpl.ExecuteTemplate(w, "login.html", nil)
+		_ = srh.tmpl.ExecuteTemplate(w, "login.html", nil)
 
 	}
 }

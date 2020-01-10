@@ -9,4 +9,7 @@ type Family struct {
 	Phone     string
 	Email     string
 	Image    string
+	ChildID   int
+	Gender    string
+
 }

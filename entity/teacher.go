@@ -6,6 +6,8 @@ type Teacher struct {
 	Password  string
 	Phone     string
 	Email     string
+	Gender    string
+	Grade     string
 	FirstName string
 	LastName  string
 	TeacherID string
