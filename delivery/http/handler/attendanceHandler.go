@@ -21,7 +21,7 @@ func NewAttendanceHandler(T *template.Template, NS models.StudentAttendanceServi
 	return &AttendanceHandler{tmpl: T, attendanceService: NS}
 }
 
-func (at *AttendanceHandler) StudentFillAttendance(w http.ResponseWriter, r *http.Request) {
+func (at *AttendanceHandler) FillStudentAttendance(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodPost {
 
@@ -41,36 +41,40 @@ func (at *AttendanceHandler) StudentFillAttendance(w http.ResponseWriter, r *htt
 
 func (at *AttendanceHandler) CheckStudentAttendance(w http.ResponseWriter, r *http.Request) {
 
-	if r.Method == http.MethodPost {
+	if r.Method == http.MethodGet {
 
-		id,_ := strconv.Atoi(r.FormValue("studentid"))
-		attend, err := at.attendanceService.CheckAttendance(id)
+		idRaw := r.URL.Query().Get("studentid")
+		id, err := strconv.Atoi(idRaw)
 
 		if err != nil {
 			panic(err)
 		}
 
-		_ = at.tmpl.ExecuteTemplate(w, "admin.course.new.layout", attend)
+		attendance, err := at.attendanceService.CheckAttendance(id)
+
+		if err != nil {
+			panic(err)
+		}
+
+		at.tmpl.ExecuteTemplate(w, "admin.course.update.layout", attendance)
 
 	}
 
-}
+	}
 
 func (at *AttendanceHandler) ShowStudentsAttendance(w http.ResponseWriter, r *http.Request) {
 
-	if r.Method == http.MethodPost {
+	attendances, err := at.attendanceService.ShowAttendance()
+	if err != nil {
+		panic(err)
+	}
 
-		//id,_ := strconv.Atoi(r.FormValue("studentid"))
-		attend, err := at.attendanceService.ShowAttendance()
-		if err != nil {
-			panic(err)
-		}
+	at.tmpl.ExecuteTemplate(w, "student.attendance.layout", attendances)
 
-		_ = at.tmpl.ExecuteTemplate(w, "admin.course.new.layout", attend)
 
 	}
 
-}
+
 
 
 
@@ -110,11 +114,11 @@ func (ntf *AttendanceHandler)ApiStudentCheckAttendance(w http.ResponseWriter,r *
 	}
 
 
-	attendance2 := entity.Attendance{}
+	attendance := entity.Attendance{}
 
 	_, _ = ntf.attendanceService.CheckAttendance(id)
 
-	output,err := json.MarshalIndent(&attendance2,"","\t\t")
+	output,err := json.MarshalIndent(&attendance,"","\t\t")
 
 	if err != nil{
 
@@ -124,6 +128,26 @@ func (ntf *AttendanceHandler)ApiStudentCheckAttendance(w http.ResponseWriter,r *
 	w.Header().Set("Content-Type","application/json")
 
 	w.Write(output)
+
+	return
+}
+//
+func (att *AttendanceHandler)ApiStudentShowAttendance(w http.ResponseWriter,r *http.Request){
+
+	len := r.ContentLength
+
+	body:= make([]byte,len)
+
+	r.Body.Read(body)
+
+	attendance:= entity.Attendance{}
+
+	json.Unmarshal(body,&attendance)
+
+
+	att.attendanceService.ShowAttendance()
+
+	w.WriteHeader(200)
 
 	return
 }

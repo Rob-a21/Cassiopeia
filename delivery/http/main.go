@@ -2,8 +2,11 @@ package main
 
 import (
 	"database/sql"
+	"github.com/Rob-a21/Cassiopeia/entity"
 	"github.com/Rob-a21/Cassiopeia/models/repository"
 	"github.com/Rob-a21/Cassiopeia/models/service"
+	"github.com/Rob-a21/Cassiopeia/token"
+	"time"
 
 	"html/template"
 	"net/http"
@@ -13,9 +16,13 @@ import (
 	"github.com/Rob-a21/Cassiopeia/delivery/http/handler"
 )
 
-var tmpl = template.Must(template.ParseGlob("../web/templates/*"))
 
 func main() {
+
+	var tmpl = template.Must(template.ParseGlob("../web/templates/*"))
+
+	//csrfSignKey := []byte(token.GenerateRandomID(32))
+
 
 	dbconn, err := sql.Open("postgres",
 		"postgres://postgres:aait@localhost/school?sslmode=disable")
@@ -29,6 +36,10 @@ func main() {
 	if err := dbconn.Ping(); err != nil {
 		panic(err)
 	}
+
+
+	//sessionRepo := repository.NewSessionRepo(dbconn)
+	//sessionSrv := service.New(sessionRepo)
 
 	registrationRepository := repository.NewPsqlRegistrationRepositoryImpl(dbconn)
 	registrationService := service.NewRegistrationServiceImpl(registrationRepository)
@@ -50,9 +61,18 @@ func main() {
 	attendanceService := service.NewStudentAttendanceServiceImpl(attendanceRepository)
 	attendanceHandler := handler.NewAttendanceHandler(tmpl, attendanceService)
 
+	assessmentRepository := repository.NewAssessmentRepositoryImpl(dbconn)
+	assessmentService := service.NewAssessmentServiceImpl(assessmentRepository)
+	assessmentHandler := handler.NewAssessmentHandler(tmpl, assessmentService)
+
+
 	homeHandler:= handler.NewHomeHandler(tmpl,profileService)
 	loginHandler := handler.NewLoginHandler(tmpl, profileService)
 	logoutHandler := handler.NewLogoutHandler(tmpl, profileService)
+
+	//sess := configSess()
+	//uh := handler.RegistrationHandler(tmpl, registrationService, sessionSrv, sess, csrfSignKey)
+
 
 
 	fs := http.FileServer(http.Dir("../web/assets"))
@@ -73,9 +93,11 @@ func main() {
 	mux.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
 	mux.HandleFunc("/student/profile", profileHandler.StudentProfile)
 
-	mux.HandleFunc("/student/new", attendanceHandler.StudentFillAttendance)
-	mux.HandleFunc("/student/show", attendanceHandler.StudentShowAttendance)
-	mux.HandleFunc("/student/check", attendanceHandler.StudentCheckAttendance)
+	mux.HandleFunc("/student/new", attendanceHandler.FillStudentAttendance)
+	mux.HandleFunc("/student/show", attendanceHandler.ShowStudentsAttendance)
+	mux.HandleFunc("/student/check", attendanceHandler.CheckStudentAttendance)
+
+	mux.HandleFunc("/student/grade", assessmentHandler.AssessmentsOfOneGrade)
 
 
 
@@ -87,6 +109,13 @@ func main() {
 
 	mux.HandleFunc("/teacher/register", registrationHandler.TeacherRegistration)
 	mux.HandleFunc("/teacher/notification", notificationHandler.TeacherAddNotification)
+	mux.HandleFunc("/teacher/grade/new", assessmentHandler.StoreGrade)
+	mux.HandleFunc("/teacher/grade/update", assessmentHandler.UpdateGrade)
+	mux.HandleFunc("/teacher/grade/delete", assessmentHandler.DeleteGrade)
+	mux.HandleFunc("/teacher/grade/deletes", assessmentHandler.DeleteGrades)
+
+
+
 
 	// admin handler
 
@@ -102,6 +131,10 @@ func main() {
 
 	// api hadlers
 
+	mux.HandleFunc("/api/student/attendance/new", attendanceHandler.ApiStudentPostAttendance)
+	mux.HandleFunc("/api/student/attendance/check", attendanceHandler.ApiStudentCheckAttendance)
+	mux.HandleFunc("/api/student/attendance/show", attendanceHandler.ApiStudentShowAttendance)
+	mux.HandleFunc("/api/teacher/grade/new", assessmentHandler.ApiTeacherPostGrade)
 	mux.HandleFunc("/api/student/course", courseHandler.ApiStudentGetCourse)
 	mux.HandleFunc("/api/student/courses", courseHandler.ApiStudentGetCourses)
 	mux.HandleFunc("/api/student/notification", notificationHandler.ApiStudentGetNotification)
@@ -112,4 +145,20 @@ func main() {
 
 
 	_ = http.ListenAndServe(":8181", mux)
+}
+
+func configSess() *entity.Session {
+	tokenExpires := time.Now().Add(time.Minute * 30).Unix()
+	sessionID := token.GenerateRandomID(32)
+	signingString, err := token.GenerateRandomString(32)
+	if err != nil {
+		panic(err)
+	}
+	signingKey := []byte(signingString)
+
+	return &entity.Session{
+		Expires:    tokenExpires,
+		SigningKey: signingKey,
+		UUID:       sessionID,
+	}
 }

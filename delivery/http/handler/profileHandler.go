@@ -5,17 +5,20 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Rob-a21/Cassiopeia/profile"
+	"github.com/Rob-a21/Cassiopeia/models"
+
 )
 
 type ProfileHandler struct {
-	tmpl           *template.Template
-	profileService profile.ProfileService
+	tmpl                *template.Template
+	profileService models.ProfileService
 }
 
-func NewProfileHandler(T *template.Template, PS profile.ProfileService) *ProfileHandler {
-	return &ProfileHandler{tmpl: T, profileService: PS}
+func NewProfileHandler(T *template.Template, NS models.ProfileService) *ProfileHandler {
+	return &ProfileHandler{tmpl: T, profileService: NS}
 }
+
+
 
 func (prf *ProfileHandler) StudentsProfile(w http.ResponseWriter, r *http.Request) {
 
@@ -51,6 +54,23 @@ func (prf *ProfileHandler) StudentProfile(w http.ResponseWriter, r *http.Request
 	}
 
 }
+
+
+func (prf *ProfileHandler) EmailExists(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == http.MethodGet {
+
+		email := r.URL.Query().Get("id")
+
+
+		prf.profileService.EmailExists(email)
+
+
+	}
+
+	http.Redirect(w, r, "/admin/student", http.StatusSeeOther)
+}
+
 
 
 

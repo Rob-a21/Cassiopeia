@@ -10,25 +10,57 @@ import (
 	"strconv"
 
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/registration"
+	"github.com/Rob-a21/Cassiopeia/models"
 )
 
-type RegistrationHandler struct {
-	tmpl       *template.Template
-	regService registration.RegistrationService
+
+
+type contextKey string
+
+var ctxUserSessionKey = contextKey("signed_in_user_session")
+
+//type RegistrationHandler struct {
+//	tmpl           *template.Template
+//	profileService    models.ProfileService
+//	sessionService models.SessionService
+//	userSess       *entity.Session
+//	csrfSignKey    []byte
+//	regService models.RegistrationService
+//}
+
+type RegistrationHandler struct{
+
+	tmpl           *template.Template
+	regService models.RegistrationService
+
 }
 
-func NewRegistrationHandler(T *template.Template, RS registration.RegistrationService) *RegistrationHandler {
+func NewRegistrationHandler(T *template.Template, RS models.RegistrationService) *RegistrationHandler {
 	return &RegistrationHandler{tmpl: T, regService: RS}
 }
+//func NewRegistrationHandler(t *template.Template, usrServ models.ProfileService,
+//	sessServ models.SessionService,
+//	usrSess *entity.Session, csKey []byte,RS models.RegistrationService) *RegistrationHandler{
+//	return &RegistrationHandler{tmpl: t, profileService: usrServ, sessionService: sessServ,
+//		userSess: usrSess, csrfSignKey: csKey,regService:RS}
+//}
+
+
+
 
 func (srh *RegistrationHandler) StudentRegistration(w http.ResponseWriter, r *http.Request) {
 
+
+		//hashedPassword ,err:= bcrypt.GenerateFromPassword([]byte(r.FormValue("password")), 12)
+		//
+		//if err != nil{
+		//	panic(err)
+		//}
 	if r.Method == http.MethodPost {
 
 		student := entity.Student{}
 		student.UserName = r.FormValue("username")
-		student.Password = r.FormValue("password")
+		student.Password =r.FormValue("password")
 		student.FirstName = r.FormValue("fname")
 		student.LastName = r.FormValue("lname")
 		student.ID, _ = strconv.Atoi(r.FormValue("id"))
@@ -57,7 +89,117 @@ func (srh *RegistrationHandler) StudentRegistration(w http.ResponseWriter, r *ht
 		srh.tmpl.ExecuteTemplate(w, "student.registration.html", nil)
 
 	}
+
+	//token, err := token.CSRFToken(srh.csrfSignKey)
+	//if err != nil {
+	//	http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+	//}
+	//if r.Method == http.MethodGet {
+	//	signUpForm := struct {
+	//		Values  url.Values
+	//		VErrors form.ValidationErrors
+	//		CSRF    string
+	//	}{
+	//		Values:  nil,
+	//		VErrors: nil,
+	//		CSRF:    token,
+	//	}
+	//	srh.tmpl.ExecuteTemplate(w, "signup.layout", signUpForm)
+	//	return
+	//}
+	//
+	//if r.Method == http.MethodPost {
+	//	// Parse the form data
+	//	err := r.ParseForm()
+	//	if err != nil {
+	//		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+	//		return
+	//	}
+	//
+	//	// Validate the form contents
+	//	singnUpForm := form.Input{Values: r.PostForm, VErrors: form.ValidationErrors{}}
+	//	singnUpForm.Required("fname", "email", "password", "confirmpassword")
+	//	singnUpForm.MatchesPattern("email", form.EmailRX)
+	//	singnUpForm.MinLength("password", 10)
+	//	singnUpForm.PasswordMatches("password", "confirmpassword")
+	//	singnUpForm.CSRF = token
+	//	// If there are any errors, redisplay the signup form.
+	//	if !singnUpForm.Valid() {
+	//		srh.tmpl.ExecuteTemplate(w, "signup.layout", singnUpForm)
+	//		return
+	//	}
+	//
+	//
+	//	eExists := srh.profileService.EmailExists(r.FormValue("email"))
+	//	if eExists {
+	//		singnUpForm.VErrors.Add("email", "Email Already Exists")
+	//		srh.tmpl.ExecuteTemplate(w, "signup.layout", singnUpForm)
+	//		return
+	//	}
+	//
+	//	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(r.FormValue("password")), 12)
+	//	if err != nil {
+	//		singnUpForm.VErrors.Add("password", "Password Could not be stored")
+	//		srh.tmpl.ExecuteTemplate(w, "signup.layout", singnUpForm)
+	//		return
+	//	}
+
+		//role, errs := srh.S.RoleByName("USER")
+
+		//if len(errs) > 0 {
+		//	singnUpForm.VErrors.Add("role", "could not assign role to the user")
+		//	srh.tmpl.ExecuteTemplate(w, "signup.layout", singnUpForm)
+		//	return
+		//}
+
+		//student := &entity.Student{
+		//	UserName: r.FormValue("fullname"),
+		//	Email:    r.FormValue("email"),
+		//	FirstName:    r.FormValue("phone"),
+		//	LastName:    r.FormValue("phone"),
+		//	Password: string(hashedPassword),
+		//}
+		//srh.regService.RegisterStudent(student)
+		//if len(errs) > 0 {
+		//	http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		//	return
+		//}
+
+		//if r.Method == http.MethodPost {
+
+	//	student := entity.Student{}
+	//	student.UserName = r.FormValue("username")
+	//	student.Password = string(hashedPassword)//r.FormValue("password")
+	//	student.FirstName = r.FormValue("fname")
+	//	student.LastName = r.FormValue("lname")
+	//	student.ID, _ = strconv.Atoi(r.FormValue("id"))
+	//	student.Email = r.FormValue("email")
+	//
+	//	mf, fh, err := r.FormFile("catimg")
+	//	if err != nil {
+	//		panic(err)
+	//	}
+	//	defer mf.Close()
+	//
+	//	student.Image = fh.Filename
+	//
+	//	writeFile(&mf, fh.Filename)
+	//
+	//	srh.regService.RegisterStudent(student)
+	//
+	//	if err != nil {
+	//		panic(err)
+	//	}
+	//
+	//	http.Redirect(w, r, "/student/register", http.StatusSeeOther)
+	//
+	//} else {
+	//
+	//	srh.tmpl.ExecuteTemplate(w, "student.registration.html", nil)
+	//
+	//}
 }
+
 
 func (srh *RegistrationHandler) FamilyRegistration(w http.ResponseWriter, r *http.Request) {
 
@@ -177,7 +319,7 @@ func writeFile(mf *multipart.File, fname string) {
 		panic(err)
 	}
 
-	path := filepath.Join(wd, "delivery", "web", "assets", "img", fname)
+	path := filepath.Join(wd, "../","web", "assets", "img", fname)
 	image, err := os.Create(path)
 
 	if err != nil {
