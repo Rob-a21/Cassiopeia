@@ -51,6 +51,20 @@ func (pr *PsqlProfileRepositoryImpl) Student(id int) (entity.Student, error) {
 	return student, nil
 }
 
+func (pr *PsqlProfileRepositoryImpl) EmailExists(email string) bool {
+	row := pr.conn.QueryRow("SELECT * FROM student WHERE email = $1", email)
+
+	student := entity.Student{}
+
+	err := row.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Email, &student.Image)
+	if err != nil {
+		panic(err)
+	}
+
+
+	return true
+}
+
 func (pr *PsqlProfileRepositoryImpl) Families() ([]entity.Family, error) {
 
 	rows, err := pr.conn.Query("select * from family;")
@@ -178,8 +192,4 @@ func (pr *PsqlProfileRepositoryImpl) DeleteTeacher(id string) error {
 	return nil
 }
 
-
-func (rr *PsqlProfileRepositoryImpl) Roles() ([]entity.Admin, error) {
-	return []entity.Admin{}, nil
-}
 
