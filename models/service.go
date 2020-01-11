@@ -1,4 +1,4 @@
-package user
+package models
 
 import "github.com/Rob-a21/Cassiopeia/entity"
 
@@ -18,13 +18,14 @@ type NotificationService interface {
 type ProfileService interface {
 	Students() ([]entity.Student, error)
 	Student(id int) (entity.Student, error)
+	EmailExists(email string) bool
 	DeleteStudent(id int) error
 	Families() ([]entity.Family, error)
 	Teachers() ([]entity.Teacher, error)
 	Teacher(id string) (entity.Teacher, error)
 	DeleteTeacher(id string) error
 	Admin(id int) (entity.Admin, error)
-	AdminByEmail(email string) (*entity.Admin, []error)
+	AdminByEmail(email string) (entity.Admin, error)
 	Admins() ([]entity.Admin, error)
 }
 

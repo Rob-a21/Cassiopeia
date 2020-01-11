@@ -1,4 +1,4 @@
-package user
+package models
 
 import "github.com/Rob-a21/Cassiopeia/entity"
 
@@ -18,13 +18,14 @@ type NotificationRepository interface {
 type ProfileRepository interface {
 	Students() ([]entity.Student, error)
 	Student(id int) (entity.Student, error)
+	EmailExists(email string) bool
 	DeleteStudent(id int) error
 	Families() ([]entity.Family, error)
 	Teachers() ([]entity.Teacher, error)
 	Teacher(id string) (entity.Teacher, error)
 	DeleteTeacher(id string) error
 	Admin(id int) (entity.Admin, error)
-	AdminByEmail(email string) (*entity.Admin, []error)
+	AdminByEmail(email string) (entity.Admin, error)
 	Admins() ([]entity.Admin, error)
 }
 
@@ -40,9 +41,9 @@ type AssessmentRepository interface {
 }
 
 type StudentAttendanceRepository interface {
-	ShowAttendance() ([]entity.Attendance, error) //Categories
-	CheckAttendance(id int) (entity.Attendance, error) //Category
-	FillAttendance(attendance entity.Attendance) error //StoreStudent
+	ShowAttendance() ([]entity.Attendance, error)
+	CheckAttendance(id int) (entity.Attendance, error)
+	FillAttendance(attendance entity.Attendance) error
 }
 
 type CourseRepository interface {
