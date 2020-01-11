@@ -1,0 +1,7 @@
+{{ define "admin.viewteacher.layout" }}
+
+    {{ template "admin.navbar" . }}
+    {{ template "admin.viewteacher.content" . }}
+    {{ template "admin.footer" . }}
+    
+{{ end }}

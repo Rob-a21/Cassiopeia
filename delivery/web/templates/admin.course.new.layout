@@ -1,0 +1,7 @@
+{{ define "admin.course.new.layout" }}
+
+{{ template "admin.navbar" . }}
+{{ template "admin.course.new.content" . }}
+{{ template "admin.footer" . }}
+
+{{ end }}

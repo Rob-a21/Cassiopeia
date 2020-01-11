@@ -1,0 +1,5 @@
+{{ define "student.course.layout" }}
+{{ template "student.navbar" . }}
+{{ template "student.course.content" . }}
+{{ template "student.footer" . }}
+{{ end }}

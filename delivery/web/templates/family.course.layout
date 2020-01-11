@@ -1,0 +1,7 @@
+{{ define "family.course.layout" }}
+
+    {{ template "family.navbar" . }}
+    {{ template "family.course.content" . }}
+    {{ template "family.footer" . }}
+    
+{{ end }}

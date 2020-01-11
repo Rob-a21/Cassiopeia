@@ -1,74 +1,62 @@
 {{ define "student.navbar" }}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- css -->
-    <link  rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/student.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cassiopia School Managment</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Fonts -->
+  <link href="../assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="../assets/css/animate.css" rel="stylesheet" />
+  <!-- school portal theme CSS -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/default.css" rel="stylesheet">
+
 
 </head>
 
-<body>
-    <nav class="navbar navbar-light fixed-top flex-md-nowrap p-0" style="background-color: #e3f2fd;">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">School Managment</a>
-    </nav>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="load"></div>
+  </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/student">
-                                <span data-feather="home"></span>
-                                School <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/student/notification">
-                                <span data-feather="notification"></span>
-                                notification
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/student/assessment">
-                                <span data-feather="assessment"></span>
-                                assessment
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/student/profiles">
-                                <span data-feather="myprofile"></span>
-                                myprofile
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/student/course">
-                                <span data-feather="course"></span>
-                                course
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/student/attendance">
-                                <span data-feather="attendance"></span>
-                                attendance
-                            </a>
-                        </li>
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+        <a class="navbar-brand" href="studentsprofile.html">
+          <h1>SCHOOL PORTAL</h1>
+        </a>
+      </div>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/student/logout">
-                                <span data-feather="logout"></span>
-                                logout
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-            </nav>
-            </div>
-            </div>
-            {{ end }}
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#intro">Profile</a></li>
+          <li><a href="#Grades">Grades</a></li>
+          <li><a href="#contact">Notification</a></li>
+          <li><a href="#contact">Attendance</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resource <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Biology</a></li>
+              <li><a href="#">English</a></li>
+              <li><a href="#">Maths</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="#contact">Logout</a></li>
+        </ul>
+      </div>
+      </div>
+      </nav>
+{{ end }}
