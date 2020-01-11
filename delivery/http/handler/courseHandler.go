@@ -4,19 +4,18 @@ import (
 	"encoding/json"
 	"html/template"
 	"net/http"
-	"path"
 	"strconv"
 
-	"github.com/Rob-a21/Cassiopeia/models"
+	"github.com/Rob-a21/Cassiopeia/course"
 	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
 type CourseHandler struct {
 	tmpl       *template.Template
-	crsService models.CourseService
+	crsService course.CourseService
 }
 
-func NewCourseHandler(T *template.Template, CS models.CourseService) *CourseHandler {
+func NewCourseHandler(T *template.Template, CS course.CourseService) *CourseHandler {
 	return &CourseHandler{tmpl: T, crsService: CS}
 }
 
@@ -117,7 +116,7 @@ func (crs *CourseHandler) AdminDeleteCourse(w http.ResponseWriter, r *http.Reque
 }
 
 
-func (crs *CourseHandler) StudentCourse(w http.ResponseWriter, r *http.Request) {
+func (crs *CourseHandler) StudentGetCourse(w http.ResponseWriter, r *http.Request) {
 
 	courses, err := crs.crsService.GetCourse()
 	if err != nil {
@@ -140,7 +139,7 @@ func (crs *CourseHandler) FamilyGetCourse(w http.ResponseWriter, r *http.Request
 }
 
 
-func (crs *CourseHandler)ApiAdminPostCourse(w http.ResponseWriter,r *http.Request){
+func (crs *CourseHandler)AdminPostCourse(w http.ResponseWriter,r *http.Request){
 
 	  len := r.ContentLength
 
@@ -161,99 +160,6 @@ func (crs *CourseHandler)ApiAdminPostCourse(w http.ResponseWriter,r *http.Reques
 }
 
 
-func (crs *CourseHandler)ApiAdminGetCourses(w http.ResponseWriter,r *http.Request) {
-
-
-	course := entity.Course{}
-
-	crs.crsService.GetCourse()
-
-	output,err := json.MarshalIndent(&course,"","\t\t")
-
-	if err != nil{
-
-		return
-	}
-
-	w.Header().Set("Content-Type","application/json")
-
-	w.Write(output)
-
-	return
-}
-
-func (crs *CourseHandler)ApiAdminDeleteCourse(w http.ResponseWriter,r *http.Request) {
-
-	id, err := strconv.Atoi(path.Base(r.URL.Path))
-
-	if err != nil{
-
-		return
-	}
-
-	//course := entity.Course{}
-	//
-	//res,err :=crs.crsService.Course(id)
-	//
-	//if err!= nil{
-	//	return
-	//}
-
-	crs.crsService.DeleteCourse(id)
-
-
-	return
-}
-
-
-
-func (crs *CourseHandler)ApiStudentGetCourse(w http.ResponseWriter,r *http.Request) {
-
-	id, err := strconv.Atoi(path.Base(r.URL.Path))
-
-	if err != nil{
-
-		return
-	}
-
-	course := entity.Course{}
-
-	 crs.crsService.Course(id)
-
-	output,err := json.MarshalIndent(&course,"","\t\t")
-
-	if err != nil{
-
-		return
-	}
-
-	w.Header().Set("Content-Type","application/json")
-
-	w.Write(output)
-
-	return
-}
-
-func (crs *CourseHandler)ApiStudentGetCourses(w http.ResponseWriter,r *http.Request) {
-
-
-	course := entity.Course{}
-
-	crs.crsService.GetCourse()
-
-	output,err := json.MarshalIndent(&course,"","\t\t")
-
-	if err != nil{
-
-		return
-	}
-
-	w.Header().Set("Content-Type","application/json")
-
-	w.Write(output)
-
-	return
-}
 
 
 

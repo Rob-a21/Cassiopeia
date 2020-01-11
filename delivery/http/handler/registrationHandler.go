@@ -10,15 +10,15 @@ import (
 	"strconv"
 
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/models"
+	"github.com/Rob-a21/Cassiopeia/registration"
 )
 
 type RegistrationHandler struct {
 	tmpl       *template.Template
-	regService models.RegistrationService
+	regService registration.RegistrationService
 }
 
-func NewRegistrationHandler(T *template.Template, RS models.RegistrationService) *RegistrationHandler {
+func NewRegistrationHandler(T *template.Template, RS registration.RegistrationService) *RegistrationHandler {
 	return &RegistrationHandler{tmpl: T, regService: RS}
 }
 
