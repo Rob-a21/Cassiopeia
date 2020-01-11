@@ -2,16 +2,16 @@ package service
 
 import (
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/user"
+	"github.com/Rob-a21/Cassiopeia/models"
 
 )
 
 
 type AssessmentServiceImpl struct {
-	assRepo user.AssessmentRepository
+	assRepo models.AssessmentRepository
 }
 
-func NewAssessmentServiceImpl(aRepo user.AssessmentRepository) *AssessmentServiceImpl {
+func NewAssessmentServiceImpl(aRepo models.AssessmentRepository) *AssessmentServiceImpl {
 	return &AssessmentServiceImpl{assRepo: aRepo}
 }
 

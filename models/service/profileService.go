@@ -2,15 +2,18 @@ package service
 
 import (
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/profile"
-	"github.com/Rob-a21/Cassiopeia/user"
+	"github.com/Rob-a21/Cassiopeia/models"
 )
 
 type ProfileServiceImpl struct {
-	profileRepository user.ProfileRepository
+	profileRepository models.ProfileRepository
 }
 
-func NewProfileServiceImpl(profrepo user.ProfileRepository) *ProfileServiceImpl {
+func (ss *ProfileServiceImpl) EmailExists(email string) bool {
+	panic("implement me")
+}
+
+func NewProfileServiceImpl(profrepo models.ProfileRepository) *ProfileServiceImpl {
 	return &ProfileServiceImpl{profileRepository: profrepo}
 }
 
@@ -34,6 +37,14 @@ func (ss *ProfileServiceImpl) Student(id int) (entity.Student, error) {
 	}
 
 	return student, nil
+}
+
+func (ss *ProfileServiceImpl) EmailExist(email string)bool  {
+
+	exists:= ss.profileRepository.EmailExists(email)
+
+
+	return exists
 }
 
 func (fs *ProfileServiceImpl) Families() ([]entity.Family, error) {
@@ -85,7 +96,7 @@ func (ss *ProfileServiceImpl) Admin(id int) (entity.Admin, error) {
 }
 
 
-func (ss *ProfileServiceImpl) AdminByEmail(email string) (*entity.Admin, error) {
+func (ss *ProfileServiceImpl) AdminByEmail(email string) (entity.Admin, error) {
 
 	admin, err := ss.profileRepository.AdminByEmail(email)
 

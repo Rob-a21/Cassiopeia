@@ -4,13 +4,14 @@ package service
 
 import (
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/user")
+	"github.com/Rob-a21/Cassiopeia/models"
+)
 
 type StudentAttendanceServiceImpl struct {
-	attendanceRepo user.StudentAttendanceRepository
+	attendanceRepo models.StudentAttendanceRepository
 }
 
-func NewStudentAttendanceServiceImpl(attRepo user.StudentAttendanceRepository) *StudentAttendanceServiceImpl {
+func NewStudentAttendanceServiceImpl(attRepo models.StudentAttendanceRepository) *StudentAttendanceServiceImpl {
 	return &StudentAttendanceServiceImpl{attendanceRepo: attRepo}
 }
 

@@ -2,15 +2,14 @@ package service
 
 import (
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/notification"
-	"github.com/Rob-a21/Cassiopeia/user"
+	"github.com/Rob-a21/Cassiopeia/models"
 )
 
 type NotificationServiceImpl struct {
-	notificationRepository user.NotificationRepository
+	notificationRepository models.NotificationRepository
 }
 
-func NewNotificationServiceImpl(nrpo user.NotificationRepository) *NotificationServiceImpl {
+func NewNotificationServiceImpl(nrpo models.NotificationRepository) *NotificationServiceImpl {
 	return &NotificationServiceImpl{notificationRepository: nrpo}
 }
 

@@ -1,16 +1,15 @@
 package service
 
 import (
-	"github.com/Rob-a21/Cassiopeia/course"
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/user"
+	"github.com/Rob-a21/Cassiopeia/models"
 )
 
 type CourseServiceImpl struct {
-	courseRepository user.CourseRepository
+	courseRepository models.CourseRepository
 }
 
-func NewCourseServiceImpl(crRepo user.CourseRepository) *CourseServiceImpl {
+func NewCourseServiceImpl(crRepo models.CourseRepository) *CourseServiceImpl {
 
 	return &CourseServiceImpl{courseRepository: crRepo}
 }

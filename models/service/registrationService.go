@@ -2,15 +2,14 @@ package service
 
 import (
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/registration"
-	"github.com/Rob-a21/Cassiopeia/user"
+	"github.com/Rob-a21/Cassiopeia/models"
 )
 
 type RegistrationServiceImpl struct {
-	registrationRepo user.RegistrationRepository
+	registrationRepo models.RegistrationRepository
 }
 
-func NewRegistrationServiceImpl(regRepo user.RegistrationRepository) *RegistrationServiceImpl {
+func NewRegistrationServiceImpl(regRepo models.RegistrationRepository) *RegistrationServiceImpl {
 
 	return &RegistrationServiceImpl{registrationRepo: regRepo}
 }
