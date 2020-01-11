@@ -2,8 +2,8 @@ package main
 
 import (
 	"database/sql"
-	"github.com/Rob-a21/Cassiopeia/user/repository"
-	"github.com/Rob-a21/Cassiopeia/user/service"
+	"github.com/Rob-a21/Cassiopeia/models/repository"
+	"github.com/Rob-a21/Cassiopeia/models/service"
 
 	"html/template"
 	"net/http"
@@ -18,7 +18,7 @@ var tmpl = template.Must(template.ParseGlob("../web/templates/*"))
 func main() {
 
 	dbconn, err := sql.Open("postgres",
-		"postgres://postgres:strafael@localhost/cassiopeia?sslmode=disable")
+		"postgres://postgres:aait@localhost/school?sslmode=disable")
 
 	if err != nil {
 		panic(err)
@@ -46,16 +46,26 @@ func main() {
 	courseService := service.NewCourseServiceImpl(courseRepository)
 	courseHandler := handler.NewCourseHandler(tmpl, courseService)
 
-	//homeHandler:= handler.NewHomeHandler(tmpl)
+	attendanceRepository := repository.NewStudentAttendanceRepositoryImpl(dbconn)
+	attendanceService := service.NewStudentAttendanceServiceImpl(attendanceRepository)
+	attendanceHandler := handler.NewAttendanceHandler(tmpl, attendanceService)
+
+	homeHandler:= handler.NewHomeHandler(tmpl,profileService)
 	loginHandler := handler.NewLoginHandler(tmpl, profileService)
+	logoutHandler := handler.NewLogoutHandler(tmpl, profileService)
+
 
 	fs := http.FileServer(http.Dir("../web/assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	mux := http.NewServeMux()
 
-	//mux.HandleFunc("/", homeHandler.Home)
-      // student handler
+
+
+	mux.HandleFunc("/", homeHandler.Home)
+	mux.HandleFunc("/logout", logoutHandler.Logout)
+
+	// student handler
 	mux.HandleFunc("/student/register", registrationHandler.StudentRegistration)
 	mux.HandleFunc("/student/login", loginHandler.Login)
 	mux.HandleFunc("/student/course", courseHandler.StudentCourse)
@@ -63,10 +73,15 @@ func main() {
 	mux.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
 	mux.HandleFunc("/student/profile", profileHandler.StudentProfile)
 
+	mux.HandleFunc("/student/new", attendanceHandler.StudentFillAttendance)
+	mux.HandleFunc("/student/show", attendanceHandler.StudentShowAttendance)
+	mux.HandleFunc("/student/check", attendanceHandler.StudentCheckAttendance)
+
+
+
 	// family handler
 
 	mux.HandleFunc("/family/register", registrationHandler.FamilyRegistration)
-	//mux.HandleFunc("/family/course", courseHandler.FamilyGetCourse)
 
 	// teacher handler
 
@@ -96,5 +111,5 @@ func main() {
 	mux.HandleFunc("/api/admin/course/delete", courseHandler.ApiAdminDeleteCourse)
 
 
-	_ = http.ListenAndServe(":2121", mux)
+	_ = http.ListenAndServe(":8181", mux)
 }

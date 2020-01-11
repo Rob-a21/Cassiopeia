@@ -177,3 +177,9 @@ func (pr *PsqlProfileRepositoryImpl) DeleteTeacher(id string) error {
 
 	return nil
 }
+
+
+func (rr *PsqlProfileRepositoryImpl) Roles() ([]entity.Admin, error) {
+	return []entity.Admin{}, nil
+}
+

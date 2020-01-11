@@ -3,7 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/user"
+	"github.com/Rob-a21/Cassiopeia/models"
 	"html/template"
 	"net/http"
 	"path"
@@ -13,11 +13,11 @@ import (
 
 
 type AttendanceHandler struct {
-	tmpl                *template.Template
-	attendanceService user.StudentAttendanceService
+	tmpl              *template.Template
+	attendanceService models.StudentAttendanceService
 }
 
-func NewAttendanceHandler(T *template.Template, NS user.StudentAttendanceService) *AttendanceHandler {
+func NewAttendanceHandler(T *template.Template, NS models.StudentAttendanceService) *AttendanceHandler {
 	return &AttendanceHandler{tmpl: T, attendanceService: NS}
 }
 
@@ -25,18 +25,19 @@ func (at *AttendanceHandler) StudentFillAttendance(w http.ResponseWriter, r *htt
 
 	if r.Method == http.MethodPost {
 
-		attendance2 := entity.Attendance{}
-		attendance2.Date = time.Now()
-		attendance2.StudentId,_ = strconv.Atoi(r.FormValue("studentid"))
+		attendance := entity.Attendance{}
+		attendance.Date = time.Now()
+		attendance.StudentId,_ = strconv.Atoi(r.FormValue("studentid"))
 
-		_ = at.attendanceService.FillAttendance(attendance2)
+		_ = at.attendanceService.FillAttendance(attendance)
 
 
 	}
 
-	_ = at.tmpl.ExecuteTemplate(w, "admin.course.new.layout", nil)
+	_ = at.tmpl.ExecuteTemplate(w, "student.attendance.new.layout", nil)
 
 }
+
 
 
 

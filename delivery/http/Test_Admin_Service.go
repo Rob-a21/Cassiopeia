@@ -4,8 +4,8 @@ package main
 
 import (
 	"bytes"
-	"github.com/Rob-a21/Cassiopeia/user/repository"
-	"github.com/Rob-a21/Cassiopeia/user/service"
+	"github.com/Rob-a21/Cassiopeia/models/repository"
+	"github.com/Rob-a21/Cassiopeia/models/service"
 	"html/template"
 	"io/ioutil"
 	"net/http"

@@ -3,7 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/user"
+	"github.com/Rob-a21/Cassiopeia/models"
 	"html/template"
 	"net/http"
 	"time"
@@ -11,10 +11,10 @@ import (
 
 type NotificationHandler struct {
 	tmpl                *template.Template
-	notificationService user.NotificationService
+	notificationService models.NotificationService
 }
 
-func NewNotificationHandler(T *template.Template, NS user.NotificationService) *NotificationHandler {
+func NewNotificationHandler(T *template.Template, NS models.NotificationService) *NotificationHandler {
 	return &NotificationHandler{tmpl: T, notificationService: NS}
 }
 

@@ -5,15 +5,15 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Rob-a21/Cassiopeia/user"
+	"github.com/Rob-a21/Cassiopeia/models"
 )
 
 type ProfileHandler struct {
 	tmpl           *template.Template
-	profileService user.ProfileService
+	profileService models.ProfileService
 }
 
-func NewProfileHandler(T *template.Template, PS user.ProfileService) *ProfileHandler {
+func NewProfileHandler(T *template.Template, PS models.ProfileService) *ProfileHandler {
 	return &ProfileHandler{tmpl: T, profileService: PS}
 }
 
