@@ -39,6 +39,39 @@ func (at *AttendanceHandler) StudentFillAttendance(w http.ResponseWriter, r *htt
 }
 
 
+func (at *AttendanceHandler) CheckStudentAttendance(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == http.MethodPost {
+
+		id,_ := strconv.Atoi(r.FormValue("studentid"))
+		attend, err := at.attendanceService.CheckAttendance(id)
+
+		if err != nil {
+			panic(err)
+		}
+
+		_ = at.tmpl.ExecuteTemplate(w, "admin.course.new.layout", attend)
+
+	}
+
+}
+
+func (at *AttendanceHandler) ShowStudentsAttendance(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == http.MethodPost {
+
+		//id,_ := strconv.Atoi(r.FormValue("studentid"))
+		attend, err := at.attendanceService.ShowAttendance()
+		if err != nil {
+			panic(err)
+		}
+
+		_ = at.tmpl.ExecuteTemplate(w, "admin.course.new.layout", attend)
+
+	}
+
+}
+
 
 
 func (at *AttendanceHandler)ApiStudentPostAttendance(w http.ResponseWriter,r *http.Request){
