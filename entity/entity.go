@@ -13,16 +13,16 @@ type Admin struct {
 }
 
 type Assessment struct {
-	Value     int
-	SubjectID string
-	StudentID string
-	Grade     string
+	Value     int    `json:"value"`
+	SubjectID int     `json:"subjectid"`
+	StudentID int      `json:"studentid"`
+	Grade     string    `json:"grade"`
 }
 
 
 type Attendance struct {
-	Date      time.Time
-	StudentId int
+	Date      time.Time `json:"date"`
+	StudentId int        `json:"studentid"`
 }
 
 type Course struct {
