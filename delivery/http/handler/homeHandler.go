@@ -19,5 +19,5 @@ func NewHomeHandler(T *template.Template, PS models.ProfileService) *HomeHandler
 func (srh *HomeHandler) Home(w http.ResponseWriter, r *http.Request) {
 
 
-	srh.tmpl.ExecuteTemplate(w,"mainPage.html",nil)
+	srh.tmpl.ExecuteTemplate(w,"mainpage.layout",nil)
 }

@@ -1,37 +1,63 @@
 {{ define "navbar" }}
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <title>Restaurant</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- css -->
-    <link rel="stylesheet" type="text/html" href="../assets/css/bootstrap.min.css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">3Y Restaurant</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="menu">Menu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact">Contact</a>
-                </li>
-            </ul>
+        <title>Cassiopia School Managment</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+        <!-- Fonts -->
+        <link href="../assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/animate.css" rel="stylesheet" />
+        <!-- school portal theme CSS -->
+        <link href="../assets/css/style.css" rel="stylesheet">
+        <link href="../assets/css/default.css" rel="stylesheet">
+
+
+    </head>
+
+    <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="load"></div>
+    </div>
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="studentsprofile.html">
+                    <h1>SCHOOL PORTAL</h1>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+
+                    <li><a href="/login">login</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">signup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/admin/register">Admin</a></li>
+                            <li><a href="/student/register">Student</a></li>
+                            <li><a href="/teacher/register">Teacher</a></li>
+                            <li><a href="/family/register">Family</a></li>
+
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </nav>
-    {{ end }}
+{{ end }}

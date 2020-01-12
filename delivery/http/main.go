@@ -82,12 +82,9 @@ func main() {
 	http.HandleFunc("/student/course", courseHandler.StudentCourse)
 	http.HandleFunc("/student/notification", notificationHandler.StudentGetNotification)
 	http.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
-	http.HandleFunc("/student/profile", profileHandler.StudentProfile)
-
-	http.HandleFunc("/student/new", attendanceHandler.FillStudentAttendance)
-	http.HandleFunc("/student/show", attendanceHandler.ShowStudentsAttendance)
-	http.HandleFunc("/student/check", attendanceHandler.CheckStudentAttendance)
-
+	http.HandleFunc("/student/attendance/new", attendanceHandler.FillStudentAttendance)
+	http.HandleFunc("/student/attendance/show", attendanceHandler.ShowStudentsAttendance)
+	http.HandleFunc("/student/attendance/check", attendanceHandler.CheckStudentAttendance)
 	http.HandleFunc("/student/grade", assessmentHandler.AssessmentsOfOneGrade)
 
 	// family handler
@@ -97,6 +94,7 @@ func main() {
 	// teacher handler
 
 	http.HandleFunc("/teacher/register", registrationHandler.TeacherRegistration)
+	http.HandleFunc("/teacher/profile", profileHandler.TeacherProfile)
 	http.HandleFunc("/teacher/notification", notificationHandler.TeacherAddNotification)
 	http.HandleFunc("/teacher/grade/new", assessmentHandler.StoreGrade)
 	http.HandleFunc("/teacher/grade/update", assessmentHandler.UpdateGrade)
@@ -106,6 +104,7 @@ func main() {
 	// admin handler
 
 	http.HandleFunc("/admin/register", registrationHandler.AdminRegistration)
+	http.HandleFunc("/admin/profile", profileHandler.AdminProfile)
 	http.HandleFunc("/admin/student", profileHandler.AdminGetStudent)
 	http.HandleFunc("/admin/student/delete", profileHandler.AdminDeleteStudent)
 	http.HandleFunc("/admin/teacher", profileHandler.AdminGetTeacher)

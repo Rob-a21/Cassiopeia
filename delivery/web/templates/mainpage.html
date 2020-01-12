@@ -1,92 +1,177 @@
-<!DOCTYPE html>
-<html lang="en">            
-<head>
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cassiopeia School</title>
-</head>
-<body>
-    <div>
-        <ul id="nav">
-            <li class="nav"><a class="active" href="/home">Home</a></li>
-            <li class="nav"><a href="/SignUp">SignUp</a></li>
-            <li class="nav"><a href="/Login">Login</a></li>
-          </ul>
-    </div>
-    <img src="../assets/img/seven.jpg" alt="img" id="mainImage">
-    <div id="overImage">
-        <h1 id="mainTitle">Cassiopeia</h1>
-        <h3 id="subTitle">School Management</h3>
-    </div>
+{{ define "mainpage.layout" }}
 
-    <div id="content">
-        <div class="subContent">
-            <h1>Mission</h1>
-            <img src="../assets/img/a.jpg" class="inside" alt="">
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-                 et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-                Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae iure.
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-                et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-               Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae iure
-               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-               et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-              Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae iure
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-              et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-             Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae </p>
+    {{ template "navbar" . }}
+    {{ template "mainpage.content" . }}
+    {{ template "footer" . }}
 
-        </div>
+{{ end }}
+{{ define "mainpage.content"}}
 
-        <div class="subContent">
-            <h1>Vision</h1>
-            <img src="../assets/img/four.jpg" class="inside" alt="">
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-                et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-               Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae iure.
-               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-               et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-              Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae iure
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-              et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-             Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae iure
-             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-             et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-            Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae </p>
-               
-        </div>
+    <section>
+        <section id="about" class="home-section text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="wow bounceInUp" data-wow-delay="0.2s">
+                            <div class="team boxed-grey">
+                                <div class="inner">
+                                    <div class="avatar"><img src="../assets/img/user.jpg" alt="" class="img-responsive img-circle" /></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="wow bounceInUp" data-wow-delay="0.2s">
+                                    <div class="team boxed-grey">
+                                        <div class="inner">
+                                            <div class="avatar"><img src="../assets/img/user.jpg" alt="" class="img-responsive img-circle" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="wow bounceInUp" data-wow-delay="0.2s">
+                                    <div class="team boxed-grey">
+                                        <div class="inner">
+                                            <div class="avatar"><img src="../assets/img/user.jpg" alt="" class="img-responsive img-circle" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        </section>
 
-        <div class="subContent">
-            <h1>Goals</h1>
-            <img src="../assets/img/three.jpg" class="inside" alt="">
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-                et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-               Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae iure.
-               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-               et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-              Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae iure
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-              et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-             Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae iure
-             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur
-             et odit debitis architecto voluptas nemo vero unde commodi delectus. 
-            Dolor explicabo id dicta ipsum inventore aliquam culpa, corporis quae </p>
-               
-        </div>
-    </div>
+        <!-- Section: student grade -->
+        <section id="about" class="home-section text-center">
+            <div class="heading-about">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="wow bounceInDown" data-wow-delay="0.4s">
+                                <div class="section-heading">
+                                    <h2>Cassiopeia School</h2>
+                                    <i class="fa fa-2x fa-angle-down"></i>
 
-    <footer id="footer">
-        <div>
-            <ul>
-                <li><p>Contact: <a href="">+251-919-813-323</a></p></li>
-                <li><p>Email: <a href="">Cassiopeia@gmail.com</a></p></li>
-                <li><p>Street Address: King George IV</p></li>
-                <li><p>© 2019</p></li>
-            </ul>
-        </div>
-    </footer>
-</body>
-</html>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
 
+                <div class="row">
+                    <div class="col-lg-2 col-lg-offset-5">
+                        <hr class="marginbot-50">
+                    </div>
+                </div>
+
+
+
+        <!-- Section: contact -->
+        <section id="contact" class="home-section text-center">
+            <div class="heading-contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="wow bounceInDown" data-wow-delay="0.4s">
+                                <div class="section-heading">
+                                    <h2>Contact to us</h2>
+                                    <i class="fa fa-2x fa-angle-down"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-2 col-lg-offset-5">
+                        <hr class="marginbot-50">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="boxed-grey">
+
+                            <div id="sendmessage">Your message has been sent. Thank you!</div>
+                            <div id="errormessage"></div>
+                            <form id="contact-form" action="" method="post" role="form" class="contactForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">
+                                                Name</label>
+                                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">
+                                                Email Address</label>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                                <div class="validation"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="subject">
+                                                Subject</label>
+                                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                            <div class="validation"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">
+                                                Message</label>
+                                            <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                                            <div class="validation"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-skin pull-right" id="btnContactUs">
+                                            Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="widget-contact">
+                            <h5>Web Design Project</h5>
+
+                            <address>
+                                <strong>Cassiopia Design, Inc.</strong><br>
+                                AAIT Institiute of technology<br>
+                                Addis Ababa ,Ethiopia.<br>
+                                <abbr title="Phone">P:</abbr> (+251) 900-7890
+                            </address>
+
+                            <address>
+                                <strong>Email</strong><br>
+                                <a href="#">email.Cassiopia@example.com</a>
+                            </address>
+                            <address>
+                                <strong>We're on social networks</strong><br>
+                                <ul class="company-social">
+                                    <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+                                    <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>
+                            </address>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+{{ end }}

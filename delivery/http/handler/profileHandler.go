@@ -65,6 +65,25 @@ func (prf *ProfileHandler) EmailExists(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/admin/student", http.StatusSeeOther)
 }
 
+
+func (prf *ProfileHandler) TeacherProfile(w http.ResponseWriter, r *http.Request) {
+
+	teacher, err := prf.profileService.Teachers()
+	if err != nil {
+		panic(err)
+	}
+	prf.tmpl.ExecuteTemplate(w, "teacher.index.layout", teacher)
+
+}
+func (prf *ProfileHandler) AdminProfile(w http.ResponseWriter, r *http.Request) {
+
+	admin, err := prf.profileService.Admins()
+	if err != nil {
+		panic(err)
+	}
+	prf.tmpl.ExecuteTemplate(w, "admin.index.layout", admin)
+
+}
 func (prf *ProfileHandler) AdminGetStudent(w http.ResponseWriter, r *http.Request) {
 
 	students, err := prf.profileService.Students()
