@@ -1,5 +1,0 @@
-{{ define "student.notification.layout" }}
-{{ template "student.navbar" . }}
-{{ template "student.notification.content" . }}
-{{ template "student.footer" . }}
-{{ end }}

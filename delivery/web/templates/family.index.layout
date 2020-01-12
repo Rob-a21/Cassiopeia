@@ -1,7 +1,0 @@
-{{ define "family.index.layout" }}
-
-{{ template "family.navbar" . }}
-{{ template "family.index.content" . }}
-{{ template "family.footer" . }}
-
-{{ end }}

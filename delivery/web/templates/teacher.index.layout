@@ -1,7 +1,0 @@
-{{ define "teacher.index.layout" }}
-
-{{ template "teacher.navbar" . }}
-{{ template "teacher.index.content" . }}
-{{ template "teacher.footer" . }}
-
-{{ end }}

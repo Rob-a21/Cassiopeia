@@ -2,11 +2,12 @@ package main
 
 import (
 	"database/sql"
+	"time"
+
 	"github.com/Rob-a21/Cassiopeia/entity"
 	"github.com/Rob-a21/Cassiopeia/models/repository"
 	"github.com/Rob-a21/Cassiopeia/models/service"
 	"github.com/Rob-a21/Cassiopeia/token"
-	"time"
 
 	"html/template"
 	"net/http"
@@ -16,13 +17,11 @@ import (
 	"github.com/Rob-a21/Cassiopeia/delivery/http/handler"
 )
 
+var tmpl = template.Must(template.ParseGlob("c:/Users/solki/go/src/github.com/Rob-a21/Cassiopeia/delivery/web/templates/*"))
 
 func main() {
 
-	var tmpl = template.Must(template.ParseGlob("../web/templates/*"))
-
 	//csrfSignKey := []byte(token.GenerateRandomID(32))
-
 
 	dbconn, err := sql.Open("postgres",
 		"postgres://postgres:aait@localhost/school?sslmode=disable")
@@ -36,7 +35,6 @@ func main() {
 	if err := dbconn.Ping(); err != nil {
 		panic(err)
 	}
-
 
 	//sessionRepo := repository.NewSessionRepo(dbconn)
 	//sessionSrv := service.New(sessionRepo)
@@ -65,86 +63,71 @@ func main() {
 	assessmentService := service.NewAssessmentServiceImpl(assessmentRepository)
 	assessmentHandler := handler.NewAssessmentHandler(tmpl, assessmentService)
 
-
-	homeHandler:= handler.NewHomeHandler(tmpl,profileService)
+	homeHandler := handler.NewHomeHandler(tmpl, profileService)
 	loginHandler := handler.NewLoginHandler(tmpl, profileService)
 	logoutHandler := handler.NewLogoutHandler(tmpl, profileService)
 
 	//sess := configSess()
 	//uh := handler.RegistrationHandler(tmpl, registrationService, sessionSrv, sess, csrfSignKey)
 
-
-
-	fs := http.FileServer(http.Dir("../web/assets"))
+	fs := http.FileServer(http.Dir("c:/Users/solki/go/src/github.com/Rob-a21/Cassiopeia/delivery/web/assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
-	mux := http.NewServeMux()
-
-
-
-	mux.HandleFunc("/", homeHandler.Home)
-	mux.HandleFunc("/logout", logoutHandler.Logout)
+	http.HandleFunc("/", homeHandler.Home)
+	http.HandleFunc("/logout", logoutHandler.Logout)
 
 	// student handler
-	mux.HandleFunc("/student/register", registrationHandler.StudentRegistration)
-	mux.HandleFunc("/student/login", loginHandler.Login)
-	mux.HandleFunc("/student/course", courseHandler.StudentCourse)
-	mux.HandleFunc("/student/notification", notificationHandler.StudentGetNotification)
-	mux.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
-	mux.HandleFunc("/student/profile", profileHandler.StudentProfile)
+	http.HandleFunc("/student/register", registrationHandler.StudentRegistration)
+	http.HandleFunc("/student/login", loginHandler.Login)
+	http.HandleFunc("/student/course", courseHandler.StudentCourse)
+	http.HandleFunc("/student/notification", notificationHandler.StudentGetNotification)
+	http.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
+	http.HandleFunc("/student/profile", profileHandler.StudentProfile)
 
-	mux.HandleFunc("/student/new", attendanceHandler.FillStudentAttendance)
-	mux.HandleFunc("/student/show", attendanceHandler.ShowStudentsAttendance)
-	mux.HandleFunc("/student/check", attendanceHandler.CheckStudentAttendance)
+	http.HandleFunc("/student/new", attendanceHandler.FillStudentAttendance)
+	http.HandleFunc("/student/show", attendanceHandler.ShowStudentsAttendance)
+	http.HandleFunc("/student/check", attendanceHandler.CheckStudentAttendance)
 
-	mux.HandleFunc("/student/grade", assessmentHandler.AssessmentsOfOneGrade)
-
-
+	http.HandleFunc("/student/grade", assessmentHandler.AssessmentsOfOneGrade)
 
 	// family handler
 
-	mux.HandleFunc("/family/register", registrationHandler.FamilyRegistration)
+	http.HandleFunc("/family/register", registrationHandler.FamilyRegistration)
 
 	// teacher handler
 
-	mux.HandleFunc("/teacher/register", registrationHandler.TeacherRegistration)
-	mux.HandleFunc("/teacher/notification", notificationHandler.TeacherAddNotification)
-	mux.HandleFunc("/teacher/grade/new", assessmentHandler.StoreGrade)
-	mux.HandleFunc("/teacher/grade/update", assessmentHandler.UpdateGrade)
-	mux.HandleFunc("/teacher/grade/delete", assessmentHandler.DeleteGrade)
-	mux.HandleFunc("/teacher/grade/deletes", assessmentHandler.DeleteGrades)
-
-
-
+	http.HandleFunc("/teacher/register", registrationHandler.TeacherRegistration)
+	http.HandleFunc("/teacher/notification", notificationHandler.TeacherAddNotification)
+	http.HandleFunc("/teacher/grade/new", assessmentHandler.StoreGrade)
+	http.HandleFunc("/teacher/grade/update", assessmentHandler.UpdateGrade)
+	http.HandleFunc("/teacher/grade/delete", assessmentHandler.DeleteGrade)
+	http.HandleFunc("/teacher/grade/deletes", assessmentHandler.DeleteGrades)
 
 	// admin handler
 
-	mux.HandleFunc("/admin/register", registrationHandler.AdminRegistration)
-	mux.HandleFunc("/admin/student", profileHandler.AdminGetStudent)
-	mux.HandleFunc("/admin/student/delete", profileHandler.AdminDeleteStudent)
-	mux.HandleFunc("/admin/teacher", profileHandler.AdminGetTeacher)
-	mux.HandleFunc("/admin/teacher/delete", profileHandler.AdminDeleteTeacher)
-	mux.HandleFunc("/admin/course", courseHandler.AdminGetCourse)
-	mux.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse)
-
-
+	http.HandleFunc("/admin/register", registrationHandler.AdminRegistration)
+	http.HandleFunc("/admin/student", profileHandler.AdminGetStudent)
+	http.HandleFunc("/admin/student/delete", profileHandler.AdminDeleteStudent)
+	http.HandleFunc("/admin/teacher", profileHandler.AdminGetTeacher)
+	http.HandleFunc("/admin/teacher/delete", profileHandler.AdminDeleteTeacher)
+	http.HandleFunc("/admin/course", courseHandler.AdminGetCourse)
+	http.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse)
 
 	// api hadlers
 
-	mux.HandleFunc("/api/student/attendance/new", attendanceHandler.ApiStudentPostAttendance)
-	mux.HandleFunc("/api/student/attendance/check", attendanceHandler.ApiStudentCheckAttendance)
-	mux.HandleFunc("/api/student/attendance/show", attendanceHandler.ApiStudentShowAttendance)
-	mux.HandleFunc("/api/teacher/grade/new", assessmentHandler.ApiTeacherPostGrade)
-	mux.HandleFunc("/api/student/course", courseHandler.ApiStudentGetCourse)
-	mux.HandleFunc("/api/student/courses", courseHandler.ApiStudentGetCourses)
-	mux.HandleFunc("/api/student/notification", notificationHandler.ApiStudentGetNotification)
-	mux.HandleFunc("/api/teacher/notification", notificationHandler.TeacherPostNotification)
-	mux.HandleFunc("/api/admin/course/add", courseHandler.ApiAdminPostCourse)
-	mux.HandleFunc("/api/admin/courses", courseHandler.ApiAdminGetCourses)
-	mux.HandleFunc("/api/admin/course/delete", courseHandler.ApiAdminDeleteCourse)
+	http.HandleFunc("/api/student/attendance/new", attendanceHandler.ApiStudentPostAttendance)
+	http.HandleFunc("/api/student/attendance/check", attendanceHandler.ApiStudentCheckAttendance)
+	http.HandleFunc("/api/student/attendance/show", attendanceHandler.ApiStudentShowAttendance)
+	http.HandleFunc("/api/teacher/grade/new", assessmentHandler.ApiTeacherPostGrade)
+	http.HandleFunc("/api/student/course", courseHandler.ApiStudentGetCourse)
+	http.HandleFunc("/api/student/courses", courseHandler.ApiStudentGetCourses)
+	http.HandleFunc("/api/student/notification", notificationHandler.ApiStudentGetNotification)
+	http.HandleFunc("/api/teacher/notification", notificationHandler.TeacherPostNotification)
+	http.HandleFunc("/api/admin/course/add", courseHandler.ApiAdminPostCourse)
+	http.HandleFunc("/api/admin/courses", courseHandler.ApiAdminGetCourses)
+	http.HandleFunc("/api/admin/course/delete", courseHandler.ApiAdminDeleteCourse)
 
-
-	_ = http.ListenAndServe(":8181", mux)
+	http.ListenAndServe(":8181", nil)
 }
 
 func configSess() *entity.Session {

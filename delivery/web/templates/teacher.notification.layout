@@ -1,7 +1,0 @@
-{{ define "teacher.notification.layout" }}
-
-{{ template "teacher.navbar" . }}
-{{ template "teacher.notification.content" . }}
-{{ template "teacher.footer" . }}
-
-{{ end }}

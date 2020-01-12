@@ -1,7 +1,0 @@
-{{ define "student.index.layout" }}
-
-{{ template "student.navbar" . }}
-{{ template "student.index.content" . }}
-{{ template "student.footer" . }}
-
-{{ end }}

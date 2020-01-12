@@ -6,19 +6,16 @@ import (
 	"strconv"
 
 	"github.com/Rob-a21/Cassiopeia/models"
-
 )
 
 type ProfileHandler struct {
-	tmpl                *template.Template
+	tmpl           *template.Template
 	profileService models.ProfileService
 }
 
 func NewProfileHandler(T *template.Template, NS models.ProfileService) *ProfileHandler {
 	return &ProfileHandler{tmpl: T, profileService: NS}
 }
-
-
 
 func (prf *ProfileHandler) StudentsProfile(w http.ResponseWriter, r *http.Request) {
 
@@ -55,25 +52,18 @@ func (prf *ProfileHandler) StudentProfile(w http.ResponseWriter, r *http.Request
 
 }
 
-
 func (prf *ProfileHandler) EmailExists(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodGet {
 
 		email := r.URL.Query().Get("id")
 
-
 		prf.profileService.EmailExists(email)
-
 
 	}
 
 	http.Redirect(w, r, "/admin/student", http.StatusSeeOther)
 }
-
-
-
-
 
 func (prf *ProfileHandler) AdminGetStudent(w http.ResponseWriter, r *http.Request) {
 
@@ -83,8 +73,6 @@ func (prf *ProfileHandler) AdminGetStudent(w http.ResponseWriter, r *http.Reques
 	}
 
 	prf.tmpl.ExecuteTemplate(w, "admin.viewstudent.layout", students)
-
-
 
 }
 
@@ -111,9 +99,6 @@ func (prf *ProfileHandler) AdminDeleteStudent(w http.ResponseWriter, r *http.Req
 	http.Redirect(w, r, "/admin/student", http.StatusSeeOther)
 }
 
-
-
-
 func (prf *ProfileHandler) AdminGetTeacher(w http.ResponseWriter, r *http.Request) {
 
 	teachers, err := prf.profileService.Teachers()
@@ -122,8 +107,6 @@ func (prf *ProfileHandler) AdminGetTeacher(w http.ResponseWriter, r *http.Reques
 	}
 
 	prf.tmpl.ExecuteTemplate(w, "admin.viewteacher.layout", teachers)
-
-
 
 }
 
@@ -139,9 +122,7 @@ func (prf *ProfileHandler) AdminDeleteTeacher(w http.ResponseWriter, r *http.Req
 		//	panic(err)
 		//}
 
-		 prf.profileService.DeleteTeacher(id)
-
-
+		prf.profileService.DeleteTeacher(id)
 
 	}
 
