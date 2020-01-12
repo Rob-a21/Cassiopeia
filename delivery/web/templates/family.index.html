@@ -1,4 +1,10 @@
+{{ define "family.index.layout" }}
 
+  {{ template "family.navbar" . }}
+  {{ template "family.index.content" . }}
+  {{ template "family.footer" . }}
+
+{{ end }}
 {{ define "family.index.content"}}
 <section>
     <section id="about" class="home-section text-center">

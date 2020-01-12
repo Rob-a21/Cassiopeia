@@ -1,4 +1,8 @@
-
+{{ define "student.course.layout" }}
+    {{ template "student.navbar" . }}
+    {{ template "student.course.content" . }}
+    {{ template "student.footer" . }}
+{{ end }}
 {{ define "student.course.content"}}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div

@@ -1,4 +1,10 @@
+{{ define "teacher.index.layout" }}
 
+    {{ template "teacher.navbar" . }}
+    {{ template "teacher.index.content" . }}
+    {{ template "teacher.footer" . }}
+
+{{ end }}
 {{ define "teacher.index.content"}}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div
