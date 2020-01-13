@@ -1,0 +1,116 @@
+body{
+    background: white;
+}
+
+.center{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#containerForm{
+    background:rgb(123, 124, 123);
+    height: 850px;
+    width: 650px;
+    border-radius: 50px;
+    box-sizing: border-box;
+    padding-top: 5px;
+}
+
+#titulo{
+    width: 80%;
+    height: 50px;
+    background: ;
+    border-radius: 50px;
+    box-sizing: border-box;
+    
+}
+
+#div_titulo{
+    width: 350px;
+    height: inherit;
+    background:yelow;
+    font-size: 40px;
+    text-align: center;
+}
+
+#inputs{
+    height: 700px;
+    border-bottom: solid 1px;
+    width: inherit;
+    margin-bottom: 8px;
+}
+
+.caixa_input{
+    width: inherit;
+    background: ;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+#linhaFormacao{
+    width: inherit;
+    background: ;
+    height: 80px;
+    margin-bottom: 5px;
+}
+
+.nome_input{
+    height: inherit;
+    width: 100px;
+    background: ;
+    float: left;
+    font-size: 19px;
+    text-align:center;
+    box-sizing: border-box;
+    padding-top: 4px;
+    margin-left: 150px;
+}
+
+#nome_input_formacao{
+    height: inherit;
+    width: 100px;
+    background: ;
+    float: left;
+    font-size: 19px;
+    text-align:center;
+    box-sizing: border-box;
+    padding-top: 25px;
+    margin-left: 150px;
+}
+
+.campo_input{
+    width: 250px;
+    background:;
+    height: inherit;
+    box-sizing: border-box;
+    padding-top: 4px;
+    float: left;
+}
+
+#input_formacao{
+    width: 250px;
+    background:;
+    height: inherit;
+    box-sizing: border-box;
+    padding-top: 4px;
+    float: left;
+}
+
+#btnCadastrar{
+  
+    background:;
+    height: 30px;
+    width:120px;
+    margin-left: auto;
+}
+
+#btnCadastro{
+    border-radius: 50px;
+    width: 100px;
+    height: 25px;
+}
+
+#txtFormacao{
+    height: 60px;
+    resize: none;
+}
