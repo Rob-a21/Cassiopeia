@@ -74,11 +74,11 @@ func main() {
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	http.HandleFunc("/", homeHandler.Home)
+	http.HandleFunc("/login", loginHandler.Login)
 	http.HandleFunc("/logout", logoutHandler.Logout)
 
 	// student handler
 	http.HandleFunc("/student/register", registrationHandler.StudentRegistration)
-	http.HandleFunc("/student/login", loginHandler.Login)
 	http.HandleFunc("/student/course", courseHandler.StudentCourse)
 	http.HandleFunc("/student/notification", notificationHandler.StudentGetNotification)
 	http.HandleFunc("/student/profiles", profileHandler.StudentsProfile)

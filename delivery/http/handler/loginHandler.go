@@ -1,11 +1,11 @@
 package handler
 
 import (
+	"html/template"
+	"net/http"
 
 	"github.com/Rob-a21/Cassiopeia/entity"
 	"github.com/Rob-a21/Cassiopeia/models"
-	"html/template"
-	"net/http"
 )
 
 type LoginHandler struct {
@@ -17,7 +17,7 @@ func NewLoginHandler(T *template.Template, PS models.ProfileService) *LoginHandl
 	return &LoginHandler{tmpl: T, loginService: PS}
 }
 
-func (srh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
+func (slh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodPost {
 
@@ -37,10 +37,10 @@ func (srh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 		adminUser.UserName = r.FormValue("username")
 		adminUser.Password = r.FormValue("password")
 
-		student, err := srh.loginService.Students()
-		family, err := srh.loginService.Families()
-		teacher, err := srh.loginService.Teachers()
-		admin, err := srh.loginService.Admins()
+		student, err := slh.loginService.Students()
+		family, err := slh.loginService.Families()
+		teacher, err := slh.loginService.Teachers()
+		admin, err := slh.loginService.Admins()
 
 		if err != nil {
 
@@ -54,7 +54,7 @@ func (srh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 			if uname.UserName == studentUser.UserName && pass.Password == studentUser.Password {
 
-				http.Redirect(w, r, "/student/profile", http.StatusSeeOther)
+				http.Redirect(w, r, "/student", http.StatusSeeOther)
 
 			} else {
 			}
@@ -67,7 +67,7 @@ func (srh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 			if uname.Username == familyUser.Username && pass.Password == familyUser.Password {
 
-				http.Redirect(w, r, "", http.StatusSeeOther)
+				http.Redirect(w, r, "/family", http.StatusSeeOther)
 			}
 		}
 
@@ -78,24 +78,24 @@ func (srh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 			if uname.UserName == teacherUser.UserName && pass.Password == teacherUser.Password {
 
-				http.Redirect(w, r, "teacher/profiles", http.StatusSeeOther)
+				http.Redirect(w, r, "/teacher", http.StatusSeeOther)
 			}
 		}
-			for a := range admin {
+		for a := range admin {
 
-				uname := admin[a]
-				pass := admin[a]
+			uname := admin[a]
+			pass := admin[a]
 
-				if uname.UserName == adminUser.UserName && pass.Password == adminUser.Password {
+			if uname.UserName == adminUser.UserName && pass.Password == adminUser.Password {
 
-					http.Redirect(w, r, "admin/profile", http.StatusSeeOther)
-				}
+				http.Redirect(w, r, "/admin", http.StatusSeeOther)
 			}
-
-		}else{
-
-			_ = srh.tmpl.ExecuteTemplate(w, "login.html", nil)
-
 		}
+
+	} else {
+
+		slh.tmpl.ExecuteTemplate(w, "login.html", nil)
 
 	}
+
+}

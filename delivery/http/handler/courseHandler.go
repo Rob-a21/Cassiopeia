@@ -237,6 +237,8 @@ func (crs *CourseHandler)ApiStudentGetCourse(w http.ResponseWriter,r *http.Reque
 func (crs *CourseHandler)ApiStudentGetCourses(w http.ResponseWriter,r *http.Request) {
 
 
+if r.Method == "GET"{
+
 	course := entity.Course{}
 
 	crs.crsService.GetCourse()
@@ -252,6 +254,8 @@ func (crs *CourseHandler)ApiStudentGetCourses(w http.ResponseWriter,r *http.Requ
 
 	w.Write(output)
 
+
+}
 	return
 }
 
