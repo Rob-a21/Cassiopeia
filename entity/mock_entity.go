@@ -10,5 +10,5 @@ var CourseMock = Course{
 
 var AttendanceMock = Attendance{
 	Date:time.Now(),
-	StudentId:1,
+	StudentID:1,
 }

@@ -21,9 +21,10 @@ type ProfileService interface {
 	EmailExists(email string) bool
 	DeleteStudent(id int) error
 	Families() ([]entity.Family, error)
+	Family(id int) (entity.Family, error)
 	Teachers() ([]entity.Teacher, error)
-	Teacher(id string) (entity.Teacher, error)
-	DeleteTeacher(id string) error
+	Teacher(id int) (entity.Teacher, error)
+	DeleteTeacher(id int) error
 	Admin(id int) (entity.Admin, error)
 	AdminByEmail(email string) (entity.Admin, error)
 	Admins() ([]entity.Admin, error)
@@ -41,9 +42,9 @@ type AssessmentService interface {
 	IsQualified(studentID int) (bool, error)
 }
 type StudentAttendanceService interface {
-	ShowAttendance() ([]entity.Attendance, error) //Categories
-	CheckAttendance(id int) (entity.Attendance, error) //Category
-	FillAttendance(attendance entity.Attendance) error //StoreStudent
+	ShowAttendance() ([]entity.Attendance, error)
+	CheckAttendance(id int) (entity.Attendance, error)
+	FillAttendance(attendance entity.Attendance) error
 }
 
 type CourseService interface {

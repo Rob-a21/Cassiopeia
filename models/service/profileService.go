@@ -73,7 +73,7 @@ func (ts *ProfileServiceImpl) Teachers() ([]entity.Teacher, error) {
 
 }
 
-func (ss *ProfileServiceImpl) Teacher(id string) (entity.Teacher, error) {
+func (ss *ProfileServiceImpl) Teacher(id int) (entity.Teacher, error) {
 
 	teacher, err := ss.profileRepository.Teacher(id)
 
@@ -82,6 +82,17 @@ func (ss *ProfileServiceImpl) Teacher(id string) (entity.Teacher, error) {
 	}
 
 	return teacher, nil
+}
+
+func (ss *ProfileServiceImpl) Family(id int) (entity.Family, error) {
+
+	family, err := ss.profileRepository.Family(id)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return family, nil
 }
 
 func (ss *ProfileServiceImpl) Admin(id int) (entity.Admin, error) {
@@ -128,7 +139,7 @@ func (prf *ProfileServiceImpl) DeleteStudent(id int) error {
 	return nil
 }
 
-func (prf *ProfileServiceImpl) DeleteTeacher(id string) error {
+func (prf *ProfileServiceImpl) DeleteTeacher(id int) error {
 
 	err := prf.profileRepository.DeleteTeacher(id)
 	if err != nil {

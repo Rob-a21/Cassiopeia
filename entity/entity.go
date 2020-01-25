@@ -11,24 +11,30 @@ type Admin struct {
 	Image     string
 
 }
-
-type Assessment struct {
-	Value     int    `json:"value"`
-	SubjectID int     `json:"subjectid"`
-	StudentID int      `json:"studentid"`
-	Grade     string    `json:"grade"`
+//Student struct for data caching
+type Student struct {
+	UserName  string
+	Password  string
+	FirstName string
+	LastName  string
+	ID        int
+	Email     string
+	Grade     int
+	Image     string
 }
 
 
-type Attendance struct {
-	Date      time.Time `json:"date"`
-	StudentId int        `json:"studentid"`
-}
 
-type Course struct {
-	CourseName  string  `json:"name""`
-	CourseID    int      `json:"id"`
-	Grade int             `json:"grade"`
+//Teacher struct for data caching
+type Teacher struct {
+	UserName  string
+	Password  string
+	Phone     string
+	Email     string
+	FirstName string
+	LastName  string
+	TeacherID int
+	Image     string
 }
 
 
@@ -38,10 +44,31 @@ type Family struct {
 	LastName  string
 	Username string
 	Password  string
+	FamilyID        int
 	Phone     string
 	Email     string
 	Image    string
 }
+type Assessment struct {
+	Value     int    `json:"value"`
+	SubjectID int     `json:"subjectid"`
+	StudentID int      `json:"studentid"`
+	Grade     int    `json:"grade"`
+}
+
+
+type Attendance struct {
+	Date      time.Time `json:"date"`
+	StudentID int        `json:"studentid"`
+}
+
+type Course struct {
+	CourseName  string  `json:"name""`
+	CourseID    int      `json:"id"`
+	Grade int             `json:"grade"`
+}
+
+
 
 
 
@@ -63,27 +90,4 @@ type Session struct {
 	SigningKey []byte `"signinkey"`
 }
 
-//Student struct for data caching
-type Student struct {
-	UserName  string
-	Password  string
-	FirstName string
-	LastName  string
-	ID        int
-	Email     string
-	Image     string
-}
 
-
-
-//Teacher struct for data caching
-type Teacher struct {
-	UserName  string
-	Password  string
-	Phone     string
-	Email     string
-	FirstName string
-	LastName  string
-	TeacherID string
-	Image     string
-}

@@ -27,7 +27,7 @@ func (pr *PsqlProfileRepositoryImpl) Students() ([]entity.Student, error) {
 
 	for rows.Next() {
 		student := entity.Student{}
-		err = rows.Scan(&student.UserName, &student.Password, &student.FirstName, &student.LastName, &student.ID, &student.Email, &student.Image)
+		err = rows.Scan(&student.UserName, &student.Password, &student.FirstName, &student.LastName, &student.ID, &student.Email,&student.Grade, &student.Image)
 		if err != nil {
 			return nil, err
 		}
@@ -37,19 +37,6 @@ func (pr *PsqlProfileRepositoryImpl) Students() ([]entity.Student, error) {
 	return students, err
 }
 
-func (pr *PsqlProfileRepositoryImpl) Student(id int) (entity.Student, error) {
-
-	row := pr.conn.QueryRow("SELECT * FROM student WHERE id = $1", id)
-
-	student := entity.Student{}
-
-	err := row.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Email, &student.Image)
-	if err != nil {
-		return student, err
-	}
-
-	return student, nil
-}
 
 func (pr *PsqlProfileRepositoryImpl) EmailExists(email string) bool {
 	row := pr.conn.QueryRow("SELECT * FROM student WHERE email = $1", email)
@@ -76,7 +63,7 @@ func (pr *PsqlProfileRepositoryImpl) Families() ([]entity.Family, error) {
 	var families = []entity.Family{}
 	for rows.Next() {
 		family := entity.Family{}
-		err = rows.Scan(&family.FirstName, &family.LastName, &family.Password, &family.Phone, &family.Phone, &family.Image)
+		err = rows.Scan(&family.FirstName, &family.LastName, &family.Password,&family.FamilyID, &family.Phone, &family.Phone, &family.Image)
 		if err != nil {
 			return nil, err
 		}
@@ -108,7 +95,21 @@ func (pr *PsqlProfileRepositoryImpl) Teachers() ([]entity.Teacher, error) {
 	return teachers, err
 }
 
-func (pr *PsqlProfileRepositoryImpl) Teacher(id string) (entity.Teacher, error) {
+func (pr *PsqlProfileRepositoryImpl) Student(id int) (entity.Student, error) {
+
+	row := pr.conn.QueryRow("SELECT * FROM student WHERE id = $1", id)
+
+	student := entity.Student{}
+
+	err := row.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Email,&student.Grade, &student.Image)
+	if err != nil {
+		return student, err
+	}
+
+	return student, nil
+}
+
+func (pr *PsqlProfileRepositoryImpl) Teacher(id int) (entity.Teacher, error) {
 
 	row := pr.conn.QueryRow("SELECT * FROM teacher WHERE id = $1", id)
 
@@ -120,6 +121,20 @@ func (pr *PsqlProfileRepositoryImpl) Teacher(id string) (entity.Teacher, error) 
 	}
 
 	return teacher, nil
+}
+
+func (pr *PsqlProfileRepositoryImpl) Family(id int) (entity.Family, error) {
+
+	row := pr.conn.QueryRow("SELECT * FROM teacher WHERE id = $1", id)
+
+	family := entity.Family{}
+	err := row.Scan(&family.FirstName, &family.LastName, &family.Password,&family.FamilyID, &family.Phone, &family.Phone, &family.Image)
+	if err != nil {
+
+		return family, err
+	}
+
+	return family, nil
 }
 
 func (pr *PsqlProfileRepositoryImpl) Admin(id int) (entity.Admin, error) {
@@ -182,7 +197,7 @@ func (pr *PsqlProfileRepositoryImpl) DeleteStudent(id int) error {
 	return nil
 }
 
-func (pr *PsqlProfileRepositoryImpl) DeleteTeacher(id string) error {
+func (pr *PsqlProfileRepositoryImpl) DeleteTeacher(id int) error {
 
 	_, err := pr.conn.Exec("DELETE FROM teacher WHERE id=$1", id)
 	if err != nil {

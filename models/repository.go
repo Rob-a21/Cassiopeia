@@ -21,9 +21,10 @@ type ProfileRepository interface {
 	EmailExists(email string) bool
 	DeleteStudent(id int) error
 	Families() ([]entity.Family, error)
+	Family(id int) (entity.Family, error)
 	Teachers() ([]entity.Teacher, error)
-	Teacher(id string) (entity.Teacher, error)
-	DeleteTeacher(id string) error
+	Teacher(id int) (entity.Teacher, error)
+	DeleteTeacher(id int) error
 	Admin(id int) (entity.Admin, error)
 	AdminByEmail(email string) (entity.Admin, error)
 	Admins() ([]entity.Admin, error)

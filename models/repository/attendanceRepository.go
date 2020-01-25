@@ -27,7 +27,7 @@ func (att *StudentAttendanceRepositoryImpl) ShowAttendance() ([]entity.Attendanc
 
 	for rows.Next() {
 		attendance := entity.Attendance{}
-		err = rows.Scan(&attendance.StudentId, &attendance.Date)
+		err = rows.Scan(&attendance.StudentID, &attendance.Date)
 		if err != nil {
 			return nil, err
 		}
@@ -43,7 +43,7 @@ func (att *StudentAttendanceRepositoryImpl) CheckAttendance(id int) (entity.Atte
 
 	c := entity.Attendance{}
 
-	err := row.Scan(&c.StudentId, &c.Date)
+	err := row.Scan(&c.StudentID, &c.Date)
 	if err != nil {
 		return c, err
 	}
@@ -53,7 +53,7 @@ func (att *StudentAttendanceRepositoryImpl) CheckAttendance(id int) (entity.Atte
 
 func (att *StudentAttendanceRepositoryImpl) FillAttendance(attendance entity.Attendance) error {
 
-	_, err := att.conn.Exec("INSERT INTO attendance (date,id) values($1, $2)", time.Now(),attendance.StudentId)
+	_, err := att.conn.Exec("INSERT INTO attendance (date,id) values($1, $2)", time.Now(),attendance.StudentID)
 	if err != nil {
 		return errors.New("Insertion has failed")
 	}
