@@ -21,6 +21,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">ID</th>
                 <th scope="col">Email</th>
+                <th scope="col">Grade</th>
                 <th scope="col">Image</th>
 
 
@@ -36,6 +37,8 @@
                     <td> {{ .LastName }} </td>
                     <td> {{ .ID }} </td>
                     <td> {{ .Email }} </td>
+                    <td> {{ .Grade }} </td>
+
 
                     <td> <img src="../assets/img/{{ .Image }}" width="70rem" height="70rem" /> </td>
                     <td> <a href="/admin/student/delete?id={{ .ID }}">dismiss</a> </td>

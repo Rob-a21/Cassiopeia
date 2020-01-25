@@ -45,9 +45,10 @@ func (as *AssessmentHandler) UpdateGrade(w http.ResponseWriter, r *http.Request)
 
 		assessment := entity.Assessment{}
 		assessment.Value,_ = strconv.Atoi(r.FormValue("value"))
-		assessment.Grade = r.FormValue("grade")
 		assessment.SubjectID,_ = strconv.Atoi(r.FormValue("subjectid"))
 		assessment.StudentID,_ =  strconv.Atoi(r.FormValue("studentid"))
+		assessment.Grade,_ = strconv.Atoi(r.FormValue("grade"))
+
 
 		err := as.assService.UpdateGrade(assessment)
 
@@ -105,9 +106,10 @@ func (as *AssessmentHandler) StoreGrade(w http.ResponseWriter, r *http.Request) 
 
 		assessment := entity.Assessment{}
 		assessment.Value,_ = strconv.Atoi(r.FormValue("value"))
-		assessment.Grade = r.FormValue("grade")
 		assessment.SubjectID,_= strconv.Atoi(r.FormValue("subjectid"))
 		assessment.StudentID,_ = strconv.Atoi(r.FormValue("studentid"))
+		assessment.Grade,_ = strconv.Atoi(r.FormValue("grade"))
+
 
 		err := as.assService.StoreGrade(assessment)
 
@@ -115,7 +117,7 @@ func (as *AssessmentHandler) StoreGrade(w http.ResponseWriter, r *http.Request) 
 			panic(err)
 		}
 
-		_ = as.tmpl.ExecuteTemplate(w, "teacher.grade.new.layout", nil)
+		_ = as.tmpl.ExecuteTemplate(w, "teacher.assessment.new.layout", nil)
 
 	}
 

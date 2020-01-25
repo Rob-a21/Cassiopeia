@@ -15,46 +15,46 @@ import (
 	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
-
-func TestAdminCourse(t *testing.T) {
-
-	tmpl := template.Must(template.ParseGlob("../web/templates/*"))
-
-	courseRepo := repository.NewPsqlCourseRepositoryImpl(nil)
-	courseServ := service.NewCourseServiceImpl(courseRepo)
-
-	adminCourseHandler := handler.NewCourseHandler(tmpl,courseServ)
-
-	mux := http.NewServeMux()
-	mux.HandleFunc("/admin/course", adminCourseHandler.ApiAdminGetCourses)
-	ts := httptest.NewTLSServer(mux)
-	defer ts.Close()
-
-	tc := ts.Client()
-	url := ts.URL
-
-	resp, err := tc.Get(url + "/admin/course")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if resp.StatusCode != http.StatusOK {
-		t.Errorf("want %d, got %d", http.StatusOK, resp.StatusCode)
-	}
-
-	defer resp.Body.Close()
-
-	body, err := ioutil.ReadAll(resp.Body)
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if !bytes.Contains(body, []byte("Mock course 01")) {
-		t.Errorf("want body to contain %q", body)
-	}
-
-}
+//
+//func TestAdminCourse(t *testing.T) {
+//
+//	tmpl := template.Must(template.ParseGlob("../web/templates/*"))
+//
+//	courseRepo := repository.NewPsqlCourseRepositoryImpl(nil)
+//	courseServ := service.NewCourseServiceImpl(courseRepo)
+//
+//	adminCourseHandler := handler.NewCourseHandler(tmpl,courseServ)
+//
+//	mux := http.NewServeMux()
+//	mux.HandleFunc("/admin/course", adminCourseHandler.ApiAdminGetCourses)
+//	ts := httptest.NewTLSServer(mux)
+//	defer ts.Close()
+//
+//	tc := ts.Client()
+//	url := ts.URL
+//
+//	resp, err := tc.Get(url + "/admin/course")
+//	if err != nil {
+//		t.Fatal(err)
+//	}
+//
+//	if resp.StatusCode != http.StatusOK {
+//		t.Errorf("want %d, got %d", http.StatusOK, resp.StatusCode)
+//	}
+//
+//	defer resp.Body.Close()
+//
+//	body, err := ioutil.ReadAll(resp.Body)
+//
+//	if err != nil {
+//		t.Fatal(err)
+//	}
+//
+//	if !bytes.Contains(body, []byte("Mock course 01")) {
+//		t.Errorf("want body to contain %q", body)
+//	}
+//
+//}
 
 func TestAdminAddCourse(t *testing.T) {
 

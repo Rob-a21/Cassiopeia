@@ -74,11 +74,19 @@ func main() {
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	http.HandleFunc("/", homeHandler.Home)
-	http.HandleFunc("/login", loginHandler.Login)
+	http.HandleFunc("/admin", homeHandler.Admin)
+	http.HandleFunc("/student", homeHandler.Student)
+	http.HandleFunc("/teacher", homeHandler.Teacher)
+	http.HandleFunc("/family", homeHandler.Family)
+
+	http.HandleFunc("/admin/login", loginHandler.AdminLogin)
+	http.HandleFunc("/student/login", loginHandler.StudentLogin)
+	http.HandleFunc("/teacher/login", loginHandler.TeacherLogin)
+	http.HandleFunc("/family/login", loginHandler.FamilyLogin)
+
 	http.HandleFunc("/logout", logoutHandler.Logout)
 
 	// student handler
-	http.HandleFunc("/student/register", registrationHandler.StudentRegistration)
 	http.HandleFunc("/student/course", courseHandler.StudentCourse)
 	http.HandleFunc("/student/notification", notificationHandler.StudentGetNotification)
 	http.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
@@ -89,21 +97,22 @@ func main() {
 
 	// family handler
 
-	http.HandleFunc("/family/register", registrationHandler.FamilyRegistration)
 
 	// teacher handler
 
-	http.HandleFunc("/teacher/register", registrationHandler.TeacherRegistration)
 	http.HandleFunc("/teacher/profile", profileHandler.TeacherProfile)
 	http.HandleFunc("/teacher/notification", notificationHandler.TeacherAddNotification)
-	http.HandleFunc("/teacher/grade/new", assessmentHandler.StoreGrade)
-	http.HandleFunc("/teacher/grade/update", assessmentHandler.UpdateGrade)
-	http.HandleFunc("/teacher/grade/delete", assessmentHandler.DeleteGrade)
-	http.HandleFunc("/teacher/grade/deletes", assessmentHandler.DeleteGrades)
+	http.HandleFunc("/teacher/assessment/new", assessmentHandler.StoreGrade)
+	http.HandleFunc("/teacher/assessment/update", assessmentHandler.UpdateGrade)
+	http.HandleFunc("/teacher/assessment/delete", assessmentHandler.DeleteGrade)
+	http.HandleFunc("/teacher/assessment/deletes", assessmentHandler.DeleteGrades)
 
 	// admin handler
 
-	http.HandleFunc("/admin/register", registrationHandler.AdminRegistration)
+	http.HandleFunc("/admin/register/admin", registrationHandler.AdminRegistration)
+	http.HandleFunc("/admin/register/student", registrationHandler.StudentRegistration)
+	http.HandleFunc("/admin/register/teacher", registrationHandler.TeacherRegistration)
+	http.HandleFunc("/admin/register/family", registrationHandler.FamilyRegistration)
 	http.HandleFunc("/admin/profile", profileHandler.AdminProfile)
 	http.HandleFunc("/admin/student", profileHandler.AdminGetStudent)
 	http.HandleFunc("/admin/student/delete", profileHandler.AdminDeleteStudent)

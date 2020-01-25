@@ -52,6 +52,83 @@ func (prf *ProfileHandler) StudentProfile(w http.ResponseWriter, r *http.Request
 
 }
 
+
+func (prf *ProfileHandler) TeachersProfile(w http.ResponseWriter, r *http.Request) {
+
+	teacher, err := prf.profileService.Teachers()
+	if err != nil {
+		panic(err)
+	}
+	prf.tmpl.ExecuteTemplate(w, "teacher.index.layout", teacher)
+
+}
+
+
+func (prf *ProfileHandler) TeacherProfile(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == http.MethodGet {
+
+		idRaw := r.URL.Query().Get("id")
+
+		id, err := strconv.Atoi(idRaw)
+
+		if err != nil {
+
+			panic(err)
+		}
+
+		student, err := prf.profileService.Teacher(id)
+
+		if err != nil {
+			panic(err)
+		}
+
+		prf.tmpl.ExecuteTemplate(w, "teacher.index.html", student)
+
+	}
+}
+func (prf *ProfileHandler) AdminProfile(w http.ResponseWriter, r *http.Request) {
+
+	admin, err := prf.profileService.Admins()
+	if err != nil {
+		panic(err)
+	}
+	prf.tmpl.ExecuteTemplate(w, "admin.index.layout", admin)
+
+}
+
+func (prf *ProfileHandler) FamiliesProfile(w http.ResponseWriter, r *http.Request) {
+
+	family, err := prf.profileService.Families()
+	if err != nil {
+		panic(err)
+	}
+	prf.tmpl.ExecuteTemplate(w, "family.index.layout", family)
+
+}
+func (prf *ProfileHandler) FamilyProfile(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == http.MethodGet {
+
+		idRaw := r.URL.Query().Get("id")
+
+		id, err := strconv.Atoi(idRaw)
+
+		if err != nil {
+
+			panic(err)
+		}
+
+		student, err := prf.profileService.Family(id)
+
+		if err != nil {
+			panic(err)
+		}
+
+		prf.tmpl.ExecuteTemplate(w, "teacher.index.html", student)
+
+	}
+}
 func (prf *ProfileHandler) EmailExists(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodGet {
@@ -66,24 +143,6 @@ func (prf *ProfileHandler) EmailExists(w http.ResponseWriter, r *http.Request) {
 }
 
 
-func (prf *ProfileHandler) TeacherProfile(w http.ResponseWriter, r *http.Request) {
-
-	teacher, err := prf.profileService.Teachers()
-	if err != nil {
-		panic(err)
-	}
-	prf.tmpl.ExecuteTemplate(w, "teacher.index.layout", teacher)
-
-}
-func (prf *ProfileHandler) AdminProfile(w http.ResponseWriter, r *http.Request) {
-
-	admin, err := prf.profileService.Admins()
-	if err != nil {
-		panic(err)
-	}
-	prf.tmpl.ExecuteTemplate(w, "admin.index.layout", admin)
-
-}
 func (prf *ProfileHandler) AdminGetStudent(w http.ResponseWriter, r *http.Request) {
 
 	students, err := prf.profileService.Students()
@@ -133,13 +192,13 @@ func (prf *ProfileHandler) AdminDeleteTeacher(w http.ResponseWriter, r *http.Req
 
 	if r.Method == http.MethodGet {
 
-		id := r.URL.Query().Get("id")
+		idRaw := r.URL.Query().Get("id")
 
-		//id, err := strconv.Atoi(idRaw)
+		id, err := strconv.Atoi(idRaw)
 
-		//if err != nil {
-		//	panic(err)
-		//}
+		if err != nil {
+			panic(err)
+		}
 
 		prf.profileService.DeleteTeacher(id)
 

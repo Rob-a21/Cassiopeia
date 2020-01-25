@@ -17,7 +17,7 @@ func NewLoginHandler(T *template.Template, PS models.ProfileService) *LoginHandl
 	return &LoginHandler{tmpl: T, loginService: PS}
 }
 
-func (slh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
+func (slh *LoginHandler) StudentLogin(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodPost {
 
@@ -25,22 +25,8 @@ func (slh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 		studentUser.UserName = r.FormValue("username")
 		studentUser.Password = r.FormValue("password")
 
-		familyUser := entity.Family{}
-		familyUser.Username = r.FormValue("username")
-		familyUser.Password = r.FormValue("password")
-
-		teacherUser := entity.Teacher{}
-		teacherUser.UserName = r.FormValue("username")
-		teacherUser.Password = r.FormValue("password")
-
-		adminUser := entity.Admin{}
-		adminUser.UserName = r.FormValue("username")
-		adminUser.Password = r.FormValue("password")
-
 		student, err := slh.loginService.Students()
-		family, err := slh.loginService.Families()
-		teacher, err := slh.loginService.Teachers()
-		admin, err := slh.loginService.Admins()
+
 
 		if err != nil {
 
@@ -60,26 +46,30 @@ func (slh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		for f := range family {
+	} else {
 
-			uname := family[f]
-			pass := family[f]
+		slh.tmpl.ExecuteTemplate(w, "student.login.html", nil)
 
-			if uname.Username == familyUser.Username && pass.Password == familyUser.Password {
+	}
 
-				http.Redirect(w, r, "/family", http.StatusSeeOther)
-			}
-		}
+}
 
-		for t := range teacher {
 
-			uname := teacher[t]
-			pass := teacher[t]
+func (slh *LoginHandler) AdminLogin(w http.ResponseWriter, r *http.Request) {
 
-			if uname.UserName == teacherUser.UserName && pass.Password == teacherUser.Password {
+	if r.Method == http.MethodPost {
 
-				http.Redirect(w, r, "/teacher", http.StatusSeeOther)
-			}
+
+		adminUser := entity.Admin{}
+		adminUser.UserName = r.FormValue("username")
+		adminUser.Password = r.FormValue("password")
+
+
+		admin, err := slh.loginService.Admins()
+
+
+		if err != nil{
+			return
 		}
 		for a := range admin {
 
@@ -94,7 +84,76 @@ func (slh *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		slh.tmpl.ExecuteTemplate(w, "login.html", nil)
+		slh.tmpl.ExecuteTemplate(w, "admin.login.html", nil)
+
+	}
+
+}
+
+
+func (slh *LoginHandler) TeacherLogin(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == http.MethodPost {
+
+		teacherUser := entity.Teacher{}
+		teacherUser.UserName = r.FormValue("username")
+		teacherUser.Password = r.FormValue("password")
+
+		teacher, err := slh.loginService.Teachers()
+
+		if err != nil{
+			return
+		}
+
+		for t := range teacher {
+
+			uname := teacher[t]
+			pass := teacher[t]
+
+			if uname.UserName == teacherUser.UserName && pass.Password == teacherUser.Password {
+
+				http.Redirect(w, r, "/teacher", http.StatusSeeOther)
+			}
+		}
+
+	} else {
+
+		slh.tmpl.ExecuteTemplate(w, "teacher.login.html", nil)
+
+	}
+
+}
+
+
+func (slh *LoginHandler) FamilyLogin(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == http.MethodPost {
+
+		familyUser := entity.Family{}
+		familyUser.Username = r.FormValue("username")
+		familyUser.Password = r.FormValue("password")
+
+		family, err := slh.loginService.Families()
+
+		if err != nil{
+			return
+		}
+
+		for f := range family {
+
+			uname := family[f]
+			pass := family[f]
+
+			if uname.Username == familyUser.Username && pass.Password == familyUser.Password {
+
+				http.Redirect(w, r, "/family", http.StatusSeeOther)
+			}
+		}
+
+
+	} else {
+
+		slh.tmpl.ExecuteTemplate(w, "family.login.html", nil)
 
 	}
 

@@ -27,7 +27,7 @@ func (at *AttendanceHandler) FillStudentAttendance(w http.ResponseWriter, r *htt
 
 		attendance := entity.Attendance{}
 		attendance.Date = time.Now()
-		attendance.StudentId,_ = strconv.Atoi(r.FormValue("studentid"))
+		attendance.StudentID,_ = strconv.Atoi(r.FormValue("studentid"))
 
 		_ = at.attendanceService.FillAttendance(attendance)
 

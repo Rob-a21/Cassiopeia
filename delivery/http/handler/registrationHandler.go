@@ -64,6 +64,7 @@ func (srh *RegistrationHandler) StudentRegistration(w http.ResponseWriter, r *ht
 		student.FirstName = r.FormValue("fname")
 		student.LastName = r.FormValue("lname")
 		student.ID, _ = strconv.Atoi(r.FormValue("id"))
+		student.Grade, _ = strconv.Atoi(r.FormValue("grade"))
 		student.Email = r.FormValue("email")
 
 		mf, fh, err := r.FormFile("catimg")
@@ -82,11 +83,11 @@ func (srh *RegistrationHandler) StudentRegistration(w http.ResponseWriter, r *ht
 			panic(err)
 		}
 
-		http.Redirect(w, r, "/student/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/admin/register/student", http.StatusSeeOther)
 
 	} else {
 
-		srh.tmpl.ExecuteTemplate(w, "student.registration.html", nil)
+		srh.tmpl.ExecuteTemplate(w, "admin.register.student.layout", nil)
 
 	}
 
@@ -195,7 +196,7 @@ func (srh *RegistrationHandler) StudentRegistration(w http.ResponseWriter, r *ht
 	//
 	//} else {
 	//
-	//	srh.tmpl.ExecuteTemplate(w, "student.registration.html", nil)
+	//	srh.tmpl.ExecuteTemplate(w, "admin.register.student.html", nil)
 	//
 	//}
 }
@@ -208,7 +209,9 @@ func (srh *RegistrationHandler) FamilyRegistration(w http.ResponseWriter, r *htt
 		family := entity.Family{}
 		family.FirstName = r.FormValue("fname")
 		family.LastName = r.FormValue("lname")
+		family.Username = r.FormValue("username")
 		family.Password = r.FormValue("password")
+		family.FamilyID,_ = strconv.Atoi(r.FormValue("familyid"))
 		family.Phone = r.FormValue("phone")
 		family.Email = r.FormValue("email")
 
@@ -228,11 +231,11 @@ func (srh *RegistrationHandler) FamilyRegistration(w http.ResponseWriter, r *htt
 			panic(err)
 		}
 
-		http.Redirect(w, r, "/family/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/admin/register/family", http.StatusSeeOther)
 
 	} else {
 
-		srh.tmpl.ExecuteTemplate(w, "family.registration.html", nil)
+		srh.tmpl.ExecuteTemplate(w, "admin.register.family.layout", nil)
 
 	}
 }
@@ -248,7 +251,7 @@ func (srh *RegistrationHandler) TeacherRegistration(w http.ResponseWriter, r *ht
 		teacher.Email = r.FormValue("email")
 		teacher.FirstName = r.FormValue("fname")
 		teacher.LastName = r.FormValue("lname")
-		teacher.TeacherID = r.FormValue("id")
+		teacher.TeacherID,_ = strconv.Atoi(r.FormValue("teacherid"))
 
 		mf, fh, err := r.FormFile("catimg")
 		if err != nil {
@@ -266,11 +269,11 @@ func (srh *RegistrationHandler) TeacherRegistration(w http.ResponseWriter, r *ht
 			panic(err)
 		}
 
-		http.Redirect(w, r, "/teacher/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/admin/register/teacher", http.StatusSeeOther)
 
 	} else {
 
-		srh.tmpl.ExecuteTemplate(w, "teacher.registration.html", nil)
+		srh.tmpl.ExecuteTemplate(w, "admin.register.teacher.layout", nil)
 
 	}
 }
@@ -302,11 +305,11 @@ func (srh *RegistrationHandler) AdminRegistration(w http.ResponseWriter, r *http
 			panic(err)
 		}
 
-		http.Redirect(w, r, "/admin/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/admin/register/admin", http.StatusSeeOther)
 
 	} else {
 
-		srh.tmpl.ExecuteTemplate(w, "admin.registration.html", nil)
+		srh.tmpl.ExecuteTemplate(w, "admin.register.admin.layout", nil)
 
 	}
 }
