@@ -1,16 +1,14 @@
-{{ define "admin.view.teacher.layout" }}
-
-    {{ template "admin.navbar" . }}
-    {{ template "admin.view.teacher.content" . }}
-    {{ template "admin.footer" . }}
-    
+{{ define "student.profile.layout" }}
+    {{ template "student.navbar" . }}
+    {{ template "student.profile.content" . }}
+    {{ template "student.footer" . }}
 {{ end }}
 
-{{ define "admin.view.teacher.content"}}
+{{ define "student.profile.content"}}
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h2>Teachers</h2>
+            <h2>students</h2>
         </div>
 
 
@@ -21,8 +19,9 @@
                 <th scope="col">UserName</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
+                <th scope="col">ID</th>
                 <th scope="col">Email</th>
-                <th scope="col">TeacherID</th>
+                <th scope="col">Grade</th>
                 <th scope="col">Image</th>
 
 
@@ -36,12 +35,12 @@
                     <td> {{ .UserName }} </td>
                     <td> {{ .FirstName }} </td>
                     <td> {{ .LastName }} </td>
+                    <td> {{ .ID }} </td>
                     <td> {{ .Email }} </td>
-                    <td> {{ .TeacherID }} </td>
+                    <td> {{ .Grade }} </td>
 
 
                     <td> <img src="../assets/img/{{ .Image }}" width="70rem" height="70rem" /> </td>
-                    <td> <a href="/admin/teacher/delete?id={{ .TeacherID }}">dismiss</a> </td>
 
                 </tr>
             {{ end }}

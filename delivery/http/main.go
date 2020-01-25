@@ -89,7 +89,7 @@ func main() {
 	// student handler
 	http.HandleFunc("/student/course", courseHandler.StudentCourse)
 	http.HandleFunc("/student/notification", notificationHandler.StudentGetNotification)
-	http.HandleFunc("/student/profiles", profileHandler.StudentsProfile)
+	http.HandleFunc("/student/profile", profileHandler.StudentProfile)
 	http.HandleFunc("/student/attendance/new", attendanceHandler.FillStudentAttendance)
 	http.HandleFunc("/student/attendance/show", attendanceHandler.ShowStudentsAttendance)
 	http.HandleFunc("/student/attendance/check", attendanceHandler.CheckStudentAttendance)

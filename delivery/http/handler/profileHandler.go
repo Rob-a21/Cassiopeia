@@ -23,7 +23,7 @@ func (prf *ProfileHandler) StudentsProfile(w http.ResponseWriter, r *http.Reques
 	if err != nil {
 		panic(err)
 	}
-	prf.tmpl.ExecuteTemplate(w, "student.index.layout", students)
+	prf.tmpl.ExecuteTemplate(w, "student.profile.layout", students)
 
 }
 
@@ -46,7 +46,7 @@ func (prf *ProfileHandler) StudentProfile(w http.ResponseWriter, r *http.Request
 			panic(err)
 		}
 
-		prf.tmpl.ExecuteTemplate(w, "student.index.html", student)
+		prf.tmpl.ExecuteTemplate(w, "student.profile.layout", student)
 
 	}
 
@@ -59,7 +59,7 @@ func (prf *ProfileHandler) TeachersProfile(w http.ResponseWriter, r *http.Reques
 	if err != nil {
 		panic(err)
 	}
-	prf.tmpl.ExecuteTemplate(w, "teacher.index.layout", teacher)
+	prf.tmpl.ExecuteTemplate(w, "teacher.profile.layout", teacher)
 
 }
 
@@ -77,13 +77,13 @@ func (prf *ProfileHandler) TeacherProfile(w http.ResponseWriter, r *http.Request
 			panic(err)
 		}
 
-		student, err := prf.profileService.Teacher(id)
+		teacher, err := prf.profileService.Teacher(id)
 
 		if err != nil {
 			panic(err)
 		}
 
-		prf.tmpl.ExecuteTemplate(w, "teacher.index.html", student)
+		prf.tmpl.ExecuteTemplate(w, "teacher.profile.layout", teacher)
 
 	}
 }
@@ -93,7 +93,7 @@ func (prf *ProfileHandler) AdminProfile(w http.ResponseWriter, r *http.Request) 
 	if err != nil {
 		panic(err)
 	}
-	prf.tmpl.ExecuteTemplate(w, "admin.index.layout", admin)
+	prf.tmpl.ExecuteTemplate(w, "admin.profile.layout", admin)
 
 }
 
@@ -103,7 +103,7 @@ func (prf *ProfileHandler) FamiliesProfile(w http.ResponseWriter, r *http.Reques
 	if err != nil {
 		panic(err)
 	}
-	prf.tmpl.ExecuteTemplate(w, "family.index.layout", family)
+	prf.tmpl.ExecuteTemplate(w, "family.profile.layout", family)
 
 }
 func (prf *ProfileHandler) FamilyProfile(w http.ResponseWriter, r *http.Request) {
@@ -125,7 +125,7 @@ func (prf *ProfileHandler) FamilyProfile(w http.ResponseWriter, r *http.Request)
 			panic(err)
 		}
 
-		prf.tmpl.ExecuteTemplate(w, "teacher.index.html", student)
+		prf.tmpl.ExecuteTemplate(w, "family.profile.html", student)
 
 	}
 }
@@ -150,7 +150,7 @@ func (prf *ProfileHandler) AdminGetStudent(w http.ResponseWriter, r *http.Reques
 		panic(err)
 	}
 
-	prf.tmpl.ExecuteTemplate(w, "admin.viewstudent.layout", students)
+	prf.tmpl.ExecuteTemplate(w, "admin.view.student.layout", students)
 
 }
 
@@ -184,7 +184,7 @@ func (prf *ProfileHandler) AdminGetTeacher(w http.ResponseWriter, r *http.Reques
 		panic(err)
 	}
 
-	prf.tmpl.ExecuteTemplate(w, "admin.viewteacher.layout", teachers)
+	prf.tmpl.ExecuteTemplate(w, "admin.view.teacher.layout", teachers)
 
 }
 
