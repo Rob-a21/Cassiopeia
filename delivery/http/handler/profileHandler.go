@@ -86,6 +86,9 @@ func (prf *ProfileHandler) TeacherProfile(w http.ResponseWriter, r *http.Request
 		prf.tmpl.ExecuteTemplate(w, "teacher.profile.layout", teacher)
 
 	}
+
+	//prf.tmpl.ExecuteTemplate(w, "teacher.profile.form.layout", nil)
+
 }
 func (prf *ProfileHandler) AdminProfile(w http.ResponseWriter, r *http.Request) {
 

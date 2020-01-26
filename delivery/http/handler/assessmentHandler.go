@@ -30,7 +30,7 @@ func (as *AssessmentHandler) AssessmentsOfOneGrade(w http.ResponseWriter, r *htt
 			panic(err)
 		}
 
-		_ = as.tmpl.ExecuteTemplate(w, "teacher.grade.layout", assess)
+		_ = as.tmpl.ExecuteTemplate(w, "teacher.assessment.layout", assess)
 
 	}
 
@@ -56,9 +56,10 @@ func (as *AssessmentHandler) UpdateGrade(w http.ResponseWriter, r *http.Request)
 			panic(err)
 		}
 
-		_ = as.tmpl.ExecuteTemplate(w, "admin.grade.update.layout", nil)
 
 	}
+	_ = as.tmpl.ExecuteTemplate(w, "admin.grade.update.layout", nil)
+
 
 }
 
@@ -75,9 +76,10 @@ func (as *AssessmentHandler) DeleteGrade(w http.ResponseWriter, r *http.Request)
 			panic(err)
 		}
 
-		_ = as.tmpl.ExecuteTemplate(w, "admin.grade.layout", nil)
 
 	}
+	_ = as.tmpl.ExecuteTemplate(w, "admin.grade.layout", nil)
+
 
 }
 
@@ -93,9 +95,10 @@ func (as *AssessmentHandler) DeleteGrades(w http.ResponseWriter, r *http.Request
 			panic(err)
 		}
 
-		_ = as.tmpl.ExecuteTemplate(w, "admin.grade.layout", nil)
 
 	}
+	_ = as.tmpl.ExecuteTemplate(w, "admin.grade.layout", nil)
+
 
 }
 
@@ -117,9 +120,10 @@ func (as *AssessmentHandler) StoreGrade(w http.ResponseWriter, r *http.Request) 
 			panic(err)
 		}
 
-		_ = as.tmpl.ExecuteTemplate(w, "teacher.assessment.new.layout", nil)
 
 	}
+	_ = as.tmpl.ExecuteTemplate(w, "teacher.assessment.new.layout", nil)
+
 
 }
 
@@ -138,6 +142,7 @@ func (as *AssessmentHandler) IsQualified(w http.ResponseWriter, r *http.Request)
 		_ = as.tmpl.ExecuteTemplate(w, "admin.course.new.layout", val)
 
 	}
+
 
 }
 

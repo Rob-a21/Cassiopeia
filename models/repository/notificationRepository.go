@@ -3,7 +3,6 @@ package repository
 import (
 	"database/sql"
 	"errors"
-
 	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
@@ -11,13 +10,18 @@ type PsqlNotificationRepositoryImpl struct {
 	conn *sql.DB
 }
 
+const (
+	layoutISO = "2006-01-02"
+	layoutUS  = "January 2, 2006"
+)
+
 func NewPsqlNotificationRepositoryImpl(Conn *sql.DB) *PsqlNotificationRepositoryImpl {
 	return &PsqlNotificationRepositoryImpl{conn: Conn}
 }
 
 func (ntf *PsqlNotificationRepositoryImpl) AddNotification(notf entity.Notification) error {
 
-	_, err := ntf.conn.Exec("insert into notification (notifyname,message,notifieddate) values($1, $2,$3)", notf.NotifyName, notf.Message, notf.NotificationDate)
+	_, err := ntf.conn.Exec("insert into notification (notifyname,message,notifieddate) values($1, $2,$3)", notf.NotifyName, notf.Message, notf.NotificationDate.Format(layoutUS))
 	if err != nil {
 		return errors.New("Insertion has failed")
 	}
@@ -35,9 +39,10 @@ func (ntf *PsqlNotificationRepositoryImpl) GetNotification() ([]entity.Notificat
 
 	notifications := []entity.Notification{}
 
+
 	for rows.Next() {
 		notification := entity.Notification{}
-		err = rows.Scan(&notification.NotifyName, &notification.Message, &notification.NotificationDate)
+		err = rows.Scan(&notification.NotifyName, &notification.Message,&notification.NotificationDate)
 		if err != nil {
 			return nil, err
 		}
@@ -47,16 +52,4 @@ func (ntf *PsqlNotificationRepositoryImpl) GetNotification() ([]entity.Notificat
 	return notifications, err
 }
 
-func (ntf *PsqlNotificationRepositoryImpl) Notification(id string) (entity.Notification, error) {
 
-	row := ntf.conn.QueryRow("SELECT * FROM notification WHERE notifyname = $1", id)
-
-	notification := entity.Notification{}
-
-	err := row.Scan(&notification.Message, &notification.NotificationDate)
-	if err != nil {
-		return notification,err
-	}
-
-	return notification, nil
-}

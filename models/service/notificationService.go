@@ -35,13 +35,3 @@ func (ss *NotificationServiceImpl) GetNotification() ([]entity.Notification, err
 	return notn, nil
 }
 
-func (ntf *NotificationServiceImpl) Notification(id string) (entity.Notification, error) {
-
-	notification, err := ntf.notificationRepository.Notification(id)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return notification, nil
-}

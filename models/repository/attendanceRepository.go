@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"errors"
 	"github.com/Rob-a21/Cassiopeia/entity"
-	"time"
 )
 
 type StudentAttendanceRepositoryImpl struct {
@@ -53,7 +52,7 @@ func (att *StudentAttendanceRepositoryImpl) CheckAttendance(id int) (entity.Atte
 
 func (att *StudentAttendanceRepositoryImpl) FillAttendance(attendance entity.Attendance) error {
 
-	_, err := att.conn.Exec("INSERT INTO attendance (date,id) values($1, $2)", time.Now(),attendance.StudentID)
+	_, err := att.conn.Exec("INSERT INTO attendance (attendancedate,id) values($1, $2)", attendance.Date,attendance.StudentID)
 	if err != nil {
 		return errors.New("Insertion has failed")
 	}
