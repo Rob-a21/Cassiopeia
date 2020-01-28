@@ -49,17 +49,20 @@ type Family struct {
 	Email     string
 	Image    string
 }
+
 type Assessment struct {
-	Value     int    `json:"value"`
-	SubjectID int     `json:"subjectid"`
-	StudentID int      `json:"studentid"`
-	Grade     int    `json:"grade"`
+	Value      int `json:"value"`
+	SubjectID  int `json:"subjectid"`
+	StudentID  int `json:"studentid"`
+	Grade      int `json:"grade"`
+	Assessment string
 }
 
 
 type Attendance struct {
-	Date      time.Time `json:"date"`
-	StudentID int        `json:"studentid"`
+	Date       time.Time `json:"date"`
+	StudentID  int       `json:"studentid"`
+	Attendance string
 }
 
 type Course struct {

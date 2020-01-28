@@ -77,11 +77,11 @@ func (srh *RegistrationHandler) StudentRegistration(w http.ResponseWriter, r *ht
 
 		writeFile(&mf, fh.Filename)
 
-		srh.regService.RegisterStudent(student)
+		_ = srh.regService.RegisterStudent(student)
 
-		if err != nil {
-			panic(err)
-		}
+		//if err != nil {
+		//	panic(err)
+		//}
 
 		http.Redirect(w, r, "/admin/register/student", http.StatusSeeOther)
 
@@ -299,7 +299,7 @@ func (srh *RegistrationHandler) AdminRegistration(w http.ResponseWriter, r *http
 
 		writeFile(&mf, fh.Filename)
 
-		srh.regService.RegisterAdmin(admin)
+		_ = srh.regService.RegisterAdmin(admin)
 
 		if err != nil {
 			panic(err)
@@ -309,7 +309,7 @@ func (srh *RegistrationHandler) AdminRegistration(w http.ResponseWriter, r *http
 
 	} else {
 
-		srh.tmpl.ExecuteTemplate(w, "admin.register.admin.layout", nil)
+		_ = srh.tmpl.ExecuteTemplate(w, "admin.register.admin.layout", nil)
 
 	}
 }

@@ -29,12 +29,12 @@ func (crs *CourseHandler) AdminAddCourse(w http.ResponseWriter, r *http.Request)
 		course.CourseID, _ = strconv.Atoi(r.FormValue("courseid"))
 		course.Grade, _ = strconv.Atoi(r.FormValue("grade"))
 
-		crs.crsService.AddCourse(course)
+		_ = crs.crsService.AddCourse(course)
 
 
 	}
 
-	crs.tmpl.ExecuteTemplate(w, "admin.course.new.layout", nil)
+	_ = crs.tmpl.ExecuteTemplate(w, "admin.course.new.layout", nil)
 
 
 
@@ -69,7 +69,7 @@ func (crs *CourseHandler) AdminUpdateCourse(w http.ResponseWriter, r *http.Reque
 			panic(err)
 		}
 
-		crs.tmpl.ExecuteTemplate(w, "admin.course.update.layout", courses)
+		_ = crs.tmpl.ExecuteTemplate(w, "admin.course.update.layout", courses)
 
 
 
@@ -108,7 +108,7 @@ func (crs *CourseHandler) AdminDeleteCourse(w http.ResponseWriter, r *http.Reque
 			panic(err)
 		}
 
-		 crs.crsService.DeleteCourse(int(id))
+		_ = crs.crsService.DeleteCourse(int(id))
 
 
 	}
@@ -124,7 +124,7 @@ func (crs *CourseHandler) StudentCourse(w http.ResponseWriter, r *http.Request) 
 		panic(err)
 	}
 
-	crs.tmpl.ExecuteTemplate(w, "student.course.layout", courses)
+	_ = crs.tmpl.ExecuteTemplate(w, "student.course.layout", courses)
 
 }
 
@@ -135,7 +135,7 @@ func (crs *CourseHandler) FamilyGetCourse(w http.ResponseWriter, r *http.Request
 		panic(err)
 	}
 
-	crs.tmpl.ExecuteTemplate(w, "family.course.layout", courses)
+	_ = crs.tmpl.ExecuteTemplate(w, "family.course.layout", courses)
 
 }
 
@@ -147,13 +147,13 @@ func (crs *CourseHandler)ApiAdminPostCourse(w http.ResponseWriter,r *http.Reques
 
 		body := make([]byte, len)
 
-		r.Body.Read(body)
+		_, _ = r.Body.Read(body)
 
 		course := entity.Course{}
 
-		json.Unmarshal(body, &course)
+		_ = json.Unmarshal(body, &course)
 
-		crs.crsService.AddCourse(course)
+		_ = crs.crsService.AddCourse(course)
 
 		w.WriteHeader(200)
 	}
@@ -166,7 +166,7 @@ func (crs *CourseHandler)ApiAdminGetCourses(w http.ResponseWriter,r *http.Reques
 if r.Method == http.MethodGet {
 	course := entity.Course{}
 
-	crs.crsService.GetCourse()
+	_, _ = crs.crsService.GetCourse()
 
 	output, err := json.MarshalIndent(&course, "", "\t\t")
 
@@ -177,7 +177,7 @@ if r.Method == http.MethodGet {
 
 	w.Header().Set("Content-Type", "application/json")
 
-	w.Write(output)
+	_, _ = w.Write(output)
 }
 	return
 }
@@ -200,7 +200,7 @@ func (crs *CourseHandler)ApiAdminDeleteCourse(w http.ResponseWriter,r *http.Requ
 		//	return
 		//}
 
-		crs.crsService.DeleteCourse(id)
+		_ = crs.crsService.DeleteCourse(id)
 
 	}
 	return

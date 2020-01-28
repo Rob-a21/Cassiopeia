@@ -15,7 +15,6 @@ func NewSessionRepo(db *sql.DB) *SessionRepo{
 
 func (sr *SessionRepo) Session(sessionID string) (*entity.Session, error) {
 
-
 	row := sr.conn.QueryRow("SELECT * FROM session WHERE id = $1", sessionID)
 
 	session := entity.Session{}

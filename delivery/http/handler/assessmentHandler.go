@@ -153,14 +153,13 @@ func (gr *AssessmentHandler)ApiTeacherPostGrade(w http.ResponseWriter,r *http.Re
 
 	body:= make([]byte,len)
 
-	r.Body.Read(body)
+	_, _ = r.Body.Read(body)
 
 	assessment:= entity.Assessment{}
 
-	json.Unmarshal(body,&assessment)
+	_ = json.Unmarshal(body, &assessment)
 
-
-	gr.assService.StoreGrade(assessment)
+	_ = gr.assService.StoreGrade(assessment)
 
 	w.WriteHeader(200)
 

@@ -1,4 +1,4 @@
-package main
+package test_handler
 
 import (
 	"database/sql"
@@ -118,8 +118,8 @@ func main() {
 	http.HandleFunc("/admin/student/delete", profileHandler.AdminDeleteStudent)
 	http.HandleFunc("/admin/teacher", profileHandler.AdminGetTeacher)
 	http.HandleFunc("/admin/teacher/delete", profileHandler.AdminDeleteTeacher)
-	http.HandleFunc("/admin/course", courseHandler.AdminGetCourse)
-	http.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse)
+	http.HandleFunc("/admin/course", courseHandler.AdminGetCourse)//prog
+	http.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse)//prog
 
 	// api hadlers
 

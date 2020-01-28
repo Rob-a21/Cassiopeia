@@ -48,7 +48,7 @@ func (slh *LoginHandler) StudentLogin(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		slh.tmpl.ExecuteTemplate(w, "student.login.html", nil)
+		_ = slh.tmpl.ExecuteTemplate(w, "student.login.html", nil)
 
 	}
 
@@ -84,7 +84,7 @@ func (slh *LoginHandler) AdminLogin(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		slh.tmpl.ExecuteTemplate(w, "admin.login.html", nil)
+		_ = slh.tmpl.ExecuteTemplate(w, "admin.login.html", nil)
 
 	}
 
@@ -118,7 +118,7 @@ func (slh *LoginHandler) TeacherLogin(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		slh.tmpl.ExecuteTemplate(w, "teacher.login.html", nil)
+		_ = slh.tmpl.ExecuteTemplate(w, "teacher.login.html", nil)
 
 	}
 
@@ -153,7 +153,7 @@ func (slh *LoginHandler) FamilyLogin(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		slh.tmpl.ExecuteTemplate(w, "family.login.html", nil)
+		_ = slh.tmpl.ExecuteTemplate(w, "family.login.html", nil)
 
 	}
 

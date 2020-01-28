@@ -23,7 +23,7 @@ func (prf *ProfileHandler) StudentsProfile(w http.ResponseWriter, r *http.Reques
 	if err != nil {
 		panic(err)
 	}
-	prf.tmpl.ExecuteTemplate(w, "student.profile.layout", students)
+	_ = prf.tmpl.ExecuteTemplate(w, "student.profile.layout", students)
 
 }
 
@@ -153,7 +153,7 @@ func (prf *ProfileHandler) AdminGetStudent(w http.ResponseWriter, r *http.Reques
 		panic(err)
 	}
 
-	prf.tmpl.ExecuteTemplate(w, "admin.view.student.layout", students)
+	_ = prf.tmpl.ExecuteTemplate(w, "admin.view.student.layout", students)
 
 }
 

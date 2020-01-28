@@ -2,10 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f067042e-3fb4-4161-a352-08e763da82c9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/delivery/http/handler/assessmentHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/delivery/http/TestingHandlers.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/repository/assessmentRepoMock.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/repository/attendanceRepoMock.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/repository/courseRepoMock.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/repository/notificationRepoMock.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/repository/profileRepoMock.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/repository/registrationMockRepo.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/repository/sessionMockRepo.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery/http/Test_Admin_Service.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/Test_Admin_Service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery/http/TestAdminAddCourse.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery/http/handler/assessmentHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/handler/assessmentHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/delivery/http/handler/attendanceHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/handler/attendanceHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery/http/handler/courseHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/handler/courseHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery/http/handler/homeHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/handler/homeHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery/http/handler/loginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/handler/loginHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery/http/handler/notificationHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/handler/notificationHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery/http/handler/profileHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/handler/profileHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery/http/handler/registrationHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/handler/registrationHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery/http/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/entity.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/mock_entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/mock_entity.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/repository/sessionRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/repository/sessionRepository.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,45 +33,42 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/delivery/http/handler/courseHandler.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-              <folding>
-                <element signature="e#17#173#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/delivery/http/handler/attendanceHandler.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="31" column="60" lean-forward="true" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="60" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/delivery/http/handler/assessmentHandler.go">
+        <entry file="file://$PROJECT_DIR$/delivery/http/TestingHandlers.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
+            <state relative-caret-position="416">
+              <caret line="382" column="31" selection-start-line="382" selection-start-column="31" selection-end-line="382" selection-end-column="31" />
               <folding>
-                <element signature="e#17#84#0" expanded="true" />
+                <element signature="e#22#320#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assessment/repository.go">
+        <entry file="file://$PROJECT_DIR$/delivery/http/handler/loginHandler.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+            <state relative-caret-position="180">
+              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/delivery/http/main.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="110" selection-start-line="110" selection-end-line="110" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/entity/mock_entity.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="470">
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
             </state>
           </provider>
         </entry>
@@ -74,40 +90,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../sthg/m.go" />
-        <option value="$PROJECT_DIR$/course/repository.go" />
-        <option value="$PROJECT_DIR$/grade/service.go" />
-        <option value="$PROJECT_DIR$/grade/repository.go" />
-        <option value="$PROJECT_DIR$/grade/repository/gradeRepository.go" />
-        <option value="$PROJECT_DIR$/grade/service/gradeService.go" />
-        <option value="$PROJECT_DIR$/profile/service.go" />
-        <option value="$PROJECT_DIR$/profile/repository.go" />
-        <option value="$PROJECT_DIR$/profile/pService/profileService.go" />
-        <option value="$PROJECT_DIR$/profile/pRepository/profileRepository.go" />
-        <option value="$PROJECT_DIR$/delivery/handler/profileHandler.go" />
-        <option value="$PROJECT_DIR$/delivery/handler/registrationHandler.go" />
-        <option value="$PROJECT_DIR$/attendance/repository/repository.go" />
-        <option value="$PROJECT_DIR$/delivery/web/templates/login.html" />
-        <option value="$PROJECT_DIR$/delivery/http/handler/profileHandler.go" />
-        <option value="$PROJECT_DIR$/entity/assessment.go" />
-        <option value="$PROJECT_DIR$/registration/repository/registrationRepo_gorm.go" />
-        <option value="$PROJECT_DIR$/registration/repository/registrationRepository.go" />
-        <option value="$PROJECT_DIR$/delivery/http/handler/registrationHandler.go" />
-        <option value="$PROJECT_DIR$/delivery/http/main.go" />
-        <option value="$PROJECT_DIR$/delivery/http/handler/admin_student_handler.go" />
-        <option value="$PROJECT_DIR$/registration/service.go" />
-        <option value="$PROJECT_DIR$/registration/repository.go" />
-        <option value="$PROJECT_DIR$/registration/service/student_service.go" />
-        <option value="$PROJECT_DIR$/registration/service/registrationService.go" />
-        <option value="$PROJECT_DIR$/registration/repository/gorm_student.go" />
-        <option value="$PROJECT_DIR$/attendance/repository.go" />
-        <option value="$PROJECT_DIR$/attendance/service.go" />
-        <option value="$PROJECT_DIR$/attendance/service/attendanceService.go" />
         <option value="$PROJECT_DIR$/attendance/repository/attendanceRepository.go" />
         <option value="$PROJECT_DIR$/assessment/repository/gradeRepository.go" />
         <option value="$PROJECT_DIR$/assessment/service/gradeService.go" />
         <option value="$PROJECT_DIR$/main.go" />
-        <option value="$PROJECT_DIR$/delivery/http/handler/loginHandler.go" />
         <option value="$PROJECT_DIR$/entity/student.go" />
         <option value="$PROJECT_DIR$/entity/teacher.go" />
         <option value="$PROJECT_DIR$/entity/family.go" />
@@ -118,8 +104,43 @@
         <option value="$PROJECT_DIR$/assessment/repository/assessmentRepository.go" />
         <option value="$PROJECT_DIR$/entity/attendance.go" />
         <option value="$PROJECT_DIR$/delivery/http/Test_Admin_Service.go" />
-        <option value="$PROJECT_DIR$/delivery/http/handler/attendanceHandler.go" />
+        <option value="$PROJECT_DIR$/delivery/http/adminGetCourse.go" />
+        <option value="$PROJECT_DIR$/delivery/http/handler/TestAdminUpdateCourse.go" />
+        <option value="$PROJECT_DIR$/delivery/http/TestAdminDeleteTeacher.go" />
+        <option value="$PROJECT_DIR$/delivery/http/TestAdminUpdateCourse.go" />
+        <option value="$PROJECT_DIR$/delivery/http/main.go" />
+        <option value="$PROJECT_DIR$/delivery/http/TestAdminGetCourse.go" />
+        <option value="$PROJECT_DIR$/delivery/http/handler/homeHandler.go" />
+        <option value="$PROJECT_DIR$/delivery/http/TestAssessmentHandler.go" />
+        <option value="$PROJECT_DIR$/delivery/http/TestApiAdminGetCourses.go" />
+        <option value="$PROJECT_DIR$/delivery/http/test.go" />
+        <option value="$PROJECT_DIR$/delivery/http/testing/TestAdminAddCourse.go" />
+        <option value="$PROJECT_DIR$/delivery/http/testing/testingassessmentHandler.go" />
+        <option value="$PROJECT_DIR$/delivery/http/testing/test.go" />
+        <option value="$PROJECT_DIR$/delivery/http/TestAdminAddCourse.go" />
+        <option value="$PROJECT_DIR$/models/repository/attendanceMock.go" />
         <option value="$PROJECT_DIR$/delivery/http/handler/assessmentHandler.go" />
+        <option value="$PROJECT_DIR$/models/service/attendanceService.go" />
+        <option value="$PROJECT_DIR$/delivery/http/handler/attendanceHandler.go" />
+        <option value="$PROJECT_DIR$/entity/entity.go" />
+        <option value="$PROJECT_DIR$/delivery/http/handlers.go" />
+        <option value="$PROJECT_DIR$/delivery/http/handler/courseHandler.go" />
+        <option value="$PROJECT_DIR$/delivery/http/handler/loginHandler.go" />
+        <option value="$PROJECT_DIR$/delivery/http/handler/notificationHandler.go" />
+        <option value="$PROJECT_DIR$/models/service/notificationService.go" />
+        <option value="$PROJECT_DIR$/models/repository/notificationRepoMock.go" />
+        <option value="$PROJECT_DIR$/delivery/http/handler/profileHandler.go" />
+        <option value="$PROJECT_DIR$/models/repository/assessmentRepoMock.go" />
+        <option value="$PROJECT_DIR$/models/repository/attendanceRepoMock.go" />
+        <option value="$PROJECT_DIR$/models/repository/courseRepoMock.go" />
+        <option value="$PROJECT_DIR$/models/repository/profileRepoMock.go" />
+        <option value="$PROJECT_DIR$/models/service/profileService.go" />
+        <option value="$PROJECT_DIR$/models/repository/registrationMockRepo.go" />
+        <option value="$PROJECT_DIR$/models/repository/sessionRepository.go" />
+        <option value="$PROJECT_DIR$/entity/mock_entity.go" />
+        <option value="$PROJECT_DIR$/models/repository/sessionMockRepo.go" />
+        <option value="$PROJECT_DIR$/delivery/http/handler/registrationHandler.go" />
+        <option value="$PROJECT_DIR$/delivery/http/TestingHandlers.go" />
       </list>
     </option>
   </component>
@@ -135,6 +156,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -160,11 +182,15 @@
               <item name="http" type="462c0819:PsiDirectoryNode" />
               <item name="handler" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Cassiopeia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cassiopeia" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -175,7 +201,7 @@
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../web-prog-go-sample-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/delivery/http" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -183,6 +209,10 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hp\go\src\github.com\Rob-a21\Cassiopeia\delivery\http" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\go\src\github.com\Rob-a21\Cassiopeia\delivery\http" />
+      <recent name="C:\Users\hp\go\src\github.com\Rob-a21\Cassiopeia\delivery\http\testing" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -210,7 +240,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22214764" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19395973" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -240,319 +270,280 @@
     </ignored-roots>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/notification/service/notificationService.go" />
-    <entry file="file://$PROJECT_DIR$/course/service.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/course/repository.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/course/service/courseService.go" />
-    <entry file="file://$PROJECT_DIR$/attendance/repository/repository.go" />
-    <entry file="file://$PROJECT_DIR$/notification/repository.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md" />
-    <entry file="file://$PROJECT_DIR$/delivery/web/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/delivery/web/templates/mainpage.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/delivery/http/handler/profileHandler.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="e#17#100#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registration/repository/registrationRepo_gorm.go" />
-    <entry file="file://$PROJECT_DIR$/profile/service.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profile/repository.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/builtin/builtin.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="231" column="5" selection-start-line="231" selection-start-column="5" selection-end-line="231" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../restaurant-rest/user/service.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../restaurant-rest/delivery/http/handler/admin_role_handler.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1220">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
-          <folding>
-            <element signature="e#17#139#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/delivery/http/handler/registrationHandler.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://C:/Go/src/runtime/panic.go">
+    <entry file="file://$PROJECT_DIR$/entity/attendance.go" />
+    <entry file="file://$PROJECT_DIR$/main.go" />
+    <entry file="file://$PROJECT_DIR$/delivery/http/Test_Admin_Service.go" />
+    <entry file="file://$PROJECT_DIR$/attendance/repository.go" />
+    <entry file="file://$PROJECT_DIR$/assessment/repository.go" />
+    <entry file="file://$PROJECT_DIR$/delivery/http/adminGetCourse.go" />
+    <entry file="file://$PROJECT_DIR$/delivery/http/handler/TestAdminUpdateCourse.go" />
+    <entry file="file://$PROJECT_DIR$/delivery/http/test.go" />
+    <entry file="file://$PROJECT_DIR$/delivery/http/testing/main.go" />
+    <entry file="file://$PROJECT_DIR$/delivery/http/testing/testingassessmentHandler.go" />
+    <entry file="file://$PROJECT_DIR$/delivery/http/testing/test.go" />
+    <entry file="file://$PROJECT_DIR$/delivery/http/testing/TestAdminAddCourse.go" />
+    <entry file="file://$PROJECT_DIR$/delivery/http/TestAdminAddCourse.go" />
+    <entry file="file://$PROJECT_DIR$/delivery/http/TestApiAdminGetCourses.go" />
+    <entry file="file://$PROJECT_DIR$/form/data.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="678" selection-start-line="678" selection-end-line="678" />
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Go/src/net/http/server.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="2927" selection-start-line="2927" selection-end-line="2928" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/delivery/http/main.go" />
-    <entry file="file://$PROJECT_DIR$/registration/service.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registration/repository/registrationRepository.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-520">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="e#20#96#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registration/service/student_service.go" />
-    <entry file="file://$PROJECT_DIR$/delivery/http/handler/admin_student_handler.go" />
-    <entry file="file://$PROJECT_DIR$/registration/repository/gorm_student.go" />
-    <entry file="file://$PROJECT_DIR$/attendance/service.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registration/repository.go">
+    <entry file="file://$PROJECT_DIR$/form/errors.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
-          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/registration/service/registrationService.go">
+    <entry file="file://$PROJECT_DIR$/delivery/http/testingassessmentHandler.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/delivery/http/TestAssessmentHandler.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="400">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/attendance/repository/attendanceRepository.go">
+    <entry file="file://$PROJECT_DIR$/models/service/attendanceService.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#20#104#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/delivery/http/handler/loginHandler.go">
+    <entry file="file://$PROJECT_DIR$/delivery/http/handler/attendanceHandler.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/attendance/service/attendanceService.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/teacher.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/student.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/family.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/course.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/notification.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/admin.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/assessment.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assessment/repository/gradeRepository.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1700">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#20#96#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assessment/service/gradeService.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
-          <folding>
-            <element signature="e#17#111#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assessment/service/assessmentService.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-          <folding>
-            <element signature="e#17#111#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assessment/repository/assessmentRepository.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="136" selection-start-line="136" selection-end-line="136" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assessment/service.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="72" selection-start-line="7" selection-start-column="72" selection-end-line="7" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/attendance.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/delivery/http/Test_Admin_Service.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#16#317#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/attendance/repository.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+        <state relative-caret-position="360">
+          <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/delivery/http/handler/courseHandler.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="110">
+          <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
           <folding>
             <element signature="e#17#173#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/delivery/http/handler/attendanceHandler.go">
+    <entry file="file://$PROJECT_DIR$/delivery/http/handler/homeHandler.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="31" column="60" lean-forward="true" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="60" />
+        <state relative-caret-position="110">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assessment/repository.go">
+    <entry file="file://$PROJECT_DIR$/models/repository/registrationRepo.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/service/notificationService.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/service/courseService.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/courseRepository.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
-          <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/delivery/http/handler/notificationHandler.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="71" column="40" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/profileRepository.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2495">
+          <caret line="210" selection-start-line="210" selection-end-line="210" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/delivery/http/handler/profileHandler.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="148" column="34" selection-start-line="148" selection-start-column="34" selection-end-line="148" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/assessmentRepoMock.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/notificationRepoMock.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-140">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/service/profileService.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/service.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/attendanceRepoMock.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/delivery/http/handler/assessmentHandler.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
+        <state relative-caret-position="1940">
+          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/assessmentRepository.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
           <folding>
-            <element signature="e#17#84#0" expanded="true" />
+            <element signature="e#21#97#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/registrationRepository.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/profileRepoMock.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/delivery/http/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="110" selection-start-line="110" selection-end-line="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/courseRepoMock.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/entity/mock_entity.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/entity/entity.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/sessionRepository.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/registrationMockRepo.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#20#136#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/repository/sessionMockRepo.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+          <folding>
+            <element signature="e#20#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/delivery/http/handler/userHandler.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2580" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/delivery/http/handler/registrationHandler.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/delivery/http/handler/logoutHandler.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/delivery/http/handler/loginHandler.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/delivery/http/TestingHandlers.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="382" column="31" selection-start-line="382" selection-start-column="31" selection-end-line="382" selection-end-column="31" />
+          <folding>
+            <element signature="e#22#320#0" expanded="true" />
           </folding>
         </state>
       </provider>

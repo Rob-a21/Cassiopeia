@@ -24,7 +24,7 @@ func (ntf *NotificationHandler) StudentGetNotification(w http.ResponseWriter, r 
 	if err != nil {
 		panic(err)
 	}
-	ntf.tmpl.ExecuteTemplate(w, "student.notification.layout", notf)
+	_ = ntf.tmpl.ExecuteTemplate(w, "student.notification.layout", notf)
 
 }
 
@@ -49,21 +49,19 @@ func (ntf *NotificationHandler) TeacherAddNotification(w http.ResponseWriter, r 
 }
 
 
-
 func (ntf *NotificationHandler)TeacherPostNotification(w http.ResponseWriter,r *http.Request){
 
 	len := r.ContentLength
 
 	body:= make([]byte,len)
 
-	r.Body.Read(body)
+	_, _ = r.Body.Read(body)
 
 	notification:= entity.Notification{}
 
-	json.Unmarshal(body,&notification)
+	_ = json.Unmarshal(body, &notification)
 
-
-	ntf.notificationService.AddNotification(notification)
+	_ = ntf.notificationService.AddNotification(notification)
 
 	w.WriteHeader(200)
 
