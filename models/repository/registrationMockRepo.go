@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
+
 	"github.com/Rob-a21/Cassiopeia/entity"
 	"github.com/Rob-a21/Cassiopeia/models"
 )
@@ -11,7 +12,7 @@ type registrationMockRepo struct {
 	conn *sql.DB
 }
 
-func NewregistrationMockRepo(db *sql.DB)  models.RegistrationRepository {
+func NewregistrationMockRepo(db *sql.DB) models.RegistrationRepository {
 	return &registrationMockRepo{conn: db}
 }
 
@@ -25,7 +26,7 @@ func (registrationMockRepo) RegisterStudent(st entity.Student) error {
 	entity.StudentMock.Grade = st.Grade
 	entity.StudentMock.Email = st.Email
 
-	if st.ID != entity.StudentMock.ID{
+	if st.ID != entity.StudentMock.ID {
 		return errors.New("Failed Registration")
 	}
 	return nil
@@ -40,14 +41,14 @@ func (registrationMockRepo) RegisterFamily(family entity.Family) error {
 	entity.FamilyMock.Phone = family.Phone
 	entity.FamilyMock.Email = family.Email
 
-	if family.FamilyID != entity.FamilyMock.FamilyID{
+	if family.FamilyID != entity.FamilyMock.FamilyID {
 		return errors.New("Failed Registration")
 	}
 	return nil
 }
 
 func (registrationMockRepo) RegisterTeacher(teacher entity.Teacher) error {
-	entity.TeacherMock.UserName =  teacher.UserName
+	entity.TeacherMock.UserName = teacher.UserName
 	entity.TeacherMock.Password = teacher.Password
 	entity.TeacherMock.Phone = teacher.Phone
 	entity.TeacherMock.Email = teacher.Email
@@ -74,6 +75,3 @@ func (registrationMockRepo) RegisterAdmin(admin entity.Admin) error {
 	}
 	return nil
 }
-
-
-

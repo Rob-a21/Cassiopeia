@@ -21,8 +21,6 @@ var tmpl = template.Must(template.ParseGlob("c:/Users/solki/go/src/github.com/Ro
 
 func main() {
 
-	//csrfSignKey := []byte(token.GenerateRandomID(32))
-
 	dbconn, err := sql.Open("postgres",
 		"postgres://postgres:aait@localhost/school?sslmode=disable")
 
@@ -122,8 +120,8 @@ func main() {
 	http.HandleFunc("/admin/student/delete", profileHandler.AdminDeleteStudent)
 	http.HandleFunc("/admin/teacher", profileHandler.AdminGetTeacher)
 	http.HandleFunc("/admin/teacher/delete", profileHandler.AdminDeleteTeacher)
-	http.HandleFunc("/admin/course", courseHandler.AdminGetCourse)     //prog
-	http.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse) //prog
+	http.HandleFunc("/admin/course", courseHandler.AdminGetCourse)
+	http.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse)
 
 	http.ListenAndServe(":8181", nil)
 }

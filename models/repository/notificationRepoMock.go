@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+
 	"github.com/Rob-a21/Cassiopeia/entity"
 	"github.com/Rob-a21/Cassiopeia/models"
 )
@@ -15,9 +16,9 @@ func NewNotificationRepoMock(db *sql.DB) models.NotificationRepository {
 }
 
 func (aRepo *NotificationRepoMock) GetNotification() ([]entity.Notification, error) {
-		posts := []entity.Notification{entity.NotificationMock}
+	posts := []entity.Notification{entity.NotificationMock}
 
-		return posts, nil
+	return posts, nil
 }
 
 func (aRepo *NotificationRepoMock) AddNotification(notif entity.Notification) error {
@@ -58,4 +59,3 @@ func (aRepo *NotificationRepoMock) AddNotification(notif entity.Notification) er
 //
 //	return &post, nil
 //}
-

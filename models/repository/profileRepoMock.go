@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
+
 	"github.com/Rob-a21/Cassiopeia/entity"
 	"github.com/Rob-a21/Cassiopeia/models"
 )
@@ -11,10 +12,9 @@ type profileRepoMock struct {
 	conn *sql.DB
 }
 
-func NewprofileRepoMock(db *sql.DB)  models.ProfileRepository {
+func NewprofileRepoMock(db *sql.DB) models.ProfileRepository {
 	return &profileRepoMock{conn: db}
 }
-
 
 func (profileRepoMock) Students() ([]entity.Student, error) {
 
@@ -23,19 +23,20 @@ func (profileRepoMock) Students() ([]entity.Student, error) {
 	return students, nil
 }
 
-func (profileRepoMock) Student(id int) (entity.Student, error) {
-	null := entity.Student{}
+func (profileRepoMock) Student(id int) ([]entity.Student, error) {
+	//null := entity.Student{}
+	student := []entity.Student{entity.StudentMock}
 
 	if id == 0001 {
-		return entity.StudentMock, nil
+		return student, nil
 	}
 
-	return null, nil
+	return student, nil
 }
 
 func (profileRepoMock) EmailExists(email string) bool {
 
-	if email == entity.TeacherMock.Email || email == entity.StudentMock.Email || email == entity.AdminMock.Email{
+	if email == entity.TeacherMock.Email || email == entity.StudentMock.Email || email == entity.AdminMock.Email {
 		return false
 	}
 	return true
@@ -46,7 +47,8 @@ func (profileRepoMock) DeleteStudent(id int) error {
 		return errors.New("Delete Has Failed...!")
 	}
 
-	return nil}
+	return nil
+}
 
 func (profileRepoMock) Families() ([]entity.Family, error) {
 	families := []entity.Family{entity.FamilyMock}
@@ -54,14 +56,10 @@ func (profileRepoMock) Families() ([]entity.Family, error) {
 	return families, nil
 }
 
-func (profileRepoMock) Family(id int) (entity.Family, error) {
-	null := entity.Family{}
+func (profileRepoMock) Family(id int) ([]entity.Family, error) {
+	family := []entity.Family{entity.FamilyMock}
 
-	if id == 0001 {
-		return entity.FamilyMock, nil
-	}
-
-	return null, nil
+	return family, nil
 }
 
 func (profileRepoMock) Teachers() ([]entity.Teacher, error) {
@@ -70,14 +68,14 @@ func (profileRepoMock) Teachers() ([]entity.Teacher, error) {
 	return teachers, nil
 }
 
-func (profileRepoMock) Teacher(id int) (entity.Teacher, error) {
-	null := entity.Teacher{}
+func (profileRepoMock) Teacher(id int) ([]entity.Teacher, error) {
+	teacher := []entity.Teacher{entity.TeacherMock}
 
 	if id == 0001 {
-		return entity.TeacherMock, nil
+		return teacher, nil
 	}
 
-	return null, nil
+	return teacher, nil
 }
 
 func (profileRepoMock) DeleteTeacher(id int) error {
@@ -89,14 +87,11 @@ func (profileRepoMock) DeleteTeacher(id int) error {
 	return nil
 }
 
-func (profileRepoMock) Admin(id int) (entity.Admin, error) {
-	null := entity.Admin{}
+func (profileRepoMock) Admin(id int) ([]entity.Admin, error) {
 
-	if id == 0001 {
-		return entity.AdminMock, nil
-	}
+	admins := []entity.Admin{entity.AdminMock}
 
-	return null, nil
+	return admins, nil
 }
 
 func (profileRepoMock) AdminByEmail(email string) (entity.Admin, error) {
@@ -113,4 +108,11 @@ func (profileRepoMock) AdminByEmail(email string) (entity.Admin, error) {
 func (profileRepoMock) Admins() ([]entity.Admin, error) {
 	admins := []entity.Admin{entity.AdminMock}
 
-	return admins, nil}
+	return admins, nil
+}
+func (profileRepoMock) NewYearRegistration(student entity.Student) error {
+
+	_ = entity.StudentMock
+
+	return nil
+}

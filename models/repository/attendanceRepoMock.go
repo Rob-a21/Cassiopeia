@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+
 	"github.com/Rob-a21/Cassiopeia/entity"
 	"github.com/Rob-a21/Cassiopeia/models"
 )
@@ -20,14 +21,14 @@ func (aRepo *AttendanceRepoMock) ShowAttendance() ([]entity.Attendance, error) {
 	return posts, nil
 }
 
-func (aRepo *AttendanceRepoMock) CheckAttendance(id int) (entity.Attendance, error) {
-	null := entity.Attendance{}
+func (aRepo *AttendanceRepoMock) CheckAttendance(id int) ([]entity.Attendance, error) {
+	attendance := []entity.Attendance{entity.AttendanceMock}
 
 	if id == 0001 {
-		return entity.AttendanceMock, nil
+		return attendance, nil
 	}
 
-	return null, nil
+	return attendance, nil
 }
 
 func (aRepo *AttendanceRepoMock) FillAttendance(attendance entity.Attendance) error {
@@ -35,8 +36,3 @@ func (aRepo *AttendanceRepoMock) FillAttendance(attendance entity.Attendance) er
 
 	return nil
 }
-
-
-
-
-

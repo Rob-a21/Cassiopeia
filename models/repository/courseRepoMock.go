@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
+
 	"github.com/Rob-a21/Cassiopeia/entity"
 	"github.com/Rob-a21/Cassiopeia/models"
 )
@@ -11,7 +12,7 @@ type courseRepoMock struct {
 	conn *sql.DB
 }
 
-func NewcourseRepoMock(db *sql.DB)  models.CourseRepository {
+func NewcourseRepoMock(db *sql.DB) models.CourseRepository {
 	return &courseRepoMock{conn: db}
 }
 
@@ -27,20 +28,17 @@ func (aRepo *courseRepoMock) GetCourse() ([]entity.Course, error) {
 	return posts, nil
 }
 
-
-func (aRepo *courseRepoMock) Course(id int) (entity.Course, error) {
+func (aRepo *courseRepoMock) Course(id int) (*entity.Course, error) {
 
 	c := entity.Course{}
 
 	if id == 0001 {
-		return entity.CourseMock, nil
+		return &entity.CourseMock, nil
 	}
 
-	return c, nil
+	return &c, nil
 
 }
-
-
 
 func (aRepo *courseRepoMock) UpdateCourse(course entity.Course) error {
 	course = entity.CourseMock
@@ -59,6 +57,3 @@ func (aRepo *courseRepoMock) DeleteCourse(id int) error {
 
 	return nil
 }
-
-
-
