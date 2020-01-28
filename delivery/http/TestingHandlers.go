@@ -1,4 +1,4 @@
-package test_handler
+package main
 
 import (
 	"bytes"
@@ -250,8 +250,8 @@ func TestApiStudentGetNotification(t *testing.T) {
 
 	tmpl := template.Must(template.ParseGlob("../web/templates/*"))
 
-	notRepo := repository.NotificationRepoMock(nil)
-	notServ := service.NewNotificationServiceImpl(&notRepo)
+	notRepo := repository.NewNotificationRepoMock(nil)
+	notServ := service.NewNotificationServiceImpl(notRepo)
 
 	adminNotificationHandler := handler.NewNotificationHandler(tmpl,notServ)
 

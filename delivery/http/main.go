@@ -1,4 +1,4 @@
-package test_handler
+package main
 
 import (
 	"database/sql"
@@ -17,7 +17,7 @@ import (
 	"github.com/Rob-a21/Cassiopeia/delivery/http/handler"
 )
 
-var tmpl = template.Must(template.ParseGlob("c:/Users/solki/go/src/github.com/Rob-a21/Cassiopeia/delivery/web/templates/*"))
+var tmpl = template.Must(template.ParseGlob("C:/Users/hp/go/src/github.com/Rob-a21/Cassiopeia/delivery/web/templates/*"))
 
 func main() {
 
