@@ -2,15 +2,17 @@ package handler
 
 import (
 	"encoding/json"
-	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/models"
+	"fmt"
 	"html/template"
 	"net/http"
 	"path"
 	"strconv"
 	"time"
-)
 
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/models"
+	"github.com/julienschmidt/httprouter"
+)
 
 type AttendanceHandler struct {
 	tmpl              *template.Template
@@ -27,12 +29,11 @@ func (at *AttendanceHandler) FillStudentAttendance(w http.ResponseWriter, r *htt
 
 		attendance := entity.Attendance{}
 		attendance.Date = time.Now()
-		attendance.StudentID,_ = strconv.Atoi(r.FormValue("id"))
+		attendance.StudentID, _ = strconv.Atoi(r.FormValue("id"))
 
 		_ = at.attendanceService.FillAttendance(attendance)
 
-
-		http.Redirect(w,r,"/student",http.StatusSeeOther)
+		http.Redirect(w, r, "/student", http.StatusSeeOther)
 
 	}
 
@@ -40,29 +41,36 @@ func (at *AttendanceHandler) FillStudentAttendance(w http.ResponseWriter, r *htt
 
 }
 
-
 func (at *AttendanceHandler) CheckStudentAttendance(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodGet {
 
-		idRaw := r.URL.Query().Get("studentid")
+		idRaw := r.URL.Query().Get("id")
+
 		id, err := strconv.Atoi(idRaw)
 
+		fmt.Println("id:", idRaw)
+
 		if err != nil {
-			panic(err)
+
+			return
 		}
 
 		attendance, err := at.attendanceService.CheckAttendance(id)
 
 		if err != nil {
-			panic(err)
+			return
 		}
 
+<<<<<<< HEAD
+		at.tmpl.ExecuteTemplate(w, "student.attendance.layout", attendance)
+=======
 		_ = at.tmpl.ExecuteTemplate(w, "admin.course.update.layout", attendance)
+>>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	}
 
-	}
+}
 
 func (at *AttendanceHandler) ShowStudentsAttendance(w http.ResponseWriter, r *http.Request) {
 
@@ -73,24 +81,25 @@ func (at *AttendanceHandler) ShowStudentsAttendance(w http.ResponseWriter, r *ht
 
 	_ = at.tmpl.ExecuteTemplate(w, "student.attendance.layout", attendances)
 
+}
 
-	}
-
-
-
-
-
-func (at *AttendanceHandler)ApiStudentPostAttendance(w http.ResponseWriter,r *http.Request){
+func (at *AttendanceHandler) ApiStudentPostAttendance(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	len := r.ContentLength
 
-	body:= make([]byte,len)
+	body := make([]byte, len)
 
 	_, _ = r.Body.Read(body)
 
+<<<<<<< HEAD
+	attendance := entity.Attendance{}
+
+	json.Unmarshal(body, &attendance)
+=======
 	attendance:= entity.Attendance{}
 
 	_ = json.Unmarshal(body, &attendance)
+>>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	_ = at.attendanceService.FillAttendance(attendance)
 
@@ -99,56 +108,58 @@ func (at *AttendanceHandler)ApiStudentPostAttendance(w http.ResponseWriter,r *ht
 	return
 }
 
-
-
-
-
-
-
-func (ntf *AttendanceHandler)ApiStudentCheckAttendance(w http.ResponseWriter,r *http.Request) {
+func (at *AttendanceHandler) ApiStudentCheckAttendance(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	id, err := strconv.Atoi(path.Base(r.URL.Path))
 
-	if err != nil{
-
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
 
+	attendance, errs := at.attendanceService.CheckAttendance(id)
 
-	attendance := entity.Attendance{}
-
-	_, _ = ntf.attendanceService.CheckAttendance(id)
-
-	output,err := json.MarshalIndent(&attendance,"","\t\t")
-
-	if err != nil{
-
+	if errs != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
 
-	w.Header().Set("Content-Type","application/json")
+	output, err := json.MarshalIndent(attendance, "", "\t\t")
 
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(output)
-
 	return
+
 }
+
 //
-func (att *AttendanceHandler)ApiStudentShowAttendance(w http.ResponseWriter,r *http.Request){
+func (att *AttendanceHandler) ApiStudentShowAttendance(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	len := r.ContentLength
+	attendances, errs := att.attendanceService.ShowAttendance()
+	if errs != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
 
-	body:= make([]byte,len)
+	output, err := json.MarshalIndent(attendances, "", "\t\t")
 
-	r.Body.Read(body)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
 
-	attendance:= entity.Attendance{}
-
-	json.Unmarshal(body,&attendance)
-
-
-	att.attendanceService.ShowAttendance()
-
-	w.WriteHeader(200)
-
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(output)
 	return
+
 }

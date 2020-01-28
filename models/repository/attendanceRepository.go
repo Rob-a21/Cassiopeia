@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
+
 	"github.com/Rob-a21/Cassiopeia/entity"
 )
 
@@ -26,7 +27,7 @@ func (att *StudentAttendanceRepositoryImpl) ShowAttendance() ([]entity.Attendanc
 
 	for rows.Next() {
 		attendance := entity.Attendance{}
-		err = rows.Scan(&attendance.StudentID, &attendance.Date)
+		err = rows.Scan(&attendance.Date, &attendance.StudentID)
 		if err != nil {
 			return nil, err
 		}
@@ -36,23 +37,32 @@ func (att *StudentAttendanceRepositoryImpl) ShowAttendance() ([]entity.Attendanc
 	return attendances, nil
 }
 
-func (att *StudentAttendanceRepositoryImpl) CheckAttendance(id int) (entity.Attendance, error) {
+func (att *StudentAttendanceRepositoryImpl) CheckAttendance(id int) ([]entity.Attendance, error) {
 
-	row := att.conn.QueryRow("SELECT * FROM attendance WHERE id = $1", id)
+	rows, err := att.conn.Query("SELECT * FROM attendance WHERE id = $1", id)
 
-	c := entity.Attendance{}
-
-	err := row.Scan(&c.StudentID, &c.Date)
 	if err != nil {
-		return c, err
+		return nil, errors.New("Could not query the database")
+	}
+	defer rows.Close()
+
+	attendances := []entity.Attendance{}
+
+	for rows.Next() {
+		attendance := entity.Attendance{}
+		err = rows.Scan(&attendance.Date, &attendance.StudentID)
+		if err != nil {
+			return nil, err
+		}
+		attendances = append(attendances, attendance)
 	}
 
-	return c, nil
+	return attendances, nil
 }
 
 func (att *StudentAttendanceRepositoryImpl) FillAttendance(attendance entity.Attendance) error {
 
-	_, err := att.conn.Exec("INSERT INTO attendance (attendancedate,id) values($1, $2)", attendance.Date,attendance.StudentID)
+	_, err := att.conn.Exec("INSERT INTO attendance (attendancedate,id) values($1, $2)", attendance.Date, attendance.StudentID)
 	if err != nil {
 		return errors.New("Insertion has failed")
 	}

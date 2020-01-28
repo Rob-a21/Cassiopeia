@@ -15,7 +15,6 @@ func NewStudentAttendanceServiceImpl(attRepo models.StudentAttendanceRepository)
 	return &StudentAttendanceServiceImpl{attendanceRepo: attRepo}
 }
 
-
 func (at *StudentAttendanceServiceImpl) ShowAttendance() ([]entity.Attendance, error) {
 
 	attendance, err := at.attendanceRepo.ShowAttendance()
@@ -27,7 +26,7 @@ func (at *StudentAttendanceServiceImpl) ShowAttendance() ([]entity.Attendance, e
 	return attendance, nil
 }
 
-func (at *StudentAttendanceServiceImpl) CheckAttendance(id int) (entity.Attendance, error) {
+func (at *StudentAttendanceServiceImpl) CheckAttendance(id int) ([]entity.Attendance, error) {
 
 	student, err := at.attendanceRepo.CheckAttendance(id)
 
@@ -48,4 +47,3 @@ func (at *StudentAttendanceServiceImpl) FillAttendance(student entity.Attendance
 
 	return nil
 }
-

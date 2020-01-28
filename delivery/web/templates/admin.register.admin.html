@@ -1,11 +1,11 @@
+
 {{ define "admin.register.admin.layout" }}
 
-    {{ template "admin.navbar" . }}
-    {{ template "admin.register.admin.content" . }}
-    {{ template "admin.footer" . }}
+{{ template "admin.navbar" . }}
+{{ template "admin.register.admin.content" . }}
+{{ template "admin.footer" . }}
 
 {{ end }}
-
 {{ define "admin.register.admin.content"}}
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -20,19 +20,33 @@
                     <input type="text" class="form-control" name="username" id="username" placeholder="username">
                 </div>
             </div>
+            <div class="form-group row">
             <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
                 <input type="password" class="form-control" name="password" id="password" placeholder="password">
             </div>
-    </div><label for="fname" class="col-sm-2 col-form-label">First Name</label>
+       </div>
+            <div class="form-group row">
+            <label for="fname" class="col-sm-2 col-form-label">First Name</label>
     <div class="col-sm-10">
         <input type="text" class="form-control" name="fname" id="fname" placeholder="first name">
     </div>
-    </div><label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+    </div>
+            <div class="form-group row">
+            <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
     <div class="col-sm-10">
         <input type="text" class="form-control" name="lname" id="lname" placeholder="last name">
     </div>
+            </div>
 
+            <div class="form-group row">
+                <label for="id" class="col-sm-2 col-form-label">ID</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="id" id="id" placeholder="id">
+        </div>
+        </div>
+
+            <div class="form-group row">
     <label for="email" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
         <input type="text" class="form-control" name="email" id="email" placeholder="email">
@@ -48,6 +62,7 @@
             <button type="submit" class="btn btn-primary float-right">signup</button>
         </div>
     </div>
+
     </form>
 
     </div>

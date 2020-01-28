@@ -36,12 +36,13 @@ func main() {
 		panic(err)
 	}
 
+	csrfSignKey := []byte(token.GenerateRandomID(32))
 	//sessionRepo := repository.NewSessionRepo(dbconn)
 	//sessionSrv := service.New(sessionRepo)
 
 	registrationRepository := repository.NewPsqlRegistrationRepositoryImpl(dbconn)
 	registrationService := service.NewRegistrationServiceImpl(registrationRepository)
-	registrationHandler := handler.NewRegistrationHandler(tmpl, registrationService)
+	registrationHandler := handler.NewRegistrationHandler(tmpl, registrationService, csrfSignKey)
 
 	profileRepository := repository.NewPsqlProfileRepositoryImpl(dbconn)
 	profileService := service.NewProfileServiceImpl(profileRepository)
@@ -73,7 +74,8 @@ func main() {
 	fs := http.FileServer(http.Dir("c:/Users/solki/go/src/github.com/Rob-a21/Cassiopeia/delivery/web/assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
-	http.HandleFunc("/", homeHandler.Home)
+	http.HandleFunc("/home", homeHandler.Home)
+
 	http.HandleFunc("/admin", homeHandler.Admin)
 	http.HandleFunc("/student", homeHandler.Student)
 	http.HandleFunc("/teacher", homeHandler.Teacher)
@@ -87,27 +89,29 @@ func main() {
 	http.HandleFunc("/logout", logoutHandler.Logout)
 
 	// student handler
+	http.HandleFunc("/student/profile", profileHandler.StudentProfile)
+	http.HandleFunc("/student/year/registration", profileHandler.NewYearRegistration)
+	http.HandleFunc("/student/assessment", assessmentHandler.StudentAssessment)
 	http.HandleFunc("/student/course", courseHandler.StudentCourse)
 	http.HandleFunc("/student/notification", notificationHandler.StudentGetNotification)
-	http.HandleFunc("/student/profile", profileHandler.StudentProfile)
 	http.HandleFunc("/student/attendance/new", attendanceHandler.FillStudentAttendance)
-	http.HandleFunc("/student/attendance/show", attendanceHandler.ShowStudentsAttendance)
 	http.HandleFunc("/student/attendance/check", attendanceHandler.CheckStudentAttendance)
-	http.HandleFunc("/student/grade", assessmentHandler.AssessmentsOfOneGrade)
 
-	// family handler
-
-
-	// teacher handler
+	// teacher handlers
 
 	http.HandleFunc("/teacher/profile", profileHandler.TeacherProfile)
 	http.HandleFunc("/teacher/notification", notificationHandler.TeacherAddNotification)
 	http.HandleFunc("/teacher/assessment/new", assessmentHandler.StoreGrade)
 	http.HandleFunc("/teacher/assessment/update", assessmentHandler.UpdateGrade)
 	http.HandleFunc("/teacher/assessment/delete", assessmentHandler.DeleteGrade)
-	http.HandleFunc("/teacher/assessment/deletes", assessmentHandler.DeleteGrades)
+	http.HandleFunc("/teacher/assessments/delete", assessmentHandler.DeleteGrades)
 
-	// admin handler
+	// family handlers
+	http.HandleFunc("/family/profile", profileHandler.FamilyProfile)
+	http.HandleFunc("/family/assessment", assessmentHandler.StudentAssessment)
+	http.HandleFunc("/family/attendance/check", attendanceHandler.CheckStudentAttendance)
+
+	// admin handlers
 
 	http.HandleFunc("/admin/register/admin", registrationHandler.AdminRegistration)
 	http.HandleFunc("/admin/register/student", registrationHandler.StudentRegistration)
@@ -120,20 +124,6 @@ func main() {
 	http.HandleFunc("/admin/teacher/delete", profileHandler.AdminDeleteTeacher)
 	http.HandleFunc("/admin/course", courseHandler.AdminGetCourse)//prog
 	http.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse)//prog
-
-	// api hadlers
-
-	http.HandleFunc("/api/student/attendance/new", attendanceHandler.ApiStudentPostAttendance)
-	http.HandleFunc("/api/student/attendance/check", attendanceHandler.ApiStudentCheckAttendance)
-	http.HandleFunc("/api/student/attendance/show", attendanceHandler.ApiStudentShowAttendance)
-	http.HandleFunc("/api/teacher/grade/new", assessmentHandler.ApiTeacherPostGrade)
-	http.HandleFunc("/api/student/course", courseHandler.ApiStudentGetCourse)
-	http.HandleFunc("/api/student/courses", courseHandler.ApiStudentGetCourses)
-	http.HandleFunc("/api/student/notification", notificationHandler.ApiStudentGetNotification)
-	http.HandleFunc("/api/teacher/notification", notificationHandler.TeacherPostNotification)
-	http.HandleFunc("/api/admin/course/add", courseHandler.ApiAdminPostCourse)
-	http.HandleFunc("/api/admin/courses", courseHandler.ApiAdminGetCourses)
-	http.HandleFunc("/api/admin/course/delete", courseHandler.ApiAdminDeleteCourse)
 
 	http.ListenAndServe(":8181", nil)
 }

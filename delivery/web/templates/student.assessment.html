@@ -13,9 +13,12 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">Value</th>
+                
+                <th scope="col">StudentID</th>
                 <th scope="col">SubjectID</th>
                 <th scope="col">Grade</th>
+                <th scope="col">Total Mark</th>
+
 
 
 
@@ -24,9 +27,11 @@
             <tbody>
             {{ range . }}
                 <tr>
-                    <td> {{ .Value }} </td>
+                    <td> {{ .StudentID }} </td>
                     <td> {{ .SubjectID }} </td>
                     <td> {{ .Grade }} </td>
+                    <td> {{ .Value }} </td>
+
 
 
 

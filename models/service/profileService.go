@@ -28,7 +28,7 @@ func (ss *ProfileServiceImpl) Students() ([]entity.Student, error) {
 	return students, nil
 }
 
-func (ss *ProfileServiceImpl) Student(id int) (entity.Student, error) {
+func (ss *ProfileServiceImpl) Student(id int) ([]entity.Student, error) {
 
 	student, err := ss.profileRepository.Student(id)
 
@@ -39,10 +39,9 @@ func (ss *ProfileServiceImpl) Student(id int) (entity.Student, error) {
 	return student, nil
 }
 
-func (ss *ProfileServiceImpl) EmailExist(email string)bool  {
+func (ss *ProfileServiceImpl) EmailExist(email string) bool {
 
-	exists:= ss.profileRepository.EmailExists(email)
-
+	exists := ss.profileRepository.EmailExists(email)
 
 	return exists
 }
@@ -73,9 +72,9 @@ func (ts *ProfileServiceImpl) Teachers() ([]entity.Teacher, error) {
 
 }
 
-func (ss *ProfileServiceImpl) Teacher(id int) (entity.Teacher, error) {
+func (ts *ProfileServiceImpl) Teacher(id int) ([]entity.Teacher, error) {
 
-	teacher, err := ss.profileRepository.Teacher(id)
+	teacher, err := ts.profileRepository.Teacher(id)
 
 	if err != nil {
 		panic(err)
@@ -84,18 +83,25 @@ func (ss *ProfileServiceImpl) Teacher(id int) (entity.Teacher, error) {
 	return teacher, nil
 }
 
-func (ss *ProfileServiceImpl) Family(id int) (entity.Family, error) {
+func (ss *ProfileServiceImpl) Family(id int) ([]entity.Family, error) {
 
 	family, err := ss.profileRepository.Family(id)
 
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	return family, nil
 }
 
-func (ss *ProfileServiceImpl) Admin(id int) (entity.Admin, error) {
+func (ss *ProfileServiceImpl) NewYearRegistration(student entity.Student) error {
+
+	ss.profileRepository.NewYearRegistration(student)
+
+	return nil
+}
+
+func (ss *ProfileServiceImpl) Admin(id int) ([]entity.Admin, error) {
 
 	admin, err := ss.profileRepository.Admin(id)
 
@@ -105,7 +111,6 @@ func (ss *ProfileServiceImpl) Admin(id int) (entity.Admin, error) {
 
 	return admin, nil
 }
-
 
 func (ss *ProfileServiceImpl) AdminByEmail(email string) (entity.Admin, error) {
 

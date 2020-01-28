@@ -41,11 +41,18 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/student/profile">Profile</a></li>
+          <li><a href="/student/profile">Profile</a></li>
+          <li><a href="/student/year/registration">Register</a></li>
           <li><a href="/student/course">Course</a></li>
           <li><a href="/student/notification">Notification</a></li>
           <li><a href="/student/assessment">Assessment</a></li>
-          <li><a href="/student/attendance/new">Attendance</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Attendance <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/student/attendance/new">Fill</a></li>
+                <li><a href="/student/attendance/check">Check</a></li>
+            </ul>
+        </li>
           <li><a href="/logout">Logout</a></li>
         </ul>
       </div>

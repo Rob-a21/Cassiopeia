@@ -27,7 +27,7 @@ func (pr *PsqlProfileRepositoryImpl) Students() ([]entity.Student, error) {
 
 	for rows.Next() {
 		student := entity.Student{}
-		err = rows.Scan(&student.UserName, &student.Password, &student.FirstName, &student.LastName, &student.ID, &student.Email,&student.Grade, &student.Image)
+		err = rows.Scan(&student.UserName, &student.Password, &student.FirstName, &student.LastName, &student.ID, &student.Email, &student.Grade, &student.Image)
 		if err != nil {
 			return nil, err
 		}
@@ -36,7 +36,6 @@ func (pr *PsqlProfileRepositoryImpl) Students() ([]entity.Student, error) {
 
 	return students, err
 }
-
 
 func (pr *PsqlProfileRepositoryImpl) EmailExists(email string) bool {
 	row := pr.conn.QueryRow("SELECT * FROM student WHERE email = $1", email)
@@ -47,7 +46,6 @@ func (pr *PsqlProfileRepositoryImpl) EmailExists(email string) bool {
 	if err != nil {
 		panic(err)
 	}
-
 
 	return true
 }
@@ -63,7 +61,7 @@ func (pr *PsqlProfileRepositoryImpl) Families() ([]entity.Family, error) {
 	var families = []entity.Family{}
 	for rows.Next() {
 		family := entity.Family{}
-		err = rows.Scan(&family.FirstName, &family.LastName, &family.Password,&family.FamilyID, &family.Phone, &family.Phone, &family.Image)
+		err = rows.Scan(&family.FirstName, &family.LastName, &family.Password, &family.FamilyID, &family.Phone, &family.Phone, &family.Image)
 		if err != nil {
 			return nil, err
 		}
@@ -95,62 +93,95 @@ func (pr *PsqlProfileRepositoryImpl) Teachers() ([]entity.Teacher, error) {
 	return teachers, err
 }
 
-func (pr *PsqlProfileRepositoryImpl) Student(id int) (entity.Student, error) {
+func (pr *PsqlProfileRepositoryImpl) Student(id int) ([]entity.Student, error) {
 
-	row := pr.conn.QueryRow("SELECT * FROM student WHERE id = $1", id)
-
-	student := entity.Student{}
-
-	err := row.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Email,&student.Grade, &student.Image)
+	rows, err := pr.conn.Query("select * from student WHERE id = $1", id)
 	if err != nil {
-		return student, err
+		return nil, errors.New("Could not query the database")
+	}
+	defer rows.Close()
+
+	student := []entity.Student{}
+
+	for rows.Next() {
+		stdt := entity.Student{}
+		err = rows.Scan(&stdt.UserName, &stdt.Password, &stdt.FirstName, &stdt.LastName, &stdt.ID, &stdt.Email, &stdt.Grade, &stdt.Image)
+		if err != nil {
+			return nil, err
+		}
+		student = append(student, stdt)
 	}
 
-	return student, nil
+	return student, err
 }
 
-func (pr *PsqlProfileRepositoryImpl) Teacher(id int) (entity.Teacher, error) {
+func (pr *PsqlProfileRepositoryImpl) Teacher(id int) ([]entity.Teacher, error) {
 
-	row := pr.conn.QueryRow("SELECT * FROM teacher WHERE id = $1", id)
-
-	teacher := entity.Teacher{}
-
-	err := row.Scan(&teacher.UserName, &teacher.Password, &teacher.Phone,&teacher.Email, &teacher.FirstName, &teacher.LastName, &teacher.TeacherID, &teacher.Image)
+	rows, err := pr.conn.Query("select * from teacher WHERE id = $1", id)
 	if err != nil {
-		return teacher, err
+		return nil, errors.New("Could not query the database")
+	}
+	defer rows.Close()
+
+	tchr := []entity.Teacher{}
+
+	for rows.Next() {
+		teacher := entity.Teacher{}
+		err = rows.Scan(&teacher.UserName, &teacher.Password, &teacher.Phone, &teacher.Email, &teacher.FirstName, &teacher.LastName, &teacher.TeacherID, &teacher.Image)
+		if err != nil {
+			return nil, err
+		}
+		tchr = append(tchr, teacher)
 	}
 
-	return teacher, nil
+	return tchr, err
 }
 
-func (pr *PsqlProfileRepositoryImpl) Family(id int) (entity.Family, error) {
+func (pr *PsqlProfileRepositoryImpl) Family(id int) ([]entity.Family, error) {
 
-	row := pr.conn.QueryRow("SELECT * FROM teacher WHERE id = $1", id)
-
-	family := entity.Family{}
-	err := row.Scan(&family.FirstName, &family.LastName, &family.Password,&family.FamilyID, &family.Phone, &family.Phone, &family.Image)
+	rows, err := pr.conn.Query("select * from family WHERE id = $1", id)
 	if err != nil {
+		return nil, errors.New("Could not query the database")
+	}
+	defer rows.Close()
 
-		return family, err
+	fmly := []entity.Family{}
+
+	for rows.Next() {
+		family := entity.Family{}
+		err = rows.Scan(&family.FirstName, &family.LastName, &family.Password, &family.FamilyID, &family.Phone, &family.Phone, &family.Image)
+		if err != nil {
+			return nil, err
+		}
+		fmly = append(fmly, family)
 	}
 
-	return family, nil
+	return fmly, err
 }
+func (pr *PsqlProfileRepositoryImpl) Admin(id int) ([]entity.Admin, error) {
 
-func (pr *PsqlProfileRepositoryImpl) Admin(id int) (entity.Admin, error) {
+	rows, err := pr.conn.Query("select * from admin WHERE id = $1", id)
 
-	row := pr.conn.QueryRow("SELECT * FROM admin WHERE id = $1", id)
-
-	admin := entity.Admin{}
-
-	err := row.Scan(&admin.UserName,&admin.Password,&admin.FirstName,&admin.LastName,&admin.Email,&admin.Image)
 	if err != nil {
-		return admin, err
+
+		return nil, errors.New("Could not query the database")
+	}
+	defer rows.Close()
+
+	admn := []entity.Admin{}
+
+	for rows.Next() {
+		admin := entity.Admin{}
+		err := rows.Scan(&admin.UserName, &admin.Password, &admin.FirstName, &admin.LastName, &admin.ID, &admin.Email, &admin.Image)
+		if err != nil {
+			return nil, err
+		}
+		admn = append(admn, admin)
 	}
 
-	return admin, nil
-}
+	return admn, err
 
+}
 
 func (pr *PsqlProfileRepositoryImpl) AdminByEmail(email string) (entity.Admin, error) {
 
@@ -158,7 +189,7 @@ func (pr *PsqlProfileRepositoryImpl) AdminByEmail(email string) (entity.Admin, e
 
 	admin := entity.Admin{}
 
-	err := row.Scan(&admin.UserName,&admin.Password,&admin.FirstName,&admin.LastName,&admin.Email,&admin.Image)
+	err := row.Scan(&admin.UserName, &admin.Password, &admin.FirstName, &admin.LastName, &admin.Email, &admin.Image)
 	if err != nil {
 		return admin, err
 	}
@@ -207,4 +238,12 @@ func (pr *PsqlProfileRepositoryImpl) DeleteTeacher(id int) error {
 	return nil
 }
 
+func (reg *PsqlProfileRepositoryImpl) NewYearRegistration(student entity.Student) error {
 
+	_, err := reg.conn.Exec("UPDATE student SET grade=$1,WHERE id=$2", student.Grade, student.ID)
+	if err != nil {
+		return errors.New("Update has failed")
+	}
+
+	return nil
+}

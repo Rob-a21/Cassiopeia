@@ -36,7 +36,7 @@ func (crs *CourseServiceImpl) GetCourse() ([]entity.Course, error) {
 	return course, nil
 }
 
-func (cs *CourseServiceImpl) Course(id int) (entity.Course, error) {
+func (cs *CourseServiceImpl) Course(id int) (*entity.Course, error) {
 
 	course, err := cs.courseRepository.Course(id)
 

@@ -2,11 +2,14 @@ package handler
 
 import (
 	"encoding/json"
-	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/models"
+	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
+
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/models"
+	"github.com/julienschmidt/httprouter"
 )
 
 type AssessmentHandler struct {
@@ -17,7 +20,6 @@ type AssessmentHandler struct {
 func NewAssessmentHandler(T *template.Template, AS models.AssessmentService) *AssessmentHandler {
 	return &AssessmentHandler{tmpl: T, assService: AS}
 }
-
 
 func (as *AssessmentHandler) AssessmentsOfOneGrade(w http.ResponseWriter, r *http.Request) {
 
@@ -36,19 +38,48 @@ func (as *AssessmentHandler) AssessmentsOfOneGrade(w http.ResponseWriter, r *htt
 
 }
 
+func (ass *AssessmentHandler) StudentAssessment(w http.ResponseWriter, r *http.Request) {
 
+	if r.Method == http.MethodGet {
 
+		idRaw := r.URL.Query().Get("id")
+
+		fmt.Println("id", idRaw)
+
+		id, err := strconv.Atoi(idRaw)
+
+		if err != nil {
+
+			fmt.Println("conversion error!")
+
+			return
+		}
+
+		assessment, err := ass.assService.SingleStudentAssessment(id)
+
+		if err != nil {
+
+			fmt.Println("not conversion error!")
+
+			return
+
+		}
+
+		ass.tmpl.ExecuteTemplate(w, "student.assessment.layout", assessment)
+
+	}
+
+}
 
 func (as *AssessmentHandler) UpdateGrade(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodPost {
 
 		assessment := entity.Assessment{}
-		assessment.Value,_ = strconv.Atoi(r.FormValue("value"))
-		assessment.SubjectID,_ = strconv.Atoi(r.FormValue("subjectid"))
-		assessment.StudentID,_ =  strconv.Atoi(r.FormValue("studentid"))
-		assessment.Grade,_ = strconv.Atoi(r.FormValue("grade"))
-
+		assessment.Value, _ = strconv.Atoi(r.FormValue("value"))
+		assessment.SubjectID, _ = strconv.Atoi(r.FormValue("subjectid"))
+		assessment.StudentID, _ = strconv.Atoi(r.FormValue("studentid"))
+		assessment.Grade, _ = strconv.Atoi(r.FormValue("grade"))
 
 		err := as.assService.UpdateGrade(assessment)
 
@@ -56,10 +87,8 @@ func (as *AssessmentHandler) UpdateGrade(w http.ResponseWriter, r *http.Request)
 			panic(err)
 		}
 
-
 	}
 	_ = as.tmpl.ExecuteTemplate(w, "admin.grade.update.layout", nil)
-
 
 }
 
@@ -67,19 +96,17 @@ func (as *AssessmentHandler) DeleteGrade(w http.ResponseWriter, r *http.Request)
 
 	if r.Method == http.MethodPost {
 
-		SubjectID,_ := strconv.Atoi(r.FormValue("subjectid"))
-		StudentID,_ := strconv.Atoi(r.FormValue("studentid"))
+		SubjectID, _ := strconv.Atoi(r.FormValue("subjectid"))
+		StudentID, _ := strconv.Atoi(r.FormValue("studentid"))
 
-		err := as.assService.DeleteGrade(StudentID,SubjectID)
+		err := as.assService.DeleteGrade(StudentID, SubjectID)
 
 		if err != nil {
 			panic(err)
 		}
 
-
 	}
 	_ = as.tmpl.ExecuteTemplate(w, "admin.grade.layout", nil)
-
 
 }
 
@@ -87,7 +114,7 @@ func (as *AssessmentHandler) DeleteGrades(w http.ResponseWriter, r *http.Request
 
 	if r.Method == http.MethodPost {
 
-		StudentID,_ := strconv.Atoi(r.FormValue("studentid"))
+		StudentID, _ := strconv.Atoi(r.FormValue("studentid"))
 
 		err := as.assService.DeleteGrades(StudentID)
 
@@ -95,24 +122,20 @@ func (as *AssessmentHandler) DeleteGrades(w http.ResponseWriter, r *http.Request
 			panic(err)
 		}
 
-
 	}
 	_ = as.tmpl.ExecuteTemplate(w, "admin.grade.layout", nil)
 
-
 }
-
 
 func (as *AssessmentHandler) StoreGrade(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodPost {
 
 		assessment := entity.Assessment{}
-		assessment.Value,_ = strconv.Atoi(r.FormValue("value"))
-		assessment.SubjectID,_= strconv.Atoi(r.FormValue("subjectid"))
-		assessment.StudentID,_ = strconv.Atoi(r.FormValue("studentid"))
-		assessment.Grade,_ = strconv.Atoi(r.FormValue("grade"))
-
+		assessment.Value, _ = strconv.Atoi(r.FormValue("value"))
+		assessment.SubjectID, _ = strconv.Atoi(r.FormValue("subjectid"))
+		assessment.StudentID, _ = strconv.Atoi(r.FormValue("studentid"))
+		assessment.Grade, _ = strconv.Atoi(r.FormValue("grade"))
 
 		err := as.assService.StoreGrade(assessment)
 
@@ -120,10 +143,8 @@ func (as *AssessmentHandler) StoreGrade(w http.ResponseWriter, r *http.Request) 
 			panic(err)
 		}
 
-
 	}
 	_ = as.tmpl.ExecuteTemplate(w, "teacher.assessment.new.layout", nil)
-
 
 }
 
@@ -131,7 +152,7 @@ func (as *AssessmentHandler) IsQualified(w http.ResponseWriter, r *http.Request)
 
 	if r.Method == http.MethodPost {
 
-		StudentID,_ := strconv.Atoi(r.FormValue("studentid"))
+		StudentID, _ := strconv.Atoi(r.FormValue("studentid"))
 
 		val, err := as.assService.IsQualified(StudentID)
 
@@ -143,23 +164,29 @@ func (as *AssessmentHandler) IsQualified(w http.ResponseWriter, r *http.Request)
 
 	}
 
-
 }
 
-
-func (gr *AssessmentHandler)ApiTeacherPostGrade(w http.ResponseWriter,r *http.Request){
+func (gr *AssessmentHandler) ApiTeacherPostAssessment(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	len := r.ContentLength
 
-	body:= make([]byte,len)
+	body := make([]byte, len)
 
 	_, _ = r.Body.Read(body)
 
+<<<<<<< HEAD
+	assessment := entity.Assessment{}
+
+	json.Unmarshal(body, &assessment)
+
+	gr.assService.StoreGrade(assessment)
+=======
 	assessment:= entity.Assessment{}
 
 	_ = json.Unmarshal(body, &assessment)
 
 	_ = gr.assService.StoreGrade(assessment)
+>>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	w.WriteHeader(200)
 

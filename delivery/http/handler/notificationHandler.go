@@ -2,11 +2,13 @@ package handler
 
 import (
 	"encoding/json"
-	"github.com/Rob-a21/Cassiopeia/entity"
-	"github.com/Rob-a21/Cassiopeia/models"
 	"html/template"
 	"net/http"
 	"time"
+
+	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/models"
+	"github.com/julienschmidt/httprouter"
 )
 
 type NotificationHandler struct {
@@ -48,18 +50,28 @@ func (ntf *NotificationHandler) TeacherAddNotification(w http.ResponseWriter, r 
 
 }
 
+<<<<<<< HEAD
+func (ntf *NotificationHandler) ApiTeacherPostNotification(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+=======
 
 func (ntf *NotificationHandler)TeacherPostNotification(w http.ResponseWriter,r *http.Request){
+>>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	len := r.ContentLength
 
-	body:= make([]byte,len)
+	body := make([]byte, len)
 
 	_, _ = r.Body.Read(body)
 
+<<<<<<< HEAD
+	notification := entity.Notification{}
+
+	json.Unmarshal(body, &notification)
+=======
 	notification:= entity.Notification{}
 
 	_ = json.Unmarshal(body, &notification)
+>>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	_ = ntf.notificationService.AddNotification(notification)
 
@@ -68,32 +80,25 @@ func (ntf *NotificationHandler)TeacherPostNotification(w http.ResponseWriter,r *
 	return
 }
 
+func (ntf *NotificationHandler) ApiStudentGetNotification(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-func (ntf *NotificationHandler)ApiStudentGetNotification(w http.ResponseWriter,r *http.Request) {
+	notification, errs := ntf.notificationService.GetNotification()
 
-	//id, err := strconv.Atoi(path.Base(r.URL.Path))
-	//
-	//if err != nil{
-	//
-	//	return
-	//}
+	if errs != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
 
-	//id := path.Base(r.URL.Path)
+	output, err := json.MarshalIndent(notification, "", "\t\t")
 
-	notification:= entity.Notification{}
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
 
-	ntf.notificationService.GetNotification()
-
-	output,err := json.MarshalIndent(&notification,"","\t\t")
-
-   if err != nil{
-
-	   return
-   }
-
-    w.Header().Set("Content-Type","application/json")
-
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(output)
-
 	return
 }

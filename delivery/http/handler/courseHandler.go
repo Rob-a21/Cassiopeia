@@ -7,8 +7,9 @@ import (
 	"path"
 	"strconv"
 
-	"github.com/Rob-a21/Cassiopeia/models"
 	"github.com/Rob-a21/Cassiopeia/entity"
+	"github.com/Rob-a21/Cassiopeia/models"
+	"github.com/julienschmidt/httprouter"
 )
 
 type CourseHandler struct {
@@ -31,12 +32,9 @@ func (crs *CourseHandler) AdminAddCourse(w http.ResponseWriter, r *http.Request)
 
 		_ = crs.crsService.AddCourse(course)
 
-
 	}
 
 	_ = crs.tmpl.ExecuteTemplate(w, "admin.course.new.layout", nil)
-
-
 
 }
 
@@ -50,7 +48,6 @@ func (crs *CourseHandler) AdminGetCourse(w http.ResponseWriter, r *http.Request)
 	crs.tmpl.ExecuteTemplate(w, "admin.course.layout", courses)
 
 }
-
 
 func (crs *CourseHandler) AdminUpdateCourse(w http.ResponseWriter, r *http.Request) {
 
@@ -71,16 +68,12 @@ func (crs *CourseHandler) AdminUpdateCourse(w http.ResponseWriter, r *http.Reque
 
 		_ = crs.tmpl.ExecuteTemplate(w, "admin.course.update.layout", courses)
 
-
-
-
 	} else if r.Method == http.MethodPost {
 
 		course := entity.Course{}
 		course.CourseID, _ = strconv.Atoi(r.FormValue("courseid"))
 		course.CourseName = r.FormValue("coursename")
-		course.Grade,_ = strconv.Atoi(r.FormValue("grade"))
-
+		course.Grade, _ = strconv.Atoi(r.FormValue("grade"))
 
 		err := crs.crsService.UpdateCourse(course)
 
@@ -96,6 +89,8 @@ func (crs *CourseHandler) AdminUpdateCourse(w http.ResponseWriter, r *http.Reque
 
 }
 
+<<<<<<< HEAD
+=======
 func (crs *CourseHandler) AdminDeleteCourse(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodGet {
@@ -117,6 +112,7 @@ func (crs *CourseHandler) AdminDeleteCourse(w http.ResponseWriter, r *http.Reque
 }
 
 
+>>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 func (crs *CourseHandler) StudentCourse(w http.ResponseWriter, r *http.Request) {
 
 	courses, err := crs.crsService.GetCourse()
@@ -139,8 +135,104 @@ func (crs *CourseHandler) FamilyGetCourse(w http.ResponseWriter, r *http.Request
 
 }
 
+//
+//func (crs *CourseHandler)ApiAdminPostCourse(w http.ResponseWriter,r *http.Request){
+//
+//	if r.Method == http.MethodPost {
+//		len := r.ContentLength
+//
+//		body := make([]byte, len)
+//
+//		r.Body.Read(body)
+//
+//		course := entity.Course{}
+//
+//		json.Unmarshal(body, &course)
+//
+//		crs.crsService.AddCourse(course)
+//
+//		w.WriteHeader(200)
+//	}
+//	   return
+//}
+//
+//
+//func (crs *CourseHandler)ApiAdminGetCourses(w http.ResponseWriter,r *http.Request) {
+//
+//if r.Method == http.MethodGet {
+//	course := entity.Course{}
+//
+//	crs.crsService.GetCourse()
+//
+//	output, err := json.MarshalIndent(&course, "", "\t\t")
+//
+//	if err != nil {
+//
+//		return
+//	}
+//
+//	w.Header().Set("Content-Type", "application/json")
+//
+//	w.Write(output)
+//}
+//	return
+//}
 
-func (crs *CourseHandler)ApiAdminPostCourse(w http.ResponseWriter,r *http.Request){
+//
+//func (crs *CourseHandler)ApiStudentGetCourse(w http.ResponseWriter,r *http.Request) {
+//
+//	if r.Method == http.MethodGet {
+//		id, err := strconv.Atoi(path.Base(r.URL.Path))
+//
+//		if err != nil {
+//
+//			return
+//		}
+//
+//		course := entity.Course{}
+//
+//		crs.crsService.Course(id)
+//
+//		output, err := json.MarshalIndent(&course, "", "\t\t")
+//
+//		if err != nil {
+//
+//			return
+//		}
+//
+//		w.Header().Set("Content-Type", "application/json")
+//
+//		w.Write(output)
+//	}
+//	return
+//}
+
+//func (crs *CourseHandler)ApiStudentGetCourses(w http.ResponseWriter,r *http.Request) {
+//
+//
+//if r.Method == http.MethodGet{
+//
+//	course := entity.Course{}
+//
+//	crs.crsService.GetCourse()
+//
+//	output,err := json.MarshalIndent(&course,"","\t\t")
+//
+//	if err != nil{
+//
+//		return
+//	}
+//
+//	w.Header().Set("Content-Type","application/json")
+//
+//	w.Write(output)
+//
+//
+//}
+//	return
+//}
+
+func (crs *CourseHandler) ApiAdminPostCourse(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	if r.Method == http.MethodPost {
 		len := r.ContentLength
@@ -157,110 +249,161 @@ func (crs *CourseHandler)ApiAdminPostCourse(w http.ResponseWriter,r *http.Reques
 
 		w.WriteHeader(200)
 	}
-	   return
+	return
 }
 
+func (crs *CourseHandler) ApiAdminGetCourses(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-func (crs *CourseHandler)ApiAdminGetCourses(w http.ResponseWriter,r *http.Request) {
+	courses, errs := crs.crsService.GetCourse()
 
+<<<<<<< HEAD
+	if errs != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
+=======
 if r.Method == http.MethodGet {
 	course := entity.Course{}
 
 	_, _ = crs.crsService.GetCourse()
+>>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
-	output, err := json.MarshalIndent(&course, "", "\t\t")
+	output, err := json.MarshalIndent(courses, "", "\t\t")
 
 	if err != nil {
-
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+<<<<<<< HEAD
+	w.Write(output)
+=======
 
 	_, _ = w.Write(output)
 }
+>>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 	return
+
 }
 
-func (crs *CourseHandler)ApiAdminDeleteCourse(w http.ResponseWriter,r *http.Request) {
+func (crs *CourseHandler) ApiAdminGetCourse(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	if r.Method == http.MethodDelete {
-		id, err := strconv.Atoi(path.Base(r.URL.Path))
-
-		if err != nil {
-
-			return
-		}
-
-		//course := entity.Course{}
-		//
-		//res,err :=crs.crsService.Course(id)
-		//
-		//if err!= nil{
-		//	return
-		//}
-
-		_ = crs.crsService.DeleteCourse(id)
-
-	}
-	return
-}
-
-
-
-func (crs *CourseHandler)ApiStudentGetCourse(w http.ResponseWriter,r *http.Request) {
-
-	if r.Method == http.MethodGet {
-		id, err := strconv.Atoi(path.Base(r.URL.Path))
-
-		if err != nil {
-
-			return
-		}
-
-		course := entity.Course{}
-
-		crs.crsService.Course(id)
-
-		output, err := json.MarshalIndent(&course, "", "\t\t")
-
-		if err != nil {
-
-			return
-		}
-
+	id, err := strconv.Atoi(path.Base(r.URL.Path))
+	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
-
-		w.Write(output)
-	}
-	return
-}
-
-func (crs *CourseHandler)ApiStudentGetCourses(w http.ResponseWriter,r *http.Request) {
-
-
-if r.Method == http.MethodGet{
-
-	course := entity.Course{}
-
-	crs.crsService.GetCourse()
-
-	output,err := json.MarshalIndent(&course,"","\t\t")
-
-	if err != nil{
-
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
 
-	w.Header().Set("Content-Type","application/json")
+	course, errs := crs.crsService.Course(id)
 
+	if errs != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
+
+<<<<<<< HEAD
+	output, err := json.MarshalIndent(course, "", "\t\t")
+=======
+		_ = crs.crsService.DeleteCourse(id)
+>>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
+
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(output)
-
-
-}
 	return
 }
 
+func (crs *CourseHandler) ApiAdminDeleteCourse(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
+	id, err := strconv.Atoi(path.Base(r.URL.Path))
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
 
+	course := crs.crsService.DeleteCourse(id)
 
+	//if errs != nil {
+	//	w.Header().Set("Content-Type", "application/json")
+	//	http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+	//	return
+	//}
+
+	output, err := json.MarshalIndent(course, "", "\t\t")
+
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(output)
+	return
+}
+
+func (crs *CourseHandler) ApiStudentGetCourses(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	courses, errs := crs.crsService.GetCourse()
+ 
+	if errs != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
+
+	output, err := json.MarshalIndent(courses, "", "\t\t")
+
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(output)
+	return
+
+}
+
+func (crs *CourseHandler) ApiStudentGetCourse(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	
+	id, err := strconv.Atoi(path.Base(r.URL.Path))
+
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
+
+	course, errs := crs.crsService.Course(id)
+
+	if errs != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
+
+	output, err := json.MarshalIndent(course, "", "\t\t")
+
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(output)
+	return
+}

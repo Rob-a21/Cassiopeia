@@ -5,46 +5,71 @@
 {{ end }}
 
 {{ define "student.profile.content"}}
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div
-                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h2>students</h2>
-        </div>
 
+    <section>
+        {{ range . }}
+        <section id="about" class="home-section text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="wow bounceInUp" data-wow-delay="0.2s">
+                            <div class="team boxed-grey">
+                                <div class="inner">
+                                    <div class="avatar"><img src="../assets/img/{{ .Image }}" alt="" class="img-responsive img-circle" /></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="wow bounceInUp" data-wow-delay="0.2s">
+                                    <div class="team boxed-grey">
+                                        <div class="inner">
+                                            <table>
+                                                <thead><h1>Student Profile</h1></thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>User Name : {{ .UserName }}</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>First Name : {{ .FirstName }}</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Last Name : {{ .LastName }}</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ID  : {{ .ID }}</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Email : {{ .Email }}</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Grade  : {{ .Grade }}</td>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
 
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">UserName</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">ID</th>
-                <th scope="col">Email</th>
-                <th scope="col">Grade</th>
-                <th scope="col">Image</th>
+                </div>
+            </div>
+        </section>
 
-
-
-
-            </tr>
-            </thead>
-            <tbody>
-            {{ range . }}
-                <tr>
-                    <td> {{ .UserName }} </td>
-                    <td> {{ .FirstName }} </td>
-                    <td> {{ .LastName }} </td>
-                    <td> {{ .ID }} </td>
-                    <td> {{ .Email }} </td>
-                    <td> {{ .Grade }} </td>
-
-
-                    <td> <img src="../assets/img/{{ .Image }}" width="70rem" height="70rem" /> </td>
-
-                </tr>
             {{ end }}
-            </tbody>
-        </table>
-    </main>
+    </section>
+
+
+
 {{ end }}

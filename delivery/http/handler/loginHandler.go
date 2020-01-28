@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 
@@ -26,7 +27,6 @@ func (slh *LoginHandler) StudentLogin(w http.ResponseWriter, r *http.Request) {
 		studentUser.Password = r.FormValue("password")
 
 		student, err := slh.loginService.Students()
-
 
 		if err != nil {
 
@@ -54,21 +54,20 @@ func (slh *LoginHandler) StudentLogin(w http.ResponseWriter, r *http.Request) {
 
 }
 
-
 func (slh *LoginHandler) AdminLogin(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Entering")
+	if r.Method == http.MethodGet {
+		slh.tmpl.ExecuteTemplate(w, "admin.login.html", nil)
 
-	if r.Method == http.MethodPost {
-
+	} else if r.Method == http.MethodPost {
 
 		adminUser := entity.Admin{}
 		adminUser.UserName = r.FormValue("username")
 		adminUser.Password = r.FormValue("password")
 
-
 		admin, err := slh.loginService.Admins()
 
-
-		if err != nil{
+		if err != nil {
 			return
 		}
 		for a := range admin {
@@ -84,12 +83,15 @@ func (slh *LoginHandler) AdminLogin(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
+<<<<<<< HEAD
+		http.Redirect(w, r, "/admin", http.StatusSeeOther)
+=======
 		_ = slh.tmpl.ExecuteTemplate(w, "admin.login.html", nil)
+>>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	}
 
 }
-
 
 func (slh *LoginHandler) TeacherLogin(w http.ResponseWriter, r *http.Request) {
 
@@ -101,7 +103,7 @@ func (slh *LoginHandler) TeacherLogin(w http.ResponseWriter, r *http.Request) {
 
 		teacher, err := slh.loginService.Teachers()
 
-		if err != nil{
+		if err != nil {
 			return
 		}
 
@@ -124,7 +126,6 @@ func (slh *LoginHandler) TeacherLogin(w http.ResponseWriter, r *http.Request) {
 
 }
 
-
 func (slh *LoginHandler) FamilyLogin(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodPost {
@@ -135,7 +136,7 @@ func (slh *LoginHandler) FamilyLogin(w http.ResponseWriter, r *http.Request) {
 
 		family, err := slh.loginService.Families()
 
-		if err != nil{
+		if err != nil {
 			return
 		}
 
@@ -149,7 +150,6 @@ func (slh *LoginHandler) FamilyLogin(w http.ResponseWriter, r *http.Request) {
 				http.Redirect(w, r, "/family", http.StatusSeeOther)
 			}
 		}
-
 
 	} else {
 
