@@ -50,12 +50,7 @@ func (ntf *NotificationHandler) TeacherAddNotification(w http.ResponseWriter, r 
 
 }
 
-<<<<<<< HEAD
 func (ntf *NotificationHandler) ApiTeacherPostNotification(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-=======
-
-func (ntf *NotificationHandler)TeacherPostNotification(w http.ResponseWriter,r *http.Request){
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	len := r.ContentLength
 
@@ -63,15 +58,9 @@ func (ntf *NotificationHandler)TeacherPostNotification(w http.ResponseWriter,r *
 
 	_, _ = r.Body.Read(body)
 
-<<<<<<< HEAD
 	notification := entity.Notification{}
 
 	json.Unmarshal(body, &notification)
-=======
-	notification:= entity.Notification{}
-
-	_ = json.Unmarshal(body, &notification)
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	_ = ntf.notificationService.AddNotification(notification)
 

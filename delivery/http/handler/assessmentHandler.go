@@ -174,19 +174,11 @@ func (gr *AssessmentHandler) ApiTeacherPostAssessment(w http.ResponseWriter, r *
 
 	_, _ = r.Body.Read(body)
 
-<<<<<<< HEAD
 	assessment := entity.Assessment{}
 
 	json.Unmarshal(body, &assessment)
 
 	gr.assService.StoreGrade(assessment)
-=======
-	assessment:= entity.Assessment{}
-
-	_ = json.Unmarshal(body, &assessment)
-
-	_ = gr.assService.StoreGrade(assessment)
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	w.WriteHeader(200)
 

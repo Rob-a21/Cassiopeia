@@ -89,15 +89,13 @@ func (crs *CourseHandler) AdminUpdateCourse(w http.ResponseWriter, r *http.Reque
 
 }
 
-<<<<<<< HEAD
-=======
 func (crs *CourseHandler) AdminDeleteCourse(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodGet {
 
 		idRaw := r.URL.Query().Get("courseid")
 
-		id,err := strconv.ParseInt(idRaw,0,0)
+		id, err := strconv.ParseInt(idRaw, 0, 0)
 
 		if err != nil {
 			panic(err)
@@ -105,14 +103,11 @@ func (crs *CourseHandler) AdminDeleteCourse(w http.ResponseWriter, r *http.Reque
 
 		_ = crs.crsService.DeleteCourse(int(id))
 
-
 	}
 
 	http.Redirect(w, r, "/admin/course", http.StatusSeeOther)
 }
 
-
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 func (crs *CourseHandler) StudentCourse(w http.ResponseWriter, r *http.Request) {
 
 	courses, err := crs.crsService.GetCourse()
@@ -256,18 +251,11 @@ func (crs *CourseHandler) ApiAdminGetCourses(w http.ResponseWriter, r *http.Requ
 
 	courses, errs := crs.crsService.GetCourse()
 
-<<<<<<< HEAD
 	if errs != nil {
 		w.Header().Set("Content-Type", "application/json")
 		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
-=======
-if r.Method == http.MethodGet {
-	course := entity.Course{}
-
-	_, _ = crs.crsService.GetCourse()
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	output, err := json.MarshalIndent(courses, "", "\t\t")
 
@@ -278,15 +266,11 @@ if r.Method == http.MethodGet {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-<<<<<<< HEAD
 	w.Write(output)
-=======
 
 	_, _ = w.Write(output)
-}
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
-	return
 
+	return
 }
 
 func (crs *CourseHandler) ApiAdminGetCourse(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -306,11 +290,9 @@ func (crs *CourseHandler) ApiAdminGetCourse(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-<<<<<<< HEAD
 	output, err := json.MarshalIndent(course, "", "\t\t")
-=======
-		_ = crs.crsService.DeleteCourse(id)
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
+
+	_ = crs.crsService.DeleteCourse(id)
 
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
@@ -356,7 +338,7 @@ func (crs *CourseHandler) ApiAdminDeleteCourse(w http.ResponseWriter, r *http.Re
 func (crs *CourseHandler) ApiStudentGetCourses(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	courses, errs := crs.crsService.GetCourse()
- 
+
 	if errs != nil {
 		w.Header().Set("Content-Type", "application/json")
 		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -378,7 +360,7 @@ func (crs *CourseHandler) ApiStudentGetCourses(w http.ResponseWriter, r *http.Re
 }
 
 func (crs *CourseHandler) ApiStudentGetCourse(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	
+
 	id, err := strconv.Atoi(path.Base(r.URL.Path))
 
 	if err != nil {

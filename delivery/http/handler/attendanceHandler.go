@@ -62,11 +62,7 @@ func (at *AttendanceHandler) CheckStudentAttendance(w http.ResponseWriter, r *ht
 			return
 		}
 
-<<<<<<< HEAD
 		at.tmpl.ExecuteTemplate(w, "student.attendance.layout", attendance)
-=======
-		_ = at.tmpl.ExecuteTemplate(w, "admin.course.update.layout", attendance)
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	}
 
@@ -91,17 +87,11 @@ func (at *AttendanceHandler) ApiStudentPostAttendance(w http.ResponseWriter, r *
 
 	_, _ = r.Body.Read(body)
 
-<<<<<<< HEAD
 	attendance := entity.Attendance{}
 
 	json.Unmarshal(body, &attendance)
-=======
-	attendance:= entity.Attendance{}
 
-	_ = json.Unmarshal(body, &attendance)
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
-
-	_ = at.attendanceService.FillAttendance(attendance)
+	at.attendanceService.FillAttendance(attendance)
 
 	w.WriteHeader(200)
 

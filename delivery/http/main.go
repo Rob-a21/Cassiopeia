@@ -17,7 +17,7 @@ import (
 	"github.com/Rob-a21/Cassiopeia/delivery/http/handler"
 )
 
-var tmpl = template.Must(template.ParseGlob("C:/Users/hp/go/src/github.com/Rob-a21/Cassiopeia/delivery/web/templates/*"))
+var tmpl = template.Must(template.ParseGlob("c:/Users/solki/go/src/github.com/Rob-a21/Cassiopeia/delivery/web/templates/*"))
 
 func main() {
 
@@ -122,8 +122,8 @@ func main() {
 	http.HandleFunc("/admin/student/delete", profileHandler.AdminDeleteStudent)
 	http.HandleFunc("/admin/teacher", profileHandler.AdminGetTeacher)
 	http.HandleFunc("/admin/teacher/delete", profileHandler.AdminDeleteTeacher)
-	http.HandleFunc("/admin/course", courseHandler.AdminGetCourse)//prog
-	http.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse)//prog
+	http.HandleFunc("/admin/course", courseHandler.AdminGetCourse)     //prog
+	http.HandleFunc("/admin/course/new", courseHandler.AdminAddCourse) //prog
 
 	http.ListenAndServe(":8181", nil)
 }

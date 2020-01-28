@@ -83,11 +83,7 @@ func (slh *LoginHandler) AdminLogin(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-<<<<<<< HEAD
 		http.Redirect(w, r, "/admin", http.StatusSeeOther)
-=======
-		_ = slh.tmpl.ExecuteTemplate(w, "admin.login.html", nil)
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 	}
 

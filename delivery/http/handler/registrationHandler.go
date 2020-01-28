@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"html/template"
 	"io"
 	"mime/multipart"
@@ -73,7 +72,11 @@ func (srh *RegistrationHandler) StudentRegistration(w http.ResponseWriter, r *ht
 
 	if r.Method == http.MethodPost {
 		// Parse the form data
-		err := r.ParseForm()
+		//v := url.Values{}
+		//v.Add("name", r.FormValue("name"))
+
+		//singnUpForm := form.Input{Values: v, VErrors: form.ValidationErrors{}}
+		//err := r.ParseForm()
 		if err != nil {
 			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 			return
@@ -87,7 +90,6 @@ func (srh *RegistrationHandler) StudentRegistration(w http.ResponseWriter, r *ht
 		// If there are any errors, redisplay the signup form.
 		if !singnUpForm.Valid() {
 			srh.tmpl.ExecuteTemplate(w, "admin.register.student.layout", singnUpForm)
-			fmt.Println("not valid")
 			return
 		}
 
@@ -133,16 +135,6 @@ func (srh *RegistrationHandler) StudentRegistration(w http.ResponseWriter, r *ht
 		writeFile(&mf, fh.Filename)
 
 		_ = srh.regService.RegisterStudent(student)
-
-<<<<<<< HEAD
-		if err != nil {
-			fmt.Println("incorrect")
-		}
-=======
-		//if err != nil {
-		//	panic(err)
-		//}
->>>>>>> 8e4db9168c4c3f75194869247400fcf7cf71038f
 
 		http.Redirect(w, r, "/admin", http.StatusSeeOther)
 	} else {
